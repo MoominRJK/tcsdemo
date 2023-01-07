@@ -25,27 +25,27 @@ class NavigationBar extends Component {
                         return(
                             <div>
                             <Navbar style = {navbar}  className = {"p-3"} variant = "dark">
-                                <Navbar.Brand href="#home">Etkinlik Yönetim Sistemi</Navbar.Brand>
+                                <Navbar.Brand href="#home">Event Management System</Navbar.Brand>
                                 <Link className = {isLogin() ? "nav-item text-white ml-5": "d-none"}>
-                                    Hoşgeldin {localStorage.getItem("username")}</Link>
+                                Welcome {localStorage.getItem("username")}</Link>
                                 <Nav className="ml-auto">
                                     {!isLogin() ? <Link className ="nav-link"
-                                                             to = {"/register"}>Kayıt ol</Link> : null}
+                                                             to = {"/register"}>Register</Link> : null}
                                     <Link className = {isLogin() ? "nav-link": "d-none"}
-                                          to ={"/events"} >Etkinlikler </Link>
+                                          to ={"/events"} >Events </Link>
                                     {isOrganizator() ? <Link className ="nav-link"
-                                                              to = {"/istatistik"}>Etkinlik İstatistikleri</Link> : null}
+                                                              to = {"/istatistik"}>Activity Statistics</Link> : null}
                                     {isOrganizator() ? <Link className ="nav-link"
-                                                             to = {"/raffle"}>Etkinlik Çekilişi</Link> : null}
+                                                             to = {"/raffle"}>Event Draw</Link> : null}
                                     {isOrganizator() ? <Link className ="nav-link"
-                                                             to = {"/survey"}>Anketler</Link> : null}
+                                                             to = {"/survey"}>Surveys</Link> : null}
 
                                     <Link className = {isParticipant() ? "nav-link": "d-none"}
                                           to ={`/myEvents/${localStorage.getItem('username')}`}>
-                                        Etkinliklerim</Link>
+                                        My Events</Link>
                                     <Link className = {isLogin() ? "nav-link": "d-none"}
                                                       to ={"/login"}>
-                                        Çıkış Yap</Link>
+                                       Sign out</Link>
 
                                 </Nav>
                                 <Form inline>

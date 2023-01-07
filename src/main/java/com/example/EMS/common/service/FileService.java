@@ -37,41 +37,41 @@ public class FileService {
 
         Font redAndBold = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD, BaseColor.RED);
 
-        document.add(new Paragraph("Etkinligimize katildiginiz icin tesekkur ederiz." +
-                                        " Sizinle bulusmayi iple cekiyoruz!", italicAndBold));
+        document.add(new Paragraph("Thank you for participating in our event.." +
+                                        " We look forward to meeting you!", italicAndBold));
         document.add(new Paragraph("            "));
 
 
         PdfPTable table = new PdfPTable(2);
-        table.addCell(new Paragraph("Etkinlik Bilgileri", italicAndBold));
+        table.addCell(new Paragraph("Event Information", italicAndBold));
         table.addCell("                  ");
 
-        String eventName = "Etkinlik Adi : ";
+        String eventName = "Event Name: ";
         table.addCell(eventName);
         table.addCell(participantInEvent.getEvent().getName());
 
-        String eventQuota = "Kontenjan : ";
+        String eventQuota = "Quota : ";
         table.addCell(eventQuota);
         table.addCell(Integer.toString(participantInEvent.getEvent().getQuota()));
 
-        String startDate = "Baslangıc Tarihi : ";
+        String startDate = "Starting date : ";
         table.addCell(startDate);
         table.addCell(participantInEvent.getEvent().getStartDate().toString());
 
-        String finishDate = "Bitis Tarihi : ";
+        String finishDate = "End Date : ";
         table.addCell(finishDate);
         table.addCell(participantInEvent.getEvent().getEndDate().toString());
 
-        String lecturerName = "Egitmen Adi : ";
-        table.addCell(lecturerName);
-        table.addCell(participantInEvent.getEvent().getLecturer().getName()
-                            + " " + participantInEvent.getEvent().getLecturer().getSurname());
+//        String lecturerName = "Instructor Name : ";
+//        table.addCell(lecturerName);
+//        table.addCell(participantInEvent.getEvent().getLecturer().getName()
+//                            + " " + participantInEvent.getEvent().getLecturer().getSurname());
 
         PdfPTable table2 = new PdfPTable(2);
-        table2.addCell(new Paragraph("Katilimci Ayrintilari", italicAndBold));
+        table2.addCell(new Paragraph("Participant Details", italicAndBold));
         table2.addCell("                  ");
 
-        String participantNameInfo = "Adi Soyadi : ";
+        String participantNameInfo = "Name and surname : ";
         table2.addCell(participantNameInfo);
         table2.addCell(participantInEvent.getParticipant().getName() +
                             " " + participantInEvent.getParticipant().getSurname());
@@ -80,7 +80,7 @@ public class FileService {
         table2.addCell(participantEmail);
         table2.addCell(participantInEvent.getParticipant().getEmail());
 
-        String participantPhone = "Iletisim Numarasi : ";
+        String participantPhone = "Contact Number : ";
         table2.addCell(participantPhone);
         table2.addCell(participantInEvent.getParticipant().getPhone());
 
@@ -98,7 +98,7 @@ public class FileService {
         }
 
         PdfPTable table3 = new PdfPTable(2);
-        table3.addCell(new Paragraph("Etkinlige giris kodunuz => ", italicAndBold));
+        table3.addCell(new Paragraph("Your access code to the event => ", italicAndBold));
         table3.addCell(new Paragraph(code, redAndBold));
 
         document.add(table);
@@ -108,13 +108,13 @@ public class FileService {
         document.add(table3);
         document.add(new Paragraph("            "));
 
-        document.add(new Paragraph("Kodu lütfen kimseyle paylasmayiniz.", italicAndBold));
-        document.add(new Paragraph("Etkinlikte görüsmek üzere :))", italicAndBold));
+        document.add(new Paragraph("Please do not share the code with anyone..", italicAndBold));
+        document.add(new Paragraph("See you at the event :))", italicAndBold));
 
         // Add meta data information to PDF file
         document.addCreationDate();
         document.addAuthor("Admin");
-        document.addTitle("Bilet Bilgileri");
+        document.addTitle("Ticket Information");
         document.close();
 
         final ByteArrayResource fileResource  = new ByteArrayResource(Files.readAllBytes(Paths.get(path)));

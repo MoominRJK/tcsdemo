@@ -121,7 +121,7 @@ class SurveyQuestions extends Component {
             }).catch(err => {
             this.props.history.push("/notFound404");
         })
-        this.openMessageSnackbarWithMessages("Anketi gönderdiniz !", "SUCCESS");
+        this.openMessageSnackbarWithMessages("You have sent the survey !", "SUCCESS");
         this.sendingCompleted();
     }
 
@@ -164,7 +164,7 @@ class SurveyQuestions extends Component {
         const {surveyQuestions,isParticipantAlreadyAnsweredToSurvey} = this.state;
         if(isParticipantAlreadyAnsweredToSurvey) {
             return(<div>
-                <p>Bu anketi daha önce yanıtladınız. Anket sonucunu getir.</p>
+                <p>You have answered this survey before. Fetch poll result.</p>
             </div>);
         }
         else {
@@ -172,7 +172,7 @@ class SurveyQuestions extends Component {
                 <div className={"container"}>
                     <Card>
                         <Card.Header>
-                            <h4>Etkinlik Anketi</h4>
+                            <h4>Activity Survey</h4>
                         </Card.Header>
                         <Form onSubmit = {(e) => this.sendSurveyAnswers(e)}>
                             <Card.Body>

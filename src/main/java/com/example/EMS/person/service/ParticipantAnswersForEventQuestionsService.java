@@ -42,9 +42,9 @@ public class ParticipantAnswersForEventQuestionsService {
                 saveAnswerToEventQuestion(eventQuestions.get(i));
                 saveAnswerToParticipant(participant);
             }
-            return new MessageResponse("Sorular cevaplandı", SUCCESS);
+            return new MessageResponse("Questions answered", SUCCESS);
         }
-        return new MessageResponse("Sorular cevaplanamadı", ERROR);
+        return new MessageResponse("Questions not answered", ERROR);
     }
 
 

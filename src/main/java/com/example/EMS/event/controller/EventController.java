@@ -28,18 +28,18 @@ public class EventController {
         return eventMapper.mapToDto(events);
     }
 
-    @GetMapping("/WithSurvey")
-    public List<EventDTO> getAllEventsWithSurvey() {
-        List<Event> events = eventService.getAllEventsWithSurvey();
-        return eventMapper.mapToDto(events);
-
-    }
-
-    @GetMapping("/NonRaffled")
-    public List<EventDTO> getAllNonRaffledEvents() {
-        List<Event> events = eventService.getAllNonRaffledEvents();
-        return eventMapper.mapToDto(events);
-    }
+//    @GetMapping("/WithSurvey")
+//    public List<EventDTO> getAllEventsWithSurvey() {
+//        List<Event> events = eventService.getAllEventsWithSurvey();
+//        return eventMapper.mapToDto(events);
+//
+//    }
+//
+//    @GetMapping("/NonRaffled")
+//    public List<EventDTO> getAllNonRaffledEvents() {
+//        List<Event> events = eventService.getAllNonRaffledEvents();
+//        return eventMapper.mapToDto(events);
+//    }
 
     @GetMapping("{eventName}")
     public EventDTO getEventByName(@PathVariable String eventName) {
@@ -47,14 +47,14 @@ public class EventController {
         return eventMapper.mapToDto(event);
     }
 
-    @PostMapping("{organizatorUsername}/{lecturerUsername}")
+    @PostMapping("{organizatorUsername}")
     @PreAuthorize("hasAuthority('ORGANIZATOR')")
     public MessageResponse addEvent(@PathVariable String organizatorUsername,
-                                    @RequestBody @Valid EventDTO eventDTO,
-                                    @PathVariable String lecturerUsername) {
+                                    @RequestBody @Valid EventDTO eventDTO
+                                    ) {
         return eventService.addEvent(organizatorUsername,
-                eventMapper.mapToEntity(eventDTO),
-                lecturerUsername);
+                eventMapper.mapToEntity(eventDTO)
+                );
     }
 
     @PutMapping("{eventName}")

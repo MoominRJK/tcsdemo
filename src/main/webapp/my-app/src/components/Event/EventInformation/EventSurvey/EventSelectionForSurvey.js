@@ -27,7 +27,7 @@ class EventSelectionForSurvey extends Component {
             });
             this.setState({
                 eventsWithSurvey : response.data,
-                namesOfEvents : [{value: '', display : 'Etkinlik seç'}]
+                namesOfEvents : [{value: '', display : 'Select event'}]
                     .concat(namesOfEvents)
             })
         })
@@ -47,7 +47,7 @@ class EventSelectionForSurvey extends Component {
         return (
             <div>
                 <Form.Control as="select" required
-                              placeholder = "Etkinlik seç"
+                              placeholder = "Select event"
                               value={eventName}
                               onChange={(e) => this.handleNameChange(e) }>
                     {namesOfEvents.map((name) =>

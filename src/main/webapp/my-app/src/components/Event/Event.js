@@ -16,7 +16,7 @@ class Event extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            linkContent : 'Ayrıntılar',
+            linkContent : 'Details',
             event : [],
         }
     }
@@ -45,17 +45,17 @@ class Event extends Component {
                         <EventNavbar handleNavigation = {this.setLinkContentWith} event = {event}></EventNavbar>
                     </Card.Header>
                    <Card.Body className = "container">
-                       {linkContent === "Ayrıntılar" ? <EventDetails event ={event}></EventDetails> : null}
-                       {linkContent === "Konum" ?  <EventLocation event ={event}></EventLocation>: null}
-                       {linkContent === "Anket" ?   <EventSurvey event ={event}></EventSurvey> : null}
-                       {linkContent === "Etkinliğe Özel Sorular" ? <EventQuestions event ={event}></EventQuestions> : null}
-                       {linkContent === "Etkinliğe Katıl" ? <EventParticipation event = {event}></EventParticipation> : null}
+                       {linkContent === "Details" ? <EventDetails event ={event}></EventDetails> : null}
+                       {linkContent === "Location" ?  <EventLocation event ={event}></EventLocation>: null}
+                       {linkContent === "Questionnaire" ?   <EventSurvey event ={event}></EventSurvey> : null}
+                       {linkContent === "Event Specific Questions" ? <EventQuestions event ={event}></EventQuestions> : null}
+                       {linkContent === "Join the Event" ? <EventParticipation event = {event}></EventParticipation> : null}
                    </Card.Body>
                    <Card.Footer>
-                       {( isOrganizator() ) ? <Link to = {`/participants/${event.name}`}>Katılımcıları görüntüle</Link> : null}
+                       {( isOrganizator() ) ? <Link to = {`/participants/${event.name}`}>View attendees</Link> : null}
                    </Card.Footer>
                </Card>
-               <ParticipantQuestionsArea event = {event}></ParticipantQuestionsArea>
+               {/* <ParticipantQuestionsArea event = {event}></ParticipantQuestionsArea> */}
            </div>
         );
     }

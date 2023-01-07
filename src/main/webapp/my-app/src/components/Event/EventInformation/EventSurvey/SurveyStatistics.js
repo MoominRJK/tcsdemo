@@ -53,7 +53,7 @@ class SurveyStatistics extends Component {
                         />
                     </div>
                     <button className={"btn btn-secondary mt-5 "}
-                            type="submit">Anket Bilgilerini Getir</button>
+                            type="submit">Fetch Survey Information</button>
                 </form>
                 {this.state.surveyInformation.length > 0 ?
                     <div className={"mt-5"}>
@@ -75,7 +75,7 @@ class SurveyStatistics extends Component {
                                                 <div className={"mt-1"}>
                                                     <div className={"row"}>
                                                         <div className="col">
-                                                            <p> "<strong>{answerOfQuestion.answer}"</strong> cevabını
+                                                            <p> "<strong>{answerOfQuestion.answer}"</strong> your answer
                                                             {" " + answerOfQuestion.numberOfAnswersToSurveyQuestion
                                                             +  " "}
                                                             kişi verdi</p>

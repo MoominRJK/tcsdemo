@@ -101,7 +101,7 @@ class QuestionTextArea extends Component {
         const {event,participant,question} = this.state;
         const {participantQuestions} = this.props;
         if(this.isSameQuestionAlreadyAsked(participantQuestions,question)) {
-            this.openMessageSnackbarWithMessages("Bu soruyu daha önce sordunuz. ",
+            this.openMessageSnackbarWithMessages("You have asked this question before. ",
                 "ERROR");
         }
         else {
@@ -168,7 +168,7 @@ class QuestionTextArea extends Component {
                                 id="comment"
                                 onChange = {(e) => this.changeInput(e)}/>
                             <Button className={"btn-btn primary"}
-                                    type = "submit">Soruyu gönder </Button>
+                                    type = "submit">Submit question </Button>
                         </div>
                     </form>
                 </div> : null}

@@ -4,7 +4,7 @@ import { isLogin, isOrganizator } from '../../Authentication';
 import NotFound from "../static/NotFound";
 const OrganizatorRoute = ({component: Component, ...rest}) => {
 
-    // urldeki username localdeki username ile eşit mi diye kontrol ediyor.
+    // Checks if username in url is equal to username in local.
     return (
         <Route {...rest} render={props => (
             isLogin() &&  "ORGANIZATOR" === localStorage.getItem("authorities") ?

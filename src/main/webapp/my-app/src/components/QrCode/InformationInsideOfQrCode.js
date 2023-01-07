@@ -32,10 +32,10 @@ class InformationInsideOfQrCode extends Component {
         const{event,participant} = this.state;
         return (
             <div className={"container mt-5"}>
-                <Alert severity="info">Etkinliğin anketine ve
-                    ,eğer varsa, yanıtlamış olduğunuz etkinliğin özel sorularına
-                        <a className="card-link" href={`/event/${event.name}`}> buradan </a>
-                    ulaşabilirsiniz</Alert>
+                <Alert severity="info">The event's survey and
+                    , if any, to the specific questions of the event you have answered
+                        <a className="card-link" href={`/event/${event.name}`}> from here </a>
+                        you can reach</Alert>
                 <div className={"card text-black bg-light container mt-5 mb-5"}>
                     <EventDetails event = {event}/>
                 </div>

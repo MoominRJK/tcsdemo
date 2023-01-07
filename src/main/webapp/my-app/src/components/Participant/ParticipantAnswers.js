@@ -82,7 +82,7 @@ class ParticipantAnswers extends Component {
             <div className={"container mt-5"}>
                 <Card>
                     <Card.Header>
-                        Cevaplarınız
+                    Your answers
                     </Card.Header>
                         <div>
                             <Form>

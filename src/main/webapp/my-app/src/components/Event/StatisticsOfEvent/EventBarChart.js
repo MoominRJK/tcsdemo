@@ -64,7 +64,7 @@ import { animateScroll } from "react-scroll";
         return (
             <div>
                 <div className="card">
-                    <h5>Etkinliklere Katılan Kişilerin Grafiği</h5>
+                    <h5>Graph of People Attending Events</h5>
                     <Chart type="bar"
                            className={"mt-5"}
                            data={this.basicData}

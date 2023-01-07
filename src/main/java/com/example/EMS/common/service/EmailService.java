@@ -33,11 +33,11 @@ public class EmailService {
 
     public void sendMailAboutEventRaffle(Participant participant, Event event) {
         mail.setTo(participant.getEmail());
-        mail.setFrom("ebinnaz59@gmail.com");
-        mail.setSubject("TEBRİKLER ! " + event.getName() + " etkinliğinin çekilişini kazandınız");
-        mail.setText("Sayın " + participant.getName() + " " +
-                    participant.getSurname() + " lütfen detaylı bilgi için bizimle" +
-                    " iletişime geçiniz");
+        mail.setFrom("sophielinscl@gmail.com");
+        mail.setSubject("CONGRATULATIONS ! " + event.getName() + " You have won the lottery for the event");
+        mail.setText("Dear " + participant.getName() + " " +
+                    participant.getSurname() + " Please contact us for detailed information." +
+                    " contact");
         emailSender.send(mail);
     }
     
@@ -46,7 +46,7 @@ public class EmailService {
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
         helper.setTo(participant.getEmail());
-        helper.setFrom("ebinnaz59@gmail.com");
+        helper.setFrom("sophielinscl@gmail.com");
         helper.setSubject(participationSuccessMessage(participant));
 
         MimeMultipart multipart = new MimeMultipart("related");
@@ -55,18 +55,23 @@ public class EmailService {
                 QRGenBarcodeGenerator.createQrCodeWith(participant,event);
         putQrCodeAsImageToEmail(multipart,qrImageDataSource);
         message.setContent(multipart);
-        emailSender.send(message);
+        //TODO: email the QR code
+        try {
+         //   emailSender.send(message);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private String participationSuccessMessage(Participant participant) {
-        return "Sayın " + participant.getName() + " " + participant.getSurname() +
-                " etkinliğe katılımınızı gerçekleştirdik.";
+        return "Dear " + participant.getName() + " " + participant.getSurname() +
+                " we made your participation in the event.";
     }
 
     private void createMessageBodyPartOfEmail(MimeMultipart multipart) throws MessagingException {
         BodyPart messageBodyPart = new MimeBodyPart();
-        String htmlText = "<H3>QR Code'u okutarak istediginiz zaman okutarak etkinlik bilgilerine" +
-                "ve kendi bilgilerinize ulasabilirsiniz.</H3><img src=\"cid:image\">";
+        String htmlText = "<H3>You can access the event information by scanning the QR Code whenever you want." +
+                "and you can access your own information.</H3><img src=\"cid:image\">";
         messageBodyPart.setContent(htmlText, "text/html");
         multipart.addBodyPart(messageBodyPart);
     }

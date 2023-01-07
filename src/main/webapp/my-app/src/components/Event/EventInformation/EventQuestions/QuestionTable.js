@@ -6,11 +6,11 @@ class QuestionTable extends Component {
 
     state = {
         columns: [
-            { title: 'Soru', field: 'question' },
-            { title: 'Soru Tipi', field: 'questionType'},
-            { title: 'Soruyu cevaplamak zorunlu mu ', field: 'isQuestionRequired'},
-            {title : 'Sorunun beklenen cevabının en küçük değeri', field : 'expectedMinValueAnswerOfQuestion'},
-            {title : 'Sorunun beklenen cevabının en büyük değeri', field : 'expectedMaxValueAnswerOfQuestion'},
+            { title: 'Question', field: 'question' },
+            { title: 'questionType', field: 'questionType'},
+            { title: 'Is it mandatory to answer the question ', field: 'isQuestionRequired'},
+            {title : 'The smallest value of the expected answer to the question', field : 'expectedMinValueAnswerOfQuestion'},
+            {title : 'The greatest value of the expected answer to the question', field : 'expectedMaxValueAnswerOfQuestion'},
         ],
     }
 
@@ -22,11 +22,11 @@ class QuestionTable extends Component {
                 <MaterialTable columns={columns}
                                data={questions}
                                title={<Typography variant="h4" component="h5">
-                                   Eklediğiniz Soruların Listesi
+                                   List of Questions You Have Added
                                      </Typography>}
                                actions ={[{
                                    icon :  'delete',
-                                   tooltip: 'Sil',
+                                   tooltip: 'delete',
                                    onClick: (e, rowData,) => onDeleteQuestion(e,questions.indexOf(rowData))
                                }]}/>
             </div>

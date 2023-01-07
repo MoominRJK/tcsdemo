@@ -36,13 +36,13 @@ public class LoginService {
                     user.getUsername(), loginRequestDTO.getPassword());
             Authentication authentication = authenticationProvider.authenticate(authenticationToken);
             String jwtToken =  JwtUtil.generateToken(authentication,secretKey,7);
-            messageResponse = new MessageResponse("Girdiğiniz bilgiler doğrudur.Yönlendiriliyorsunuz",
+            messageResponse = new MessageResponse("The information you entered is correct. You are being redirected",
                                                         MessageType.SUCCESS);
             return new LoginResponse(jwtToken,messageResponse);
         } catch (Exception ex) {
                ex.printStackTrace();
         }
-        messageResponse = new MessageResponse("Girdiğiniz bilgiler hatalıdır! Lütfen tekrar giriniz.",
+        messageResponse = new MessageResponse("The information you entered is incorrect! Please re-enter.",
                 MessageType.ERROR);
         return new LoginResponse(null,messageResponse);
     }

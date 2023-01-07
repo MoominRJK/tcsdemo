@@ -26,12 +26,12 @@ public class EventQuestionsService {
         Event event = eventService.getEventByName(eventName);
 
         if(event == null){
-            return new MessageResponse("Soru ekleme başarısız", ERROR);
+            return new MessageResponse("Add question failed", ERROR);
         }
         else{
             event.setEventQuestions(eventQuestions.stream().collect(Collectors.toSet()));
             eventService.save(event);
-            return new MessageResponse("Soru ekleme başarılı", SUCCESS);
+            return new MessageResponse("Add question successful", SUCCESS);
         }
     }
     public List<EventQuestions> getAllQuestionsOfEvent(String eventName) {

@@ -65,18 +65,18 @@ class EventSurvey extends Component {
         return (
             <div>
                 {((isOrganizator()) && this.isEventAlreadyFinished()) ?
-                    <p>Bu etklinlik bittiği için anket oluşturamazsınız</p> : null}
+                    <p>You cannot create a poll because this event has ended</p> : null}
                 {((isOrganizator()) && surveyQuestionCountOfEvent == 0  && !this.isEventAlreadyStarted()) ?
                    <EventSurveyForm event = {this.props.event}/>: null}
                 {(isOrganizator() && surveyQuestionCountOfEvent > 0) ?
-                    <p>Etkinliğe ait anketi ve anket sonuçlarını üst menüden görüntüleyebilirsin.</p>
+                    <p>You can view the survey and survey results of the event from the top menu.</p>
                     : null }
                 {(isParticipantAlreadyJoined && isParticipant())  ?
                     <SurveyQuestions event ={this.props.event}></SurveyQuestions>
                     : null
                 }
                 {(isParticipant() && !isParticipantAlreadyJoined) ?
-                    <p>Bu anketi sadece etkinliğe katılmış olan kullanıcılar görüntüleyebilir.</p>
+                    <p>Only users who have participated in the event can view this survey.</p>
                     : null
                 }
             </div>
@@ -88,7 +88,7 @@ export default withRouter(EventSurvey);
 
 /*
   {(isParticipantAlreadyJoined && isParticipant() && !this.isEventAlreadyFinished())  ?
-                     <p>Bu anketi,etkinlik bittikten sonra doldurabilirsiniz.</p>
+                     <p>You can fill out this survey after the event is over.</p>
                     : null
                 }
 

@@ -57,7 +57,7 @@ class AnswerTextArea extends Component {
                                 onChange = {(e) => this.changeInput(e)}/>
                                 <div>
                                         <Button className={"btn-btn primary"}
-                                              type = "submit">Cevabı gönder </Button>
+                                              type = "submit">Submit reply </Button>
                                         <button type="button"
                                                 className="close"
                                                 aria-label="Close"

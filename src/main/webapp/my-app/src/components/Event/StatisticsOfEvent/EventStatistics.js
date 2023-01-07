@@ -104,30 +104,30 @@ class EventStatistics extends Component {
                                 <Form.Control as="select" required
                                               value={statisticsType}
                                               onChange={(e) => this.handleEventStatisticsChoice(e)}>
-                                    <option value="">Grafik oluştur </option>
-                                    <option value="showGraphicsWithParticipationCount">Başvuran Sayısına Göre Etkinlikleri Göster</option>
-                                    <option value="showGraphicsWithParticipationDate">Etkinliğe Yapılan Başvuruların Tarihlerine Göre Göster</option>
+                                    <option value="">Create chart</option>
+                                    <option value="showGraphicsWithParticipationCount">Show Events by Number of Applicants</option>
+                                    <option value="showGraphicsWithParticipationDate">Show by Date of Applications Made to the Event</option>
                                 </Form.Control>
                             </InputGroup>
                         </div>
                     </div>
                     <div className="col-md-12 text-center mt-5 mb-5">
                         <button type="submit"
-                                className="btn btn-primary">Grafiği göster</button>
+                                className="btn btn-primary">show chart</button>
 
                     </div>
             </form>
                 {(isOpenedEventBarChart  && statisticsType === "showGraphicsWithParticipationCount") ?
                     <EventBarChart
                         labels = {this.state.eventNames}
-                        label = "Katılımcı Sayısı"
+                        label = "The number of participants"
                         data = {this.state.participationCountsOfEvents}/> : null}
                 {(isOpenedEventBarChart &&
                     statisticsType === "showGraphicsWithParticipationDate"
                 && this.state.participationDates.length != 0) ?
                     <EventBarChart
                         labels = {this.state.participationDates}
-                        label = "Katılımcı Sayısı"
+                        label = "The number of participants"
                         data = {this.state.participationCountsOfEvents}/> : null}
 
             </div>

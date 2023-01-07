@@ -49,10 +49,11 @@ class RegisterForm extends Component {
             authorities: [userType]
         }
         if(!this.arePasswordsEqual()) {
-            this.setMessageAs("Yazdığınız 2 parola birbiriyle uyuşmuyor.Tekrar yazınız","ERROR");
+            this.setMessageAs("The 2 passwords you typed do not match.","ERROR");
         }
         else {
-            const response = await axios.post(`/add/${userType}`,
+           // const response = await axios.post(`/add/${userType}`,
+           const response = await axios.post(`/add/${userType}`,
                 newUser,
                 ).catch(err => {
                 this.props.history.push("/notFound404");
@@ -114,19 +115,20 @@ class RegisterForm extends Component {
         return (
             <Card className={"container w-50 mt-5 text-black bg-light text-center"}>
                 <Card.Header>
-                    <h4>Kayıt ol</h4>
+                    <h4>Register</h4>
                 </Card.Header>
                 <Card.Body>
                     <Form onSubmit={(e)=> this.sendRegisterForm(e)}>
                         <Form.Group>
-                            <Form.Label>Sistemimize hangi tipte kullanıcı olarak kayıt olmak istiyorsunuz ?</Form.Label>
+                            <Form.Label>What type of user do you want to register in our system ?</Form.Label>
                             <InputGroup>
                                 <Form.Control as="select" required
                                               value={this.state.userType}
                                               onChange={(e) => this.handleUserTypeChange(e)}>
                                     <option value=""> - </option>
-                                    <option value="LECTURER">Eğitmen</option>
-                                    <option value="PARTICIPANT">Katılımcı</option>
+                                    <option value="LECTURER">LECTURER</option>
+                                    <option value="PARTICIPANT">PARTICIPANT</option>
+                                    <option value="ORGANIZATOR">ORGANIZATOR</option>
                                 </Form.Control>
                             </InputGroup>
                         </Form.Group>
@@ -134,10 +136,10 @@ class RegisterForm extends Component {
                         <div className={"row"}>
                             <div className={"col"}>
                                 <Form.Group>
-                                    <Form.Label>İsim</Form.Label>
+                                    <Form.Label>First Name</Form.Label>
                                     <Form.Control
                                         type="text"
-                                        placeholder="İsim"
+                                        placeholder="First Name"
                                         required id="name"
                                         name="name"
                                         value={this.state.name}
@@ -146,10 +148,10 @@ class RegisterForm extends Component {
                             </div>
                             <div className={"col"}>
                                 <Form.Group>
-                                    <Form.Label>Soyisim</Form.Label>
+                                    <Form.Label>Last name</Form.Label>
                                     <Form.Control
                                         type="text"
-                                        placeholder="Soyisim"
+                                        placeholder="Last name"
                                         required id="surname"
                                         value={this.state.surname}
                                         name="surname"
@@ -161,10 +163,10 @@ class RegisterForm extends Component {
                         <div className={"row"}>
                             <div className="col">
                                 <Form.Group>
-                                    <Form.Label>Kullanıcı Adı Belirleyin</Form.Label>
+                                    <Form.Label>Set Username</Form.Label>
                                     <Form.Control
                                         type="text"
-                                        placeholder="Kullanıcı Adı"
+                                        placeholder="User Name"
                                         required id="username"
                                         value={this.state.username}
                                         name="username"
@@ -173,10 +175,10 @@ class RegisterForm extends Component {
                             </div>
                             <div className="col">
                                 <Form.Group>
-                                    <Form.Label>Parola Belirleyin</Form.Label>
+                                    <Form.Label>Set Password</Form.Label>
                                     <Form.Control
                                         type="password"
-                                        placeholder="Parola"
+                                        placeholder="Password"
                                         required id="password"
                                         value={this.state.password}
                                         name="password"
@@ -187,17 +189,17 @@ class RegisterForm extends Component {
                         <div className="row">
                             <div className="col">
                                 <Form.Group>
-                                    <Form.Label>Parolanızı Tekrar Girin</Form.Label>
+                                    <Form.Label>Re-enter your password</Form.Label>
                                     <Form.Control
                                         type="password"
-                                        placeholder="Parola"
+                                        placeholder="Password"
                                         required id="repeatedPassword"
                                         value={this.state.repeatedPassword} name="repeatedPassword" onChange={this.updateInput} />
                                 </Form.Group>
                             </div>
                             <div className="col">
                                 <Form.Group>
-                                    <Form.Label>Email Adresi</Form.Label>
+                                    <Form.Label>Email Address</Form.Label>
                                     <Form.Control
                                         type="mail"
                                         placeholder="Email"
@@ -211,10 +213,10 @@ class RegisterForm extends Component {
                         <div className="row">
                             <div className="col">
                                 <Form.Group>
-                                    <Form.Label>Tc Kimlik Numaranız</Form.Label>
+                                    <Form.Label>Student ID</Form.Label>
                                     <Form.Control
                                         type="number"
-                                        placeholder="Tc Kimlik Numaranız"
+                                        placeholder="Student ID"
                                         required id="tcKimlikNo"
                                         min="0"
                                         value={this.state.tcKimlikNo}
@@ -227,22 +229,22 @@ class RegisterForm extends Component {
                                     <Form.Label>Phone</Form.Label>
                                     <Form.Control
                                         type="tel"
-                                        placeholder="xxx-xxx-xx-xx"
+                                        placeholder="xxx-xxx-xxxx"
                                         required id="phone"
-                                        pattern="[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}"
+                                        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                                         value={this.state.phone}
                                         name="phone"
                                         onChange={this.updateInput} />
-                                    <small>Format: 123-456-78-90</small>
+                                    <small>Format: 123-456-7890</small>
                                 </Form.Group>
                             </div>
                         </div>
                         <div className="row">
                             <div className="col-6">
                                 <Form.Group>
-                                    <Form.Label>Doğum Tarihi</Form.Label>
+                                    <Form.Label>Birth Date</Form.Label>
                                     <Form.Control type="date"
-                                                  placeholder="Doğum Tarihi"
+                                                  placeholder="Birth Date"
                                                   required id="birthDate"
                                                   value={this.state.birthDate}
                                                   max ={this.state.currentDate}

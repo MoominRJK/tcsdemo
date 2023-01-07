@@ -22,7 +22,7 @@ class LecturerSelection extends Component {
                     return {value : lecturer.username, display : lecturer.username}
                 });
                 this.setState({
-                    usernamesOfLecturers : [{value: '', display : 'Eğitmen seç'}]
+                    usernamesOfLecturers : [{value: '', display : 'Choose an instructor'}]
                         .concat(usernamesOfLecturers)
                 })
             });
@@ -40,9 +40,9 @@ class LecturerSelection extends Component {
         const {lecturerUsername,usernamesOfLecturers} = this.state;
         return (
             <div>
-                <Form.Label>Eğitmen</Form.Label>
+                <Form.Label>Instructor</Form.Label>
                 <Form.Control size="sm" as="select" required
-                              placeholder = "Eğitmen seç"
+                              placeholder = "Choose an instructor"
                               value={lecturerUsername}
                               className={"bg-dark text-white"}
                               onChange={(e) => this.handleUsernameChange(e) }>

@@ -37,14 +37,14 @@ public class ParticipantQuestionsService {
                 ParticipantQuestionsAboutEvent addedQuestion =
                         createParticipantQuestionWith(questionText,eventFromDB,participantFromDB);
                 participantQuestionsRepository.save(addedQuestion);
-                return new MessageResponse("Soru başarıyla eklendi ! ",SUCCESS);
+                return new MessageResponse("Question successfully added ! ",SUCCESS);
             }
-            return new MessageResponse("Bu etkinliğe katılmadığınız için " +
-                    "soru ekleyemezsiniz ! ",ERROR);
+            return new MessageResponse("For not attending this event " +
+                    "you cannot add questions ! ",ERROR);
         }
         catch (Exception e) {
             e.printStackTrace();
-            return new MessageResponse("Soru eklenirken hata oluştu",ERROR);
+            return new MessageResponse("Error occurred while adding question",ERROR);
         }
     }
 
@@ -100,7 +100,7 @@ public class ParticipantQuestionsService {
         answeredQuestion.setAnswer(answer);
         participantQuestionsRepository.save(answeredQuestion);
 
-        return new MessageResponse("Cevap eklendi ! ",SUCCESS);
+        return new MessageResponse("Answer added ! ",SUCCESS);
     }
 
 }

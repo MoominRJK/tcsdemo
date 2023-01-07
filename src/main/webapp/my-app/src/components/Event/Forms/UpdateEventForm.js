@@ -24,6 +24,11 @@ class UpdateEventForm extends Component {
         message : '',
         messageType : '',
         isDisable : false,
+        city : '',
+        state : '',
+        zip : '',
+        point : 0,
+        eventType : 1 
     }
     componentDidMount = async () => {
         if(!isOrganizator()) {
@@ -38,7 +43,7 @@ class UpdateEventForm extends Component {
         });
 
         if(this.isEventStarted(response.data.startDate)) {
-            this.showErrorMessageAboutEventAs('Bu etkinliğin başlama tarihi geçtiği için güncellenemez !');
+            this.showErrorMessageAboutEventAs('This event cannot be updated because its start date has passed. !');
         }
         else {
            this.getValuesOfEvent(response.data);
@@ -62,7 +67,11 @@ class UpdateEventForm extends Component {
     }
 
     getValuesOfEvent = (event) =>{
-    const { name, endDate,startDate,quota,address,longitude,latitude,currentNumberOfPeople } = event;
+    const { name, endDate,startDate,quota,address,longitude,latitude,currentNumberOfPeople, city,
+        state,
+        zip,
+        point,
+        eventType } = event;
         this.setState({
             name,
             endDate,
@@ -71,13 +80,18 @@ class UpdateEventForm extends Component {
             quota,
             address,
             longitude,
-            latitude
+            latitude,
+            city,
+            state,
+            zip,
+            point,
+            eventType
         });
     }
 
     updateEvent = async (e,dispatch) =>{
         e.preventDefault();
-        const { name, endDate,startDate,quota,address,longitude,latitude,currentNumberOfPeople} = this.state;
+        const { name, endDate,startDate,quota,address,longitude,latitude,currentNumberOfPeople, city, state, zip, point, eventType} = this.state;
 
         const updatedEvent = {
             name : name.trim(),
@@ -86,7 +100,12 @@ class UpdateEventForm extends Component {
             quota,
             address,
             longitude,
-            latitude
+            latitude,
+            city,
+            state,
+            zip,
+            point,
+            eventType
         }
         const response = await axios.put(`/events/${this.props.eventName}`, updatedEvent,{
             headers : {
@@ -150,15 +169,15 @@ class UpdateEventForm extends Component {
                             >
                                 <Modal.Header closeButton>
                                     <Modal.Title id="example-modal-sizes-title-lg">
-                                        Etkinliği Güncelle
+                                         Update Event
                                     </Modal.Title>
                                 </Modal.Header>
                                 <Modal.Body>
                                     <Form onSubmit ={(e) => this.updateEvent(e,dispatch)}>
                                         <Form.Group >
-                                            <Form.Label>İsim</Form.Label>
+                                            <Form.Label>Name</Form.Label>
                                             <Form.Control type="text"
-                                                          placeholder="İsim"
+                                                          placeholder="Name"
                                                           required
                                                           id = "name"
                                                           name="name"
@@ -167,19 +186,21 @@ class UpdateEventForm extends Component {
                                             />
                                         </Form.Group>
 
+                                      
                                         <Form.Group>
-                                            <Form.Label>Bitiş Tarihi</Form.Label>
-                                            <Form.Control type="date" placeholder="Bitiş Tarihi"
+                                            <Form.Label>Event Type</Form.Label>
+                                            <Form.Control type="number" placeholder="Event Type"
                                                           required
-                                                          id = "endDate"
-                                                          min = {this.state.startDate}
-                                                          value = {this.state.endDate}
-                                                          name = "endDate"
+                                                          id = "eventType"
+                                                          min ={currentNumberOfPeople}
+                                                          value = {this.state.eventType}
+                                                          name = "eventType"
                                                           onChange={this.updateInput}/>
                                         </Form.Group>
+
                                         <Form.Group >
-                                            <Form.Label>Başlangıç Tarihi</Form.Label>
-                                            <Form.Control type="date" placeholder="Başlangıç tarihi"
+                                            <Form.Label>Start Date</Form.Label>
+                                            <Form.Control type="date" placeholder="Start Date"
                                                           required
                                                           id = "startDate"
                                                           value = {this.state.startDate}
@@ -188,8 +209,31 @@ class UpdateEventForm extends Component {
                                         </Form.Group>
 
                                         <Form.Group>
-                                            <Form.Label>Kontenjan</Form.Label>
-                                            <Form.Control type="number" placeholder="Kontenjan"
+                                            <Form.Label>End Date</Form.Label>
+                                            <Form.Control type="date" placeholder="End Date"
+                                                          required
+                                                          id = "endDate"
+                                                          min = {this.state.startDate}
+                                                          value = {this.state.endDate}
+                                                          name = "endDate"
+                                                          onChange={this.updateInput}/>
+                                        </Form.Group>
+
+                                        <Form.Group>
+                                            <Form.Label>Award Point</Form.Label>
+                                            <Form.Control type="number" placeholder="Award Point"
+                                                          required
+                                                          id = "point"
+                                                          min ={currentNumberOfPeople}
+                                                          value = {this.state.point}
+                                                          name = "point"
+                                                          onChange={this.updateInput}/>
+                                        </Form.Group>
+
+
+                                        <Form.Group>
+                                            <Form.Label>Quota</Form.Label>
+                                            <Form.Control type="number" placeholder="Quota"
                                                           required
                                                           id = "quota"
                                                           min ={currentNumberOfPeople}
@@ -197,9 +241,9 @@ class UpdateEventForm extends Component {
                                                           name = "quota"
                                                           onChange={this.updateInput}/>
                                         </Form.Group>
-                                            <Form.Group>
-                                                <Form.Label>Etkinliğe kayıt yaptırmış kişi sayısı</Form.Label>
-                                                <Form.Control type="number" placeholder="Kayıtlı kişi sayısı"
+                                            {/* <Form.Group>
+                                                <Form.Label>Number of people registered for the event</Form.Label>
+                                                <Form.Control type="number" placeholder="Number of registered people"
                                                               disabled
                                                               id = "currentNumberOfPeople"
                                                               value = {currentNumberOfPeople}
@@ -207,8 +251,8 @@ class UpdateEventForm extends Component {
                                                               />
                                             </Form.Group>
                                         <Form.Group>
-                                            <Form.Label>Enlem</Form.Label>
-                                            <Form.Control type="number" placeholder="Enlem"
+                                            <Form.Label>Latitude</Form.Label>
+                                            <Form.Control type="number" placeholder="Latitude"
                                                           required
                                                           id = "latitude"
                                                           value = {this.state.latitude}
@@ -216,21 +260,51 @@ class UpdateEventForm extends Component {
                                                           onChange={this.updateInput}/>
                                         </Form.Group>
                                         <Form.Group >
-                                            <Form.Label>Boylam</Form.Label>
-                                            <Form.Control type="number" placeholder="Boylam"
+                                            <Form.Label>Longitude</Form.Label>
+                                            <Form.Control type="number" placeholder="Longitude"
                                                           required
                                                           id = "longitude"
                                                           value = {this.state.longitude}
                                                           name = "longitude"
                                                           onChange={this.updateInput}/>
-                                        </Form.Group>
+                                        </Form.Group> */}
                                         <Form.Group >
-                                            <Form.Label>Adres</Form.Label>
-                                            <Form.Control type="address" placeholder="Adres"
+                                            <Form.Label>Address</Form.Label>
+                                            <Form.Control type="address" placeholder="Address"
                                                           required
                                                           id = "address"
                                                           value = {this.state.address}
                                                           name = "address"
+                                                          onChange={this.updateInput}/>
+                                        </Form.Group>
+
+                                        <Form.Group >
+                                            <Form.Label>City</Form.Label>
+                                            <Form.Control type="city" placeholder="City"
+                                                          required
+                                                          id = "city"
+                                                          value = {this.state.city}
+                                                          name = "city"
+                                                          onChange={this.updateInput}/>
+                                        </Form.Group>
+
+                                        <Form.Group >
+                                            <Form.Label>State</Form.Label>
+                                            <Form.Control type="state" placeholder="State"
+                                                          required
+                                                          id = "state"
+                                                          value = {this.state.state}
+                                                          name = "state"
+                                                          onChange={this.updateInput}/>
+                                        </Form.Group>
+
+                                        <Form.Group >
+                                            <Form.Label>Zip</Form.Label>
+                                            <Form.Control type="zip" placeholder="Zip"
+                                                          required
+                                                          id = "zip"
+                                                          value = {this.state.address}
+                                                          name = "zip"
                                                           onChange={this.updateInput}/>
                                         </Form.Group>
 

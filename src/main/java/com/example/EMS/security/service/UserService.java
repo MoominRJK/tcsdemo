@@ -43,36 +43,36 @@ public class UserService {
         Set<Authority> authorities = getAuthoritiesOf(userDTO);
         try{
             if(isAnyUserHasSameUsernameWith(userDTO)) {
-                return new MessageResponse("Bu kullanıcı adına sahip " +
-                        "başka bir kullanıcı sistemde kayıtlı.Lütfen " +
-                        "başka bir kullanıcı adı seçin.",ERROR);
+                return new MessageResponse("Has this username " +
+                        "Another user is registered in the system. Please " +
+                        "Choose another username.",ERROR);
             }
 
             else if(isAnyUserHasSameTcKimlikNoWith(userDTO)){
-                return new MessageResponse("Bu kimlik numarasına sahip " +
-                        "başka bir kullanıcı sistemde kayıtlı.Bu kimlik" +
-                        " numarasıyla kayıt yapamassınız",ERROR);
+                return new MessageResponse("Has this ID number" +
+                        "Another user is registered in the system. This ID" +
+                        "You cannot register with the number",ERROR);
             }
             else if(isAnyUserHasSamePhoneWith(userDTO)) {
-                return new MessageResponse("Bu telefon numarasına sahip " +
-                        "başka bir kullanıcı sistemde kayıtlı.Bu telefon" +
-                        " numarasıyla kayıt yapamassınız",ERROR);
+                return new MessageResponse("He has this phone number" +
+                        "another user is registered in the system. This phone" +
+                        "You cannot register with the number ",ERROR);
             }
             else if(isAnyUserHasSameEmailWith(userDTO)) {
-                return new MessageResponse("Bu mail adresine sahip " +
-                        "başka bir kullanıcı sistemde kayıtlı.Bu mail" +
-                        " adresiyle kayıt yapamassınız",ERROR);
+                return new MessageResponse("He has this e-mail address" +
+                        "Another user is registered in the system. This is mail" +
+                        "You cannot register with the address",ERROR);
             }
             addUserToRelatedTable(userDTO,userType);
             authorityRepository.saveAll(authorities);
             addUserToUsersTable(userDTO,authorities);
-            return new MessageResponse( "Tebrikler sisteme kayıt oldunuz. " +
-                    "Artık giriş yapabilirsiniz.",SUCCESS);
+            return new MessageResponse( "Congratulations, you have registered in the system. " +
+                    "You can now login.",SUCCESS);
         }
         catch (Exception err){
             err.printStackTrace();
         }
-        return new MessageResponse( "Eklerken bir hata oluştu",ERROR);
+        return new MessageResponse( "An error occurred while adding",ERROR);
 
     }
 

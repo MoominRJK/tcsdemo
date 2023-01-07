@@ -23,7 +23,7 @@ class EventParticipation extends Component {
     }
 
     componentDidMount = () => {
-        this.isEventHaveQuestions();
+       // this.isEventHaveQuestions();
         if(isParticipant()) {
             this.isJoinedBeforeAsParticipantToEvent()
                 .then(isJoinedBefore => {
@@ -74,12 +74,12 @@ class EventParticipation extends Component {
         const {event} = this.props;
         const {isEventHaveQuestions } = this.state;
         if(this.isEventFull(event)){
-            this.setMessageStatesAs("Etkinlik Dolu","ERROR");
+            this.setMessageStatesAs("Full of Activity","ERROR");
         }
         else if(isEventHaveQuestions) {
-            this.setMessageStatesAs("Bu etkinliğe katılmadan önce " +
-                "yanıtlamanız gereken sorular var.Bu soruları Etkinliğe Özel Sorular kısmından" +
-                "yanıtladıktan sonra etkinliğe katılabilirsiniz","ERROR");
+            this.setMessageStatesAs("Before joining this event" +
+            "There are questions you need to answer. These questions can be found in the Event Specific Questions" +
+            "After answering, you can join the event","ERROR");
         }
         else{
             this.sendJoinRequestWith(participantUsername);
@@ -160,10 +160,10 @@ class EventParticipation extends Component {
         const {isJoinedBefore, isParticipationRequest, message, messageType} = this.state;
         return (
             <div>
-                {isJoinedBefore ? <p className={"text-muted float-right"}>Buna katıldın</p>
+                {isJoinedBefore ? <p className={"text-muted float-right"}>you joined this</p>
                     :
                     <button className={"btn btn-dark"}
-                            onClick={(e) => this.joinEvent(e)}>Katıl
+                            onClick={(e) => this.joinEvent(e)}>Join
                     </button>
                 }
                 {isParticipationRequest ? <CustomizedSnackbar  vertical = {"bottom"}

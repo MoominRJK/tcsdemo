@@ -45,11 +45,11 @@ public class ParticipantsInEventsService {
                 increaseCurrentPeopleCountOfEvent(eventFromDB);
             }
             else {
-                return new MessageResponse("Bu etkinliğin kontenjanı dolmuştur",
+                return new MessageResponse("This event is out of quota",
                         ERROR);
             }
             if(isParticipatedBeforeToEvent(username,eventFromDB)){
-                return new MessageResponse("Bu etkinliğe daha önceden başvurdunuz ! ",
+                return new MessageResponse("You have already applied for this event ! ",
                         ERROR);
             }
 
@@ -58,17 +58,17 @@ public class ParticipantsInEventsService {
             participantInEvents.setEvent(eventFromDB);
             participantInEvents.setPartitionDate(java.time.LocalDate.now());
             participantInEvents.setParticipantQuestions(null);
-
+            //TODO: PDF generation
             final byte[] pdfAboutEventInfo = fileService.createPdfAboutEventInfo(participantInEvents);
             participantInEvents.setEventInfoDocument(pdfAboutEventInfo);
 
             saveNewParticipationToEvent(eventFromDB);
             saveNewParticipationToParticipant(participant);
-           return new MessageResponse("Etkinliğe başarılı bir şekilde kayıt oldunuz." +
-                    "Mail'inize etkinliğin detaylarını içeren bir QR Code yolluyoruz.",
+           return new MessageResponse("You have successfully registered for the event." +
+                    "We send a QR Code to your e-mail with the details of the event..",
                     SUCCESS);
         }
-        return new MessageResponse("Bu etkinliğe kayıt olamadınız.",
+        return new MessageResponse("You could not register for this event.",
                 ERROR);
     }
 

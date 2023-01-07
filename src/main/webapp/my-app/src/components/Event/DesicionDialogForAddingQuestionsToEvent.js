@@ -35,19 +35,19 @@ export default function DesicionDialogForAddingQuestionsToEvent(props) {
                 aria-labelledby="alert-dialog-slide-title"
                 aria-describedby="alert-dialog-slide-description"
             >
-                <DialogTitle id="alert-dialog-slide-title">{"Etkinlik Anketi ve Etkinliğe Özel Sorular Hakkında"}</DialogTitle>
+                <DialogTitle id="alert-dialog-slide-title">{"About the Event Survey and Event-Specific Questions"}</DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description">
-                        <strong>{props.eventName} </strong>adlı etkinlik oluştu. Bu etkinlik için
-                        katılımcıların cevaplaması gereken sorular oluşturmak ister misiniz ?
+                        <strong>{props.eventName} </strong>event has occurred. for this event
+                        Do you want to create questions that participants have to answer? ?
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={goToEventPage} color="primary">
-                        Hayır
+                       No
                     </Button>
                     <Button onClick={goToQuestionAdditionPage} color="primary">
-                       Evet
+                       Yes
                     </Button>
                 </DialogActions>
             </Dialog>

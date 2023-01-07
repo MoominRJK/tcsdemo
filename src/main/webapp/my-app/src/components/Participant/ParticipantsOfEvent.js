@@ -5,10 +5,10 @@ import axios from "axios";
 class ParticipantsOfEvent extends Component {
     state = {
         columns: [
-            { title: 'İsim', field: 'name' },
-            { title: 'Soyisim', field: 'surname'},
-            { title: 'Tc Kimlik No', field: 'tcKimlikNo'},
-            {title : 'Kullanıcı Adı', field : 'username'},
+            { title: 'First Name', field: 'name' },
+            { title: 'Last Name', field: 'surname'},
+            { title: 'Student ID', field: 'tcKimlikNo'},
+            {title : 'Username', field : 'username'},
         ],
         participants : [],
     }
@@ -36,14 +36,14 @@ class ParticipantsOfEvent extends Component {
             <div  className={"container w-75 mt-5"}>
                 <MaterialTable
                     title={<Typography variant="h4" component="h5">
-                        Kullanıcı Listesi
+                        User List
                     </Typography>}
                     columns={this.state.columns}
                     data = {this.state.participants}
                     actions = {[ {
                             icon : 'info',
-                            tooltip: 'Kullanıcının bilgilerini ve etkinlik hakkında yanıtladığı soruları görmek' +
-                                'için tıkla',
+                            tooltip: 'See the users information and questions answered about the event' +
+                                'click for',
                     }]}
                     ></MaterialTable>
             </div>

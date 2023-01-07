@@ -37,15 +37,15 @@ class EventSurveyForm extends Component {
             answerOptions : answerOptions
         }
         if(this.isAnyDuplicateAnswerOptionIn(answerOptions)) {
-            this.openMessageSnackbarWithMessages("Eklemeye çalıştığınız soruda aynı cevap " +
-                "seçeniğini birden fazla yazdınız. Lütfen değiştiriniz.","ERROR");
+            this.openMessageSnackbarWithMessages("Same answer in the question you are trying to add " +
+                "You typed the option more than once. please change.","ERROR");
         }
         else {
             this.setState({
                 ...this.state,
                 surveyQuestions : [...this.state.surveyQuestions,newSurveyQueston],
             })
-            this.openMessageSnackbarWithMessages("Soru Eklendi","SUCCESS");
+            this.openMessageSnackbarWithMessages("Question Added","SUCCESS");
         }
     }
 
@@ -70,8 +70,8 @@ class EventSurveyForm extends Component {
         e.preventDefault();
         const { surveyQuestions } = this.state;
         if(this.isAnyDuplicateQuestionIn(surveyQuestions)) {
-            this.openMessageSnackbarWithMessages("Eklemiş olduğunuz herhangi bir soruyu birden fazla defa" +
-                " eklediniz. Lütfen her soruyu en fazla 1 defa ekleyin. ","ERROR")
+            this.openMessageSnackbarWithMessages("Any question you have added more than once" +
+            ". Please add each question no more than once. ","ERROR")
         }
         else {
             const response = await axios.post(`/surveyQuestionsOfEvent/${event.name}`,
@@ -83,7 +83,7 @@ class EventSurveyForm extends Component {
                 this.props.history.push("/notFound404");
             })
             this.resetQuestions();
-            this.openMessageSnackbarWithMessages("Anket oluşturuldu ! ",
+            this.openMessageSnackbarWithMessages("Survey created ! ",
                 "SUCCESS");
             this.sendingCompleted();
             this.goToEventsPage();
@@ -136,11 +136,11 @@ class EventSurveyForm extends Component {
         return <div>{Array.from(Array(parseInt(maxAnswerOptionCount)), (e, i) => {
             return<Form.Group key ={i + "form group"}>
                 <Form.Label key ={i + "form label"}>
-                    Lütfen verilebilecek cevabı yazın.</Form.Label>
+                Please write the answer that can be given.</Form.Label>
                 <InputGroup key ={i + "input group"}>
                     <Form.Control required
                                   type="text"
-                                  placeholder="Cevap"
+                                  placeholder="reply"
                                   id = {answerOptionsWithIndexes[i]}
                                   key ={i + "form control"}
                                   name= {answerOptionsWithIndexes[i]}
@@ -166,7 +166,7 @@ class EventSurveyForm extends Component {
             surveyQuestions.splice(index, 1);
             return { ...prevState, surveyQuestions };
         });
-        this.openMessageSnackbarWithMessages("Soru silindi ! ", "SUCCESS");
+        this.openMessageSnackbarWithMessages("Question deleted! ", "SUCCESS");
     }
 
 
@@ -176,16 +176,16 @@ class EventSurveyForm extends Component {
             <div className={"container"}>
                 <Card>
                     <Card.Header>
-                        Etkinlik Anketi
+                    Activity Survey
                     </Card.Header>
                     <Form onSubmit ={(e) => this.addQuestion(e)}>
                         <Card.Body>
                             <Form.Group >
-                                <Form.Label>Lütfen sorunuzu yazın</Form.Label>
+                                <Form.Label>Please write your question</Form.Label>
                                 <InputGroup>
                                     <Form.Control required
                                                   type="text"
-                                                  placeholder="Soru"
+                                                  placeholder="Question"
                                                   id = "question"
                                                   name="question"
                                                   value = {question}
@@ -194,8 +194,8 @@ class EventSurveyForm extends Component {
                                 </InputGroup>
                             </Form.Group>
                             <Form.Group >
-                                <Form.Label>Bu soruya verilebilecek olası
-                                cevap sayısı kaçtır ? </Form.Label>
+                                <Form.Label>Possible answer to this question
+                                how many answers ? </Form.Label>
                                 <InputGroup>
                                     <Form.Control required
                                                   type="number"
@@ -208,8 +208,8 @@ class EventSurveyForm extends Component {
 
                                     />
                                 </InputGroup>
-                                <small className="form-text text-muted">En fazla 10 en az 1 olası
-                                    cevap girebilirsiniz.</small>
+                                <small className="form-text text-muted">at most 10 at least 1 possible
+                                    you can enter answer.</small>
                             </Form.Group>
                             {(maxAnswerOptionCount <= 10) && (maxAnswerOptionCount >= 1)
                                 ? this.answerOptionsArea() : null}
@@ -218,7 +218,7 @@ class EventSurveyForm extends Component {
                         <Card.Footer style={{"textAlign":"right"}}>
                             {(this.state.surveyQuestions.length > 0 && !this.state.isSendingCompleted)?
                                 <Button variant="success"  className = {"mr-5"} onClick = {(e) => {this.sendQuestions(e)}}>
-                                    Soruları onayla
+                                    Confirm questions
                                 </Button> : null
                             }
                             <Button variant="info" type="submit">

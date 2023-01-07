@@ -48,10 +48,10 @@ class EventRaffle extends Component {
         var index = this.findIndexOfEvent(selectedEventName);
         var selectedEvent = nonRaffledEvents[index];
         if(!this.isEventHasParticipant(selectedEvent)) {
-            this.setMessageAs("Bu etkinliğin katılımcısı yok.","ERROR");
+            this.setMessageAs("This event has no participants.","ERROR");
         }
         else if(this.isEventHasAlreadyRaffleWinner(selectedEvent)) {
-           this.setMessageAs("Bu etkinlik için öncesinde çekiliş yapıldı.","ERROR");
+           this.setMessageAs("Draw was made before this event.","ERROR");
         }
         else{
             this.getParticipantsOfSelectedEventForRaffle(selectedEventName)
@@ -98,7 +98,7 @@ class EventRaffle extends Component {
     chooseRaffleWinnerFrom = (participants) => {
         let raffleWinnerParticipant;
         this.openBackdrop();
-        this.setMessageAs("Çekiliş oluşturuluyor !","SUCCESS");
+        this.setMessageAs("Drawing is being created !","SUCCESS");
         setTimeout(() =>{
             raffleWinnerParticipant = this.createRaffleWinnerFrom(participants);
             this.updateRaffleWinnerOfEventWith(raffleWinnerParticipant);
@@ -157,7 +157,7 @@ class EventRaffle extends Component {
                         />
                     </div>
                     <button className={"btn btn-secondary mt-5 "}
-                            type="submit">Çekiliş Oluştur</button>
+                            type="submit">Create Sweepstakes</button>
                 </form>
                 {isOpenBackdrop ? <SimpleBackdrop
                                     handleOpen = {isOpenBackdrop}

@@ -19,22 +19,22 @@ class Events extends Component {
                                     {isParticipant() ?
                                       <div>
                                           <Alert severity="info" className={"container"}>
-                                                <AlertTitle>Bilgilendirme</AlertTitle>
-                                                 Etkinlik isminin solunda yer alan <InfoIcon></InfoIcon>
-                                                <strong>ikonuna basarak
-                                                    etkinlik hakkında bilgi alabilir ve
-                                                    etkinliğe katılabilirsiniz.</strong>
+                                                <AlertTitle>Information</AlertTitle>
+                                                to the left of the event name. <InfoIcon></InfoIcon>
+                                                <strong>by pressing the icon
+                                                    get information about the event and
+                                                    you can attend the event.</strong>
                                         </Alert>
                                       </div> : null }
                                 {isOrganizator() ?
                                     <div>
                                         <Alert severity="info" className={"container"}>
-                                            <AlertTitle>Bilgilendirme</AlertTitle>
-                                            Etkinlik isminin solunda yer alan <InfoIcon></InfoIcon>
-                                            <strong>ikonuna basarak
-                                                etkinlik hakkında bilgi alabilir,
-                                                anket oluşturabilir ve etkinliğin katılımcılarını
-                                                görüntüleyebilirsiniz.</strong>
+                                            <AlertTitle>Information</AlertTitle>
+                                            to the left of the event name. <InfoIcon></InfoIcon>
+                                            <strong>by pressing the icon
+                                                get information about the event,
+                                                You can create a poll and view the participants of the event.
+                                                you can view.</strong>
                                         </Alert>
                                     </div>
                                     : null}

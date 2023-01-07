@@ -12,7 +12,7 @@ class EventDetails extends Component {
     }
 
     componentDidMount = () => {
-       this.getLecturerOfEvent();
+      // this.getLecturerOfEvent();
     }
 
     getLecturerOfEvent = async () =>{
@@ -32,53 +32,67 @@ class EventDetails extends Component {
 
     render() {
         const {name,startDate,endDate,
-               raffleWinnerUsername,quota,currentNumberOfPeople} = this.props.event;
+               raffleWinnerUsername,quota,currentNumberOfPeople,  
+               point,
+               eventType} = this.props.event;
         return (
             <div className={"container mb-3 mt-3"}>
-                <h3 className={"card-title text-center"}>Etkinlik Ayrıntıları</h3>
+                <h3 className={"card-title text-center"}>Event Details</h3>
                 <div className="row">
                     <div className="col">
-                        <strong>İsim :</strong>
+                        <strong>Name :</strong>
                         <p className={"ml-3 d-inline"}>{name}</p>
                     </div>
                     <div className="col">
-                        <strong>Başlama Tarihi :</strong>
+                        <strong>Starting date :</strong>
                         <p className={"ml-3 d-inline"}>{startDate}</p>
                     </div>
                 </div>
                 <div className="row">
                     <div className="col">
-                        <strong>Kontenjan :</strong>
+                        <strong>Event Type :</strong>
                             <p className={"ml-3 d-inline"}>
-                                {quota}
-                                {quota == currentNumberOfPeople ?
-                                    <strong className={"text-danger"}> (Etkinlik Dolu) </strong> : null}
+                                {eventType}              
                         </p>
                     </div>
                     <div className="col">
-                        <strong>Bitiş Tarihi :</strong>
+                        <strong>End Date :</strong>
                         <p className={"ml-3 d-inline"}>{endDate}</p>
                     </div>
                 </div>
                 <div className="row">
                     <div className="col">
-                        <strong>Şuanki katılımcı sayısı :</strong>
-                        <p className={"ml-3 d-inline"}>{currentNumberOfPeople}</p>
+                        <strong>Quota :</strong>
+                            <p className={"ml-3 d-inline"}>
+                                {quota}
+                                {quota == currentNumberOfPeople ?
+                                    <strong className={"text-danger"}> (Full of Activity) </strong> : null}
+                        </p>
                     </div>
                     <div className="col">
-                        <strong>Eğitmen kullanıcı Adı :</strong>
-                        <p className={"ml-3 d-inline"}>{this.state.lecturerUsername}</p>
+                        <strong>Current number of participants :</strong>
+                        <p className={"ml-3 d-inline"}>{currentNumberOfPeople}</p>
                     </div>
                 </div>
+
+                <div className="row">
+                    <div className="col">
+                        <strong>Award Point:</strong>
+                            <p className={"ml-3 d-inline"}>
+                                {point}
+                        </p>
+                    </div>
+                </div>
+  
                 {isOrganizator() ?
                     <div>
                         <div className={"row"}>
                             <div className="col">
-                                <strong>Organizator Kullanıcı Adı :</strong>
+                                <strong>Organizer Username :</strong>
                                 <p className={"ml-3 d-inline"}>{localStorage.getItem("username")}</p>
                             </div>
                             <div className="col">
-                                <strong>Etkinlikteki çekilişin kazananı:</strong>
+                                <strong>The winner of the lottery at the event:</strong>
                                 <p className={"ml-3 d-inline"}>{raffleWinnerUsername}</p>
                             </div>
                         </div>

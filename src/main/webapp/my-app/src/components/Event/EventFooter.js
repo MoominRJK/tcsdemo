@@ -54,8 +54,8 @@ class EventFooter extends Component {
         return (
             <div>
                 <p className={"text-muted float-right"}>
-                    {this.isEventFull() ? 'Bu etkinliğin kontenjanı doldu.' : null }
-                    {(!this.isEventFull() && isParticipant() && isJoinedBefore) ? 'Bu etkinliğe katıldınız' : null}
+                    {this.isEventFull() ? 'The quota for this event is full.' : null }
+                    {(!this.isEventFull() && isParticipant() && isJoinedBefore) ? 'You participated in this event' : null}
                 </p>
 
 

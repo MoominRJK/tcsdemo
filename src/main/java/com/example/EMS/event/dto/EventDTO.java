@@ -18,8 +18,8 @@ import java.util.HashSet;
 public class EventDTO {
 
     @JsonProperty("name")
-    @Size(max = 255, message = "İsim 255 karakterden fazla olamaz")
-    @NotBlank(message ="Etkinlik ismi boş olmamalı.")
+    @Size(max = 255, message = "Name cannot exceed 255 characters")
+    @NotBlank(message ="Event name must not be empty.")
     public final String name;
 
     @JsonProperty("startDate")
@@ -29,19 +29,37 @@ public class EventDTO {
     public final LocalDate endDate;
 
     @JsonProperty("address")
-    @NotBlank(message ="Adres boş olmamalı")
+    @NotBlank(message ="Address must not be blank")
     public final String address;
 
+    @JsonProperty("city")
+    @NotBlank(message ="City must not be blank")
+    public final String city;
+
+    @JsonProperty("state")
+    @NotBlank(message ="State must not be blank")
+    public final String state;
+
+    @JsonProperty("zip")
+    @NotBlank(message ="Zip must not be blank")
+    public final String zip;
+
+    @JsonProperty("point")
+    @Min(value = 1, message = "The award point must be created for at least 1 person")
+    public final int point;
+
     @JsonProperty("quota")
-    @Min(value = 1, message = "Etkinlik en az 1 kişi için oluşturulmalı")
+    @Min(value = 1, message = "The event must be created for at least 1 person")
     public final int quota;
 
+    @JsonProperty("eventType")
+    @Min(value = 1, message = "The event must be created for at least 1 person")
+    public final int eventType;
+
     @JsonProperty("longitude")
-    @NotNull
     public final double longitude;
 
     @JsonProperty("latitude")
-    @NotNull
     public final double latitude;
 
     @JsonProperty("currentNumberOfPeople")
@@ -72,6 +90,11 @@ public class EventDTO {
                     @JsonProperty("startDate") LocalDate startDate,
                     @JsonProperty("endDate") LocalDate endDate,
                     @JsonProperty("address") String address,
+                    @JsonProperty("city") String city,
+                    @JsonProperty("state") String state,
+                    @JsonProperty("zip") String zip,
+                    @JsonProperty("eventType") int eventType,
+                    @JsonProperty("point") int point,
                     @JsonProperty("quota") int quota,
                     @JsonProperty("longitude")  double longitude,
                     @JsonProperty("latitude")  double latitude,
@@ -87,6 +110,7 @@ public class EventDTO {
         this.endDate = endDate;
         this.address = address;
         this.quota = quota;
+        this.point = point;
         this.longitude = longitude;
         this.latitude = latitude;
         this.currentNumberOfPeople = currentNumberOfPeople;
@@ -96,7 +120,10 @@ public class EventDTO {
         this.eventQuestions = eventQuestions;
         this.participantsInEventsDTO = participantsInEventsDTO;
         this.eventSurveyQuestions = eventSurveyQuestions;
-
+        this.city = city;
+        this.state = state;
+        this.zip = zip;
+        this.eventType = eventType;
     }
 
 }

@@ -69,12 +69,12 @@ class QuestionCard extends Component {
                                        className="card-link"
                                        onClick={(e) =>
                                                     this.openAnswerTextArea(e)}>
-                                            Cevapla </a> : null
+                                            Reply </a> : null
                                 }
                                 {answer != null ?  <a href=""
                                                       className="card-link"
                                                        onClick={(e) => this.showAnswer(e)}>
-                                                Cevabı Gör </a>
+                                                See Answer </a>
                                  : null}
                             </div>
                         </div>

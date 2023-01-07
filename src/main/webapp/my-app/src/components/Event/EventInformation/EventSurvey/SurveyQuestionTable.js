@@ -9,7 +9,7 @@ class SurveyQuestionTable extends Component {
 
     state = {
         columns: [
-            { title: 'Soru', field: 'question' }]
+            { title: 'Question', field: 'question' }]
         ,
         isShowAnswerOptions : false,
         answerOptions : []
@@ -45,26 +45,26 @@ class SurveyQuestionTable extends Component {
         return (
             <div className={"mt-5"}>
                 <Alert severity="info" className={"container mb-5"}>
-                    <AlertTitle>Bilgilendirme</AlertTitle>
-                        Sorunun solunda yer alan <InfoIcon></InfoIcon>
-                    <strong>ikonuna basarak soruya verilebilecek olan cevap seçeneklerini görüntüleyebilirsiniz</strong>
+                    <AlertTitle>Information</AlertTitle>
+                    on the left of the question <InfoIcon></InfoIcon>
+                    <strong>By pressing the icon, you can view the answer options that can be given to the question.</strong>
                 </Alert>
                 <MaterialTable columns={columns}
                                id = "table"
                                data={surveyQuestions}
                                className ={"mt-5 mb-5"}
                                title={<Typography variant="h4" component="h5">
-                                   Eklediğiniz Anket Sorularının Listesi
+                                   List of Survey Questions You've Added
                                </Typography>}
                                actions ={[
                                    {
                                        icon :  'info',
-                                       tooltip: 'Cevap opsiyonlarına bak',
+                                       tooltip: 'See answer options',
                                        onClick: (e, rowData,) => this.showAnswerOptions(e,rowData)
                                     },
                                    {
                                        icon :  'delete',
-                                       tooltip: 'Soruyu sil',
+                                       tooltip: 'delete question',
                                        onClick: (e, rowData,) =>
                                            onDeleteQuestion(e,surveyQuestions.indexOf(rowData))
                                    }

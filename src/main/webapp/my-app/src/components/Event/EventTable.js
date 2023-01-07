@@ -10,10 +10,10 @@ import Consumer from '../ContextAPI/Context';
 class EventTable extends Component {
     state = {
         columns: [
-            { title: 'İsim', field: 'name' },
-            { title: 'Başlangıç Tarihi', field: 'startDate', type : 'date'},
-            { title: 'Bitiş Tarihi', field: 'endDate', type : 'date'},
-            {title : 'Adres', field : 'address'},
+            { title: 'Name', field: 'name' },
+            { title: 'Start Date', field: 'startDate', type : 'date'},
+            { title: 'End Date', field: 'endDate', type : 'date'},
+            {title : 'Address', field : 'address'},
         ],
 
         isAdditionRequest : false,
@@ -92,7 +92,7 @@ class EventTable extends Component {
                         <div className={"container w-75 mt-5"}>
                             <MaterialTable
                                 title={<Typography variant="h4" component="h5">
-                                            Etkinlik Listesi
+                                            Event List
                                         </Typography>}
                                 columns={this.state.columns}
                                 data={isParticipant() ?
@@ -106,20 +106,20 @@ class EventTable extends Component {
                                         } : null,
                                     {
                                         icon : 'info',
-                                        tooltip: 'Etkinliğe katılmak ya da etkinliğin bilgilerini ' +
-                                            'görmek için tıkla',
+                                        tooltip: 'To participate in the event or to enter the event information ' +
+                                        'click to view',
                                         onClick: ( e,rowData ) => this.goToEventPage(e,rowData.name)
                                     },
                                     isOrganizator()  ?
                                         {
                                             icon :  'edit',
-                                            tooltip: 'Etkinliği güncelle',
+                                            tooltip: 'Update event',
                                             onClick : (e, rowData) => this.openUpdateModal(e,rowData.name)
                                         } : null ,
                                     isOrganizator() ?
                                         {
                                             icon: 'add',
-                                            tooltip: 'Etkinlik ekle',
+                                            tooltip: 'Add event',
                                             isFreeAction: true ,
                                             onClick : (event) => this.setState({
                                                 isAdditionRequest : true,

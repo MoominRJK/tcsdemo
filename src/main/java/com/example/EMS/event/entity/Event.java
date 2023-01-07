@@ -47,6 +47,24 @@ public class Event extends IdBaseEntity {
     @Column(name = "RAFFLE_WINNER_USERNAME")
     private String raffleWinnerUsername;
 
+    @Column(name = "CITY")
+    private String city;
+
+    @Column(name = "STATE")
+    private String state;
+
+    @Column(name = "ZIP")
+    private String zip;
+
+    @Column(name = "GOOGLE_LOC")
+    private String googleLoc;
+
+    @Column(name = "POINT")
+    private int point;
+
+    @Column(name = "EVENT_TYPE")
+    private int eventType;
+
     @JsonIgnore
     @ManyToOne()
     @JoinColumn(name = "organizator_id")
@@ -82,7 +100,14 @@ public class Event extends IdBaseEntity {
                  final Organizator organizator,
                  final Set<EventQuestions> eventQuestions,
                  final Set<ParticipantsInEvents> participantsInEvents,
-                 final Set<EventSurveyQuestions> eventSurveyQuestions) {
+                 final Set<EventSurveyQuestions> eventSurveyQuestions,
+                 final String city,
+                 final String state,
+                 final String zip,
+                 final String googleLoc,
+                 final int point,
+                 final int eventType
+                 ) {
         super(id);
         this.name = name;
         this.startDate = startDate;
@@ -97,5 +122,11 @@ public class Event extends IdBaseEntity {
         this.eventQuestions = eventQuestions;
         this.participantsInEvents = participantsInEvents;
         this.eventSurveyQuestions = eventSurveyQuestions;
+        this.city = city;
+        this.state = state;
+        this.zip = zip;
+        this.googleLoc = googleLoc;
+        this.point = point;
+        this.eventType = eventType;
     }
 }

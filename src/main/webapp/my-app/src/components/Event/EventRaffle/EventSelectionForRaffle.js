@@ -28,7 +28,7 @@ class EventSelectionForRaffle extends Component {
                 return {value :event.name , display : event.name}
             });
             this.setState({
-                namesOfEvents : [{value: '', display : 'Etkinlik seç'}]
+                namesOfEvents : [{value: '', display : 'Select event'}]
                     .concat(namesOfEvents)
             });
         })
@@ -47,7 +47,7 @@ class EventSelectionForRaffle extends Component {
         return (
             <div>
                 <Form.Control as="select" required
-                              placeholder = "Etkinlik seç"
+                              placeholder = "Select event"
                               value={eventName}
                               onChange={(e) => this.handleNameChange(e) }>
                     {namesOfEvents.map((name) =>

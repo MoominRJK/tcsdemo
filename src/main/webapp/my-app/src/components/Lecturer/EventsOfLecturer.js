@@ -8,10 +8,10 @@ class EventsOfLecturer extends Component {
     state = {
         events : [],
         columns: [
-            { title: 'İsim', field: 'name' },
-            { title: 'Başlangıç Tarihi', field: 'startDate', type : 'date'},
-            { title: 'Bitiş Tarihi', field: 'endDate', type : 'date'},
-            {title : 'Adres', field : 'address'},
+            { title: 'Name', field: 'name' },
+            { title: 'Start Date', field: 'startDate', type : 'date'},
+            { title: 'End Date', field: 'endDate', type : 'date'},
+            {title : 'Address', field : 'address'},
         ],
 
     }
@@ -43,13 +43,13 @@ class EventsOfLecturer extends Component {
             <div  className={"container w-75 mt-5"}>
                 <MaterialTable
                     title={<Typography variant="h4" component="h5">
-                        Etkinliklerinizin Listesi
+                        List of Your Events
                     </Typography>}
                     columns={this.state.columns}
                     data = {this.state.events}
                     actions = {[ {
                         icon : 'info',
-                        tooltip: 'Etkinlik bilgileri için tıkla',
+                        tooltip: 'Click for event information',
                         onClick: ( e,rowData ) => this.goToEventPage(e,rowData.name)
                     }]}
                 ></MaterialTable>

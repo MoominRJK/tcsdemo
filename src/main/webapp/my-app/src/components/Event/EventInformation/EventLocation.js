@@ -8,10 +8,10 @@ class EventLocation extends Component {
         const {address,latitude,longitude} = this.props.event;
         return (
             <div className={"container mt-3 mb-3"}>
-                <h3 className={"card-title text-center"}>Etkinliğin Konumu</h3>
+                <h3 className={"card-title text-center"}>Location of the Event</h3>
                 <div className="row">
                     <div className="col">
-                        <strong>Adres :</strong>
+                        <strong>Address :</strong>
                         <p className={"ml-3 d-inline"}>{address}</p>
                     </div>
                     <div className="col">

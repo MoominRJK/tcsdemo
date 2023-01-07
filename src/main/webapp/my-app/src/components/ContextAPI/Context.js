@@ -41,7 +41,7 @@ const reducer = (state,action) => {
     else if(action.type === 'addEvent') {
         let newEvent = action.payload;
         return {
-            ...state, // statelerimizi tututk.
+            ...state, // we held our states.
             events : [...state.events,newEvent]
         }
     }

@@ -169,12 +169,12 @@ class EventQuestions extends Component {
             <div className={"container"}>
                 {isParticipantAlreadyAnswered ?
                     this.props.history.push(`/participantAnswersOf/${name}`) : null}
-                {isOrganizator() ? <a className={"link-item"}>Bu etkinliğe kayıt olanların cevaplarını gör</a> : null}
+                {isOrganizator() ? <a className={"link-item"}>See the answers of those who registered for this event</a> : null}
                 {isParticipant() ?
                     <Card>
                         <div>
                             <Card.Header>
-                                Etkinlik Soruları
+                            Activity Questions
                             </Card.Header>
                             <Form onSubmit = {(e) => this.joinEvent(e)}>
                                 <Card.Body>
@@ -190,7 +190,7 @@ class EventQuestions extends Component {
                                                                       id = {answersWithIndexes[index]}
                                                                       name={answersWithIndexes[index]}
                                                                       value={answersWithIndexes[index]}
-                                                                      placeholder = {!question.isQuestionRequired ?  "Opsiyonel" : null}
+                                                                      placeholder = {!question.isQuestionRequired ?  "Optional" : null}
                                                                       key = {`form-control ${index}`}
                                                                       min = {question.questionType === 'number' ?
                                                                           parseInt(question.expectedMinValueAnswerOfQuestion) :
@@ -213,10 +213,10 @@ class EventQuestions extends Component {
                                 {this.isEventHasQuestions()  ?
                                     <Card.Footer style={{"textAlign":"right"}}>
                                         {this.isEventFull() ?
-                                            <p>Bu etkinlik dolu olduğu için katılamazsınız</p>
+                                            <p>You cannot participate because this event is full</p>
                                             : <Button variant="success"
                                                       type="submit">
-                                                Cevapları Yolla ve Etkinliğe Katıl
+                                                Submit Answers and Participate in the Event
                                               </Button>
                                         }
 

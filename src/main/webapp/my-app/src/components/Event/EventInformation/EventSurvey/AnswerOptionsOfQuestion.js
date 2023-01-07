@@ -23,7 +23,7 @@ export default function AnswerOptionsOfQuestion(props) {
                 onClose={props.handleClose}
                 aria-labelledby="alert-dialog-slide-title"
                 aria-describedby="alert-dialog-slide-description">
-                <DialogTitle id="alert-dialog-slide-title">{"Sorunun cevap seçenekleri"}
+                <DialogTitle id="alert-dialog-slide-title">{"Question answer options"}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description">

@@ -114,7 +114,7 @@ class LoginForm extends Component {
                                 <Typography
                                     variant ="h5"
                                     color="primary">
-                                    Etkinlik Yönetim Sistemine Hoşgeldiniz !
+                                    Welcome to the Event Management System !
                                 </Typography>
                                 <form className={"w-75"} onSubmit = {(e) => this.login(dispatch,tcKimlikNo,password,e)}>
                                     <TextField
@@ -125,9 +125,9 @@ class LoginForm extends Component {
                                         id="tcKimlikNo"
                                         value = {tcKimlikNo}
                                         onChange = {this.changeInput}
-                                        label="TC Kimlik No"
+                                        label="Student ID"
                                         name="tcKimlikNo"
-                                        autoComplete="tcKimlikNo"
+                                        autoComplete="Student ID"
                                         autoFocus
                                     />
                                     <TextField
@@ -136,7 +136,7 @@ class LoginForm extends Component {
                                         required
                                         fullWidth
                                         name="password"
-                                        label="Parola"
+                                        label="Password"
                                         type="password"
                                         id="password"
                                         value = {password}
@@ -146,7 +146,7 @@ class LoginForm extends Component {
                                         control={<Checkbox value="remember"
                                                            color="primary"
                                                            onChange={(e) => this.handleCheckboxChange(e)}/>}
-                                        label="Beni Hatırla"
+                                        label="Remember me"
                                     />
                                     <Button
                                         onClick={this.setStateOfLoginStatusSnackbarForUsingAgain}
@@ -155,11 +155,11 @@ class LoginForm extends Component {
                                         disabled = {this.state.disabledButton}
                                         variant="contained"
                                         color="primary">
-                                        Giriş Yap
+                                        Login
                                     </Button>
                                     <Grid container>
                                         <Typography variant="body2" color="textSecondary" align="center" className = {"mt-5"}>
-                                            Sisteme erişebilmek için lütfen  giriş yapınız.
+                                        Please login to access the system.
                                         </Typography>
                                     </Grid>
                                     <hr/>

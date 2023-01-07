@@ -1,6 +1,5 @@
 package com.example.EMS.event.service;
 
-import java.time.Clock;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -14,7 +13,6 @@ import com.example.EMS.person.service.LecturerService;
 import com.example.EMS.person.service.OrganizatorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import javax.transaction.Transactional;
 
@@ -30,32 +28,32 @@ public class EventService {
     private final LecturerService lecturerService;
 
     public MessageResponse addEvent(String organizatorUsername,
-                                    Event event,
-                                    String lecturerUsername) {
+                                    Event event
+                                    ) {
 
         if(isAnyEventNameSameWith(event.getName())){
-            return new MessageResponse("Bu etkinlikle aynı isme sahip başka bir etkinlik var." +
-                    "İsim değişikliği yapınız.",ERROR);
+            return new MessageResponse("There is another event with the same name as this event." +
+                    " Change your name.",ERROR);
         }
         if(isEndDateBeforeThanStartDate(event.getStartDate(),event.getEndDate())){
-            return new MessageResponse("Etkinlik bitiş tarihi, etkinliğin başlangıç " +
-                    "tarihinden önce olamaz !",ERROR);
+            return new MessageResponse("Event end date, event start date " +
+                    "cannot be before the date !",ERROR);
         }
         if(areDateValuesNonsense(event.getStartDate(),event.getEndDate())) {
-            return new MessageResponse("Lütfen geçerli tarih giriniz.",ERROR);
+            return new MessageResponse("Please enter valid date.",ERROR);
         }
-        Optional<Organizator> organizatorOptional = organizatorService.findByUsername(organizatorUsername);
-        Optional<Lecturer> lecturerOptional = lecturerService.findByUsername(lecturerUsername);
+//        Optional<Organizator> organizatorOptional = organizatorService.findByUsername(organizatorUsername);
+//        Optional<Lecturer> lecturerOptional = lecturerService.findByUsername(lecturerUsername);
 
-        if(organizatorOptional.isPresent() && lecturerOptional.isPresent()){
-            event.setLecturer(lecturerOptional.get());
-            event.setOrganizator(organizatorOptional.get());
+//        if(organizatorOptional.isPresent() && lecturerOptional.isPresent()){
+//            event.setLecturer(lecturerOptional.get());
+//            event.setOrganizator(organizatorOptional.get());
             eventRepository.save(event);
-        }
-        else{
-            return new MessageResponse("Bu etkinlik eklenemez",ERROR);
-        }
-        return new MessageResponse("Etkinlik başarılı bir şekilde eklendi.",SUCCESS);
+//        }
+//        else{
+         //   return new MessageResponse("This event cannot be added",ERROR);
+//        }
+        return new MessageResponse("Event successfully added.",SUCCESS);
     }
 
     private boolean isAnyEventNameSameWith(String name) {
@@ -80,13 +78,13 @@ public class EventService {
 
         if(eventRepository.existsByName(eventName)) {
             if(isEventStarted(eventName)){
-                return new MessageResponse("Bu etkinlik başlangıç tarihi geçtiği için " +
-                        "silinemez.",ERROR);
+                return new MessageResponse("This event has passed its start date. " +
+                        "cannot be deleted.",ERROR);
             }
             eventRepository.deleteByName(eventName);
-            return new MessageResponse("Etkinlik silindi.",SUCCESS);
+            return new MessageResponse("Event deleted.",SUCCESS);
         }
-        return new MessageResponse("Etkinlik silinemedi.",ERROR);
+        return new MessageResponse("Failed to delete event.",ERROR);
     }
 
     private boolean isEventStarted(String eventName) {
@@ -108,25 +106,25 @@ public class EventService {
             Event eventFromDB = eventOptional.get();
             if(isEndDateBeforeThanStartDate(event.getStartDate(),
                     event.getEndDate())) {
-                return new MessageResponse("Etkinlik bitiş tarihi, etkinliğin başlangıç " +
-                        "tarihinden önce olamaz !",ERROR);
+                return new MessageResponse("Event end date, event start date " +
+                        "cannot be before the date !",ERROR);
             }
             if(areDateValuesNonsense(event.getStartDate(),event.getEndDate())) {
-                return new MessageResponse("Lütfen geçerli tarih giriniz.",ERROR);
+                return new MessageResponse("Please enter valid date.",ERROR);
             }
             if(isNumberOfParticipantBiggerThanQuota(eventFromDB.getCurrentNumberOfPeople(),
                     event.getQuota())) {
-                return new MessageResponse("Etkinliğin kotası, etkinlikteki " +
-                        "kişi sayısından az olamaz !",ERROR);
+                return new MessageResponse("Quota of the event " +
+                        "not less than the number of people !",ERROR);
             }
             if(isUpdatedEventNameNotUnique(event,eventName)) {
-                return new MessageResponse("Bu etkinliğin ismine sahip başka bir " +
-                        "etkinlik var !",ERROR);
+                return new MessageResponse("Another name of this event " +
+                        "there is activity !",ERROR);
             }
             updateEventFromDB(event, eventFromDB);
             eventRepository.save(eventFromDB);
         }
-        return new MessageResponse("Etkinlik güncellendi !",SUCCESS);
+        return new MessageResponse("The event has been updated !",SUCCESS);
     }
 
     private boolean isNumberOfParticipantBiggerThanQuota(int currentNumberOfPeople,
@@ -162,6 +160,7 @@ public class EventService {
         eventFromDB.setQuota(event.getQuota());
         eventFromDB.setRaffleWinnerUsername(event.getRaffleWinnerUsername());
         eventFromDB.setStartDate(event.getStartDate());
+        //TODO: add more fields
     }
 
     public List<Event> getAllEventsWithSurvey() {

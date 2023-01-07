@@ -22,15 +22,15 @@ class EventNavbar extends Component {
     render() {
         return (
                 <ul className="nav nav-tabs card-header-tabs" role="tablist">
-                    <EventNavLink name ="Ayrıntılar"
+                    <EventNavLink name ="Details"
                                   handleClick = {(e) =>this. navigateEventToRelatedPart(e)}></EventNavLink>
-                    <EventNavLink name ="Konum"
+                    <EventNavLink name ="Location"
                                   handleClick = {(e) =>this.navigateEventToRelatedPart(e)}></EventNavLink>
-                    <EventNavLink name ="Anket"
+                    {/* <EventNavLink name ="Questionnaire"
                                   handleClick = {(e) =>this.navigateEventToRelatedPart(e)}></EventNavLink>
-                    <EventNavLink name ="Etkinliğe Özel Sorular"
-                                  handleClick = {(e) => this.navigateEventToRelatedPart(e)}></EventNavLink>
-                    {(isParticipant() && !this.isEventAlreadyStarted()) ?  <EventNavLink name ="Etkinliğe Katıl"
+                    <EventNavLink name ="Event Specific Questions"
+                                  handleClick = {(e) => this.navigateEventToRelatedPart(e)}></EventNavLink> */}
+                    {(isParticipant() && !this.isEventAlreadyStarted()) ?  <EventNavLink name ="Join the Event"
                                   handleClick = {(e) => this.navigateEventToRelatedPart(e)}></EventNavLink> : null }
                 </ul>
         );

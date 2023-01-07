@@ -53,8 +53,8 @@ export default function QrCode(props) {
                 onClose={goToEventsPage}
                 aria-labelledby="alert-dialog-slide-title"
                 aria-describedby="alert-dialog-slide-description">
-                <DialogTitle id="alert-dialog-slide-title">{"Etkinliğe katılımınızı başarıyla gerçekleştirdik.Bu QR Code'u okutarak\n" +
-                "etkinliğin bilgilerine ve kendi bilgilerinize erişebilirsiniz. Ayrıca bu kodu mail hesabınıza da yolluyoruz."}
+                <DialogTitle id="alert-dialog-slide-title">{"We have successfully participated in the event. By scanning this QR Code\n" +
+                "You can access the event's information and your own information. We also send this code to your e-mail account."}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description">
@@ -67,7 +67,7 @@ export default function QrCode(props) {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={goToEventsPage} color="primary">
-                        Tamam
+                       Ok
                     </Button>
                 </DialogActions>
             </Dialog>

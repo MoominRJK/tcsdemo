@@ -16,16 +16,16 @@ class ParticipantQuestionsArea extends Component {
     }
 
     componentDidMount = () => {
-        this.getParticipantsQuestionsOfEvent()
-            .then(participantQuestions => {
-                if(isParticipant()){
-                    this.showQuestionsOfJustThatParticipant(participantQuestions);
-                }
-                else if(isLecturer()) {
-                    this.showAllQuestionsForLecturer();
-                }
-                this.closeBackdrop();
-            });
+        // this.getParticipantsQuestionsOfEvent()
+        //     .then(participantQuestions => {
+        //         if(isParticipant()){
+        //             this.showQuestionsOfJustThatParticipant(participantQuestions);
+        //         }
+        //         else if(isLecturer()) {
+        //             this.showAllQuestionsForLecturer();
+        //         }
+        //         this.closeBackdrop();
+        //     });
 
     }
 
@@ -137,7 +137,7 @@ class ParticipantQuestionsArea extends Component {
                         })}
                         {this.isEventStartedAndNotFinished(event) ?
                             <div>
-                                <h2>Soru Alanı</h2>
+                                <h2>Question Area</h2>
                                 <QuestionTextArea
                                     participantQuestions = {participantQuestions}
                                     handleAdding = {this.setParticipantQuestionsWith}/>

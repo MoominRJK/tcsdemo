@@ -45,8 +45,8 @@ class EventQuestionsForm extends Component {
 
         })
         this.resetQuestions();
-        this.openMessageSnackbarWithMessages("Sorular kaydedildi! Ayrıca etkinlik başlayana kadar anket" +
-            " oluşturabilirsiniz ",
+        this.openMessageSnackbarWithMessages("Questions saved! In addition, until the event starts, the survey" +
+            " you can create ",
             "SUCCESS");
         this.sendingCompleted();
 
@@ -88,7 +88,7 @@ class EventQuestionsForm extends Component {
             ...this.state, // statelerimizi tututk.
             questions : [...this.state.questions,newQuestion],
         })
-        this.openMessageSnackbarWithMessages("Soru Eklendi","SUCCESS");
+        this.openMessageSnackbarWithMessages("Question Added","SUCCESS");
     }
 
 
@@ -118,7 +118,7 @@ class EventQuestionsForm extends Component {
             questions.splice(index, 1);
             return { ...prevState, questions };
         });
-        this.openMessageSnackbarWithMessages("Soru silindi ! ", "SUCCESS");
+        this.openMessageSnackbarWithMessages("Question deleted ! ", "SUCCESS");
     }
 
     render() {
@@ -133,11 +133,11 @@ class EventQuestionsForm extends Component {
                     <Form onSubmit ={(e) => this.addQuestion(e)}>
                         <Card.Body>
                             <Form.Group >
-                                <Form.Label>Lütfen sorunuzu yazın</Form.Label>
+                                <Form.Label>Please write your question</Form.Label>
                                 <InputGroup>
                                     <Form.Control required
                                                   type="text"
-                                                  placeholder="Soru"
+                                                  placeholder="Question"
                                                   id = "question"
                                                   name="question"
                                                   value = {question}
@@ -146,24 +146,24 @@ class EventQuestionsForm extends Component {
                                 </InputGroup>
                             </Form.Group>
                             <Form.Group   >
-                                <Form.Label>Bu sorunun cevabı olarak
-                                kullancıdan ne tipte bir cevap bekliyorsunuz ? </Form.Label>
+                                <Form.Label>As an answer to this question
+                                What type of response do you expect from the user ? </Form.Label>
                                 <InputGroup>
                                     <Form.Control as="select" required
                                                   value={questionType}
                                                   onChange={(e) => this.handleQuestionTypeChange(e)}>
-                                        <option value="">Cevap tipi seçiniz</option>
-                                        <option value="number">Sayı</option>
-                                        <option value="date">Tarih</option>
-                                        <option value="email">E-mail</option>
-                                        <option value="text">Metin</option>)
+                                        <option value="">Choose answer type</option>
+                                        <option value="number">Number</option>
+                                        <option value="date">Date</option>
+                                        <option value="email">Email</option>
+                                        <option value="text">Text</option>)
                                     </Form.Control>
                                 </InputGroup>
                             </Form.Group >
                             {questionType === "number" || questionType === "date" ?
                                 <div>
                                 <Form.Group >
-                                    <Form.Label> en az değeri yazın</Form.Label>
+                                    <Form.Label>write the minimum value</Form.Label>
                                     <InputGroup>
                                         <Form.Control type={questionType}
                                                       placeholder="Minimum"
@@ -177,7 +177,7 @@ class EventQuestionsForm extends Component {
                                     </InputGroup>
                                 </Form.Group>
                                     <Form.Group  >
-                                        <Form.Label>en fazla değeri yazın</Form.Label>
+                                        <Form.Label>write the maximum value</Form.Label>
                                         <InputGroup>
                                             <Form.Control type={questionType}
                                                           placeholder="Maximum"
@@ -193,14 +193,14 @@ class EventQuestionsForm extends Component {
                                 </div>
                             : null}
                             <Form.Group  >
-                                <Form.Label>Bu sorunun cevaplanması zorunlu mu ? </Form.Label>
+                                <Form.Label>Is this question required to be answered? ? </Form.Label>
                                 <InputGroup>
                                     <Form.Control as="select" required
                                                   value={isQuestionRequired}
                                                   onChange={(e) => this.handleQuestionIsRequired(e)}>
-                                        <option value="">Zorunlu mu ?</option>
-                                        <option value="true">Evet</option>
-                                        <option value="false">Hayır</option>
+                                        <option value="">Is it mandatory?</option>
+                                        <option value="true">Yes</option>
+                                        <option value="false">No</option>
                                     </Form.Control>
                                 </InputGroup>
                             </Form.Group>
@@ -208,11 +208,11 @@ class EventQuestionsForm extends Component {
                         <Card.Footer style={{"textAlign":"right"}}>
                             {(this.state.questions.length > 0 && !this.state.isSendingCompleted) ?
                                 <Button variant="success"  className = {"mr-5"} onClick = {(e) => {this.sendQuestions(e)}}>
-                                    Soruları onayla
+                                    Confirm questions
                                 </Button> : null
                             }
                             <Button variant="info" type="submit">
-                                Soruyu ekle
+                                  add question
                             </Button>
                         </Card.Footer>
                     </Form>

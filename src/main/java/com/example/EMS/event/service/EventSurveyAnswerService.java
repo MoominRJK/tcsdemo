@@ -50,7 +50,7 @@ public class EventSurveyAnswerService {
                     participantFromDB.getId(),
                     eventSurveyQuestions.get(i).getId());
         }
-        return new MessageResponse("Başarılı",SUCCESS);
+        return new MessageResponse("Successful",SUCCESS);
     }
 
     public boolean isAnsweredBeforeToSurveyQuestions(String participantUsername,
