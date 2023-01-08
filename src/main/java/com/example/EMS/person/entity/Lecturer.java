@@ -32,11 +32,11 @@ public class Lecturer extends Person {
     private Set<ParticipantQuestionsAboutEvent> participantQuestions;
 
     public Lecturer(Integer id,final String name, final String surname,
-                       final String tcKimlikNo, final String username,
+                       final String schoolId, final String username,
                        final String password, final String phone,
                        final String email, final LocalDate birthDate,
                       final Set<Event> events) {
-        super(id, name, surname, tcKimlikNo, username, password, phone, email, birthDate);
+        super(id, name, surname, schoolId, username, password, phone, email, birthDate, 0);
         this.events = events;
     }
 }

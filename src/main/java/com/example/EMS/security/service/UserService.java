@@ -1,13 +1,9 @@
 package com.example.EMS.security.service;
 
 import com.example.EMS.common.MessageResponse;
-import com.example.EMS.common.enums.MessageType;
 import com.example.EMS.person.entity.Lecturer;
 import com.example.EMS.person.entity.Organizator;
 import com.example.EMS.person.entity.Participant;
-import com.example.EMS.person.repository.LecturerRepository;
-import com.example.EMS.person.repository.OrganizatorRepository;
-import com.example.EMS.person.repository.ParticipantRepository;
 import com.example.EMS.person.service.LecturerService;
 import com.example.EMS.person.service.OrganizatorService;
 import com.example.EMS.person.service.ParticipantService;
@@ -17,7 +13,6 @@ import com.example.EMS.security.dto.UserDTO;
 import com.example.EMS.security.entity.Authority;
 import com.example.EMS.security.entity.Users;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -48,7 +43,7 @@ public class UserService {
                         "Choose another username.",ERROR);
             }
 
-            else if(isAnyUserHasSameTcKimlikNoWith(userDTO)){
+            else if(isAnyUserHasSameSchoolIdWith(userDTO)){
                 return new MessageResponse("Has this ID number" +
                         "Another user is registered in the system. This ID" +
                         "You cannot register with the number",ERROR);
@@ -82,8 +77,8 @@ public class UserService {
         return user != null;
     }
 
-    private boolean isAnyUserHasSameTcKimlikNoWith(UserDTO userDTO) {
-        Users user = userRepository.findByTcKimlikNo(userDTO.getTcKimlikNo());
+    private boolean isAnyUserHasSameSchoolIdWith(UserDTO userDTO) {
+        Users user = userRepository.findBySchoolId(userDTO.getSchoolId());
         return user != null;
     }
 
@@ -118,23 +113,23 @@ public class UserService {
 
     private void addUserToOrganizatorTable(UserDTO userDTO) {
         Organizator newOrganizator = new Organizator(null,userDTO.getName(),
-                userDTO.getSurname(),userDTO.getTcKimlikNo(),userDTO.getUsername(),
+                userDTO.getSurname(),userDTO.getSchoolId(),userDTO.getUsername(),
                 userDTO.getPassword(),userDTO.getPhone(),userDTO.getEmail(),
-                userDTO.getBirthDate(),false,null);
+                userDTO.getBirthDate(), userDTO.getGrade(),false,null);
         organizatorService.save(newOrganizator);
     }
 
     private void addUserToParticipantTable(UserDTO userDTO) {
         Participant newParticipant = new Participant(null,userDTO.getName(),
-                userDTO.getSurname(),userDTO.getTcKimlikNo(),userDTO.getUsername(),
+                userDTO.getSurname(),userDTO.getSchoolId(),userDTO.getUsername(),
                 userDTO.getPassword(),userDTO.getPhone(),userDTO.getEmail(),
-                userDTO.getBirthDate());
+                userDTO.getBirthDate(), userDTO.getGrade());
         participantService.save(newParticipant);
     }
 
     private void addUserToUsersTable(UserDTO userDTO,Set<Authority> authorities) {
         Users users = new Users(null,userDTO.getUsername(),
-                userDTO.getPassword(),userDTO.getTcKimlikNo(),userDTO.getEmail(),userDTO.getPhone(),
+                userDTO.getPassword(),userDTO.getSchoolId(),userDTO.getEmail(),userDTO.getPhone(),
                 true,true,
                 true,true,authorities);
         userRepository.save(users);
@@ -142,7 +137,7 @@ public class UserService {
 
     private void addUserToLecturerTable(UserDTO userDTO) {
         Lecturer newLecturer = new Lecturer(null,userDTO.getName(),
-                userDTO.getSurname(),userDTO.getTcKimlikNo(),userDTO.getUsername(),
+                userDTO.getSurname(),userDTO.getSchoolId(),userDTO.getUsername(),
                 userDTO.getPassword(),userDTO.getPhone(),userDTO.getEmail(),
                 userDTO.getBirthDate(),null);
         lecturerService.save(newLecturer);

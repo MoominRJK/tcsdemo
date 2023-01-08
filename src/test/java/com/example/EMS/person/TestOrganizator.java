@@ -14,9 +14,9 @@ public class TestOrganizator {
 
     @Test
     public void testCreateOrganizator() {
-        Person organizator = new Organizator(null,"Emre","Binnaz","1234","emreb",
-                "1234","0534534","emre@c.om",
-                LocalDateBuilder.generateDefaultLocalDate(),false,null);
+        Person organizator = new Organizator(null,"sophie","lin","1234","sophie",
+                "1234","0534534","esophie@gmail.com",
+                LocalDateBuilder.generateDefaultLocalDate(), 10,false,null);
         Assert.assertNotNull(organizator);
         Assert.assertEquals("Emre", organizator.getName());
     }

@@ -22,8 +22,8 @@ public class Person extends IdBaseEntity{
     @Column(name = "SURNAME")
     private String surname;
 
-    @Column(name = "TR_IDENTITY_NUMBER", unique = true)
-    private String tcKimlikNo;
+    @Column(name = "SCHOOL_ID", unique = true)
+    private String schoolId;
 
     @Column(name = "USERNAME", unique = true)
     private String username;
@@ -37,6 +37,9 @@ public class Person extends IdBaseEntity{
     @Column(name = "EMAIL", unique = true)
     private String email;
 
+    @Column(name = "GRADE", unique = true)
+    private int grade;
+
     @Column(name = "BIRTHDATE")
     private LocalDate birthDate;
 
@@ -45,15 +48,16 @@ public class Person extends IdBaseEntity{
     }
 
     public Person(Integer id,final String name, final String surname,
-                  final String tcKimlikNo, final String username, final String password, final String phone, final String email, final LocalDate birthDate) {
+                  final String schoolId, final String username, final String password, final String phone, final String email, final LocalDate birthDate, final int grade) {
         super(id);
         this.name = name;
         this.surname = surname;
-        this.tcKimlikNo = tcKimlikNo;
+        this.schoolId = schoolId;
         this.username = username;
         this.password = password;
         this.phone = phone;
         this.email = email;
         this.birthDate = birthDate;
+        this.grade = grade;
     }
 }

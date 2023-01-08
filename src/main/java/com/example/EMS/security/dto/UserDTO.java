@@ -19,31 +19,33 @@ import java.util.List;
 
 public class UserDTO {
 
-    @NotBlank(message = "İsim kısmı boş olamaz !")
+    @NotBlank(message = "Name cannot be empty !")
     private String name;
 
-    @NotBlank(message = "Soyisim kısmı boş olamaz !")
+    @NotBlank(message = "Last name cannot be empty !")
     private String surname;
 
-    @NotBlank(message = "TC kısmı boş olamaz !")
-    private String tcKimlikNo;
+    @NotBlank(message = "School Id cannot be empty !")
+    private String schoolId;
 
-    @NotBlank(message = "Kullanıcı adı kısmı boş olamaz !")
+    @NotBlank(message = "Username cannot be empty !")
     private String username;
 
-    @NotBlank(message = "Parola kısmı boş olamaz !")
+    @NotBlank(message = "Password cannot be empty !")
     private String password;
 
-    @NotBlank(message = "Telefon numarası girilmeli")
+    @NotBlank(message = "Phone number must be entered")
     private String phone;
 
-    @NotBlank(message = "Email kısmı boş olamaz !")
-    @Email(message = "Email geçerli olmalı.")
+    @NotBlank(message = "Email cannot be empty!")
+    @Email(message = "Email must be valid.")
     private String email;
 
     @PastOrPresent
     private LocalDate birthDate;
 
     private List<String> authorities;
+
+    private int grade;
 
 }

@@ -30,8 +30,8 @@ public class Users implements UserDetails {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "tcKimlikNo", unique = true, nullable = false)
-    private String tcKimlikNo;
+    @Column(name = "schoolId", unique = true, nullable = false)
+    private String schoolId;
 
     @Column(name = "email", unique = true, nullable = false)
     private String email;

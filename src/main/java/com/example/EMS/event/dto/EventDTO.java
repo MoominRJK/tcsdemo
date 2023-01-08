@@ -45,15 +45,15 @@ public class EventDTO {
     public final String zip;
 
     @JsonProperty("point")
-    @Min(value = 1, message = "The award point must be created for at least 1 person")
+    @Min(value = 1, message = "The award point must be created for at least 1 point")
     public final int point;
 
     @JsonProperty("quota")
-    @Min(value = 1, message = "The event must be created for at least 1 person")
+    @Min(value = 1, message = "The event must be created for at least 1 quota")
     public final int quota;
 
     @JsonProperty("eventType")
-    @Min(value = 1, message = "The event must be created for at least 1 person")
+    @Min(value = 1, message = "The event must have an event type")
     public final int eventType;
 
     @JsonProperty("longitude")

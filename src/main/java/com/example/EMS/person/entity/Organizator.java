@@ -27,11 +27,11 @@ public class Organizator extends Person {
 
 
     public Organizator(Integer id,final String name, final String surname,
-                       final String tcKimlikNo, final String username,
+                       final String schoolId, final String username,
                        final String password, final String phone,
-                       final String email, final LocalDate birthDate,
+                       final String email, final LocalDate birthDate, final int grade,
                        final boolean isOnline, final Set<Event> events) {
-        super(id,name,surname,tcKimlikNo,username,password,phone,email,birthDate);
+        super(id,name,surname,schoolId,username,password,phone,email,birthDate,grade);
         this.isOnline = isOnline;
         this.events = events;
     }

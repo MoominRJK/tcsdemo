@@ -34,7 +34,8 @@ public class Participant extends Person {
             cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<EventSurveyAnswers> eventSurveyAnswers;
 
-    public Participant(Integer id,final String name, final String surname, final String tcKimlikNo, final String username, final String password, final String phone, final String email, final LocalDate birthDate) {
-        super(id,name,surname,tcKimlikNo,username,password,phone,email,birthDate);
+
+    public Participant(Integer id,final String name, final String surname, final String schoolId, final String username, final String password, final String phone, final String email, final LocalDate birthDate, final int grade) {
+        super(id,name,surname,schoolId,username,password,phone,email,birthDate,grade);
     }
 }

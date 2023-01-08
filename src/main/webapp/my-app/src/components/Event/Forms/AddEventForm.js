@@ -33,7 +33,7 @@ class AddEventForm extends Component {
         state : '',
         zip : '',
         point : 0,
-        EventType : 1 
+        eventType : 0 
     }
 
     resetAllInputs = () =>{
@@ -98,6 +98,12 @@ class AddEventForm extends Component {
         return messageType === 'SUCCESS'
     }
 
+    handleEventTypeChange = (e) => {
+        this.setState({
+            eventType : e.target.value
+        })
+    }
+
     changeInput = (e) =>{
         this.setState({
             [e.target.name]:e.target.value
@@ -141,13 +147,15 @@ class AddEventForm extends Component {
                                                 <Form.Group as={Col} controlId="formGridType">
                                                     <Form.Label>Event Type</Form.Label>
                                                     <InputGroup>
-                                                        <Form.Control required autoComplete="off"
-                                                                      type="number" name="eventType"
-                                                                      min = "1"
-                                                                      value={eventType} onChange={this.changeInput}
-                                                                      className={"bg-dark text-white"}
-                                                                      placeholder="Event Type" />
+                                                        <Form.Control as="select" required
+                                                            value={this.state.eventType}
+                                                            onChange={(e) => this.handleEventTypeChange(e)}>
+                                                            <option value=""> Select </option>
+                                                            <option value="1">Sporting Event</option>
+                                                            <option value="2">Non-Sporting Event</option>
+                                                        </Form.Control>
                                                     </InputGroup>
+                                                    
                                                 </Form.Group>
                                             </Form.Row>
 

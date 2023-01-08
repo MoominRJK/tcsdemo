@@ -14,9 +14,9 @@ public class TestParticipant {
 
     @Test
     public void testCreateParticipant() {
-        Person participant = new Participant(null,"Emre","Binnaz","1234","emreb",
-                "1234","0534534","emre@c.om",
-                LocalDateBuilder.generateDefaultLocalDate());
+        Person participant = new Participant(null,"sophie","lin","1234","sophie",
+                "1234","0534534","sophie@gmail.com",
+                LocalDateBuilder.generateDefaultLocalDate(), 0);
         Assert.assertNotNull(participant);
         Assert.assertEquals("Emre", participant.getName());
     }

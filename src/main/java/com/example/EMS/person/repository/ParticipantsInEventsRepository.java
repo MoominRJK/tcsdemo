@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 @Repository
@@ -40,5 +41,15 @@ public interface ParticipantsInEventsRepository
             nativeQuery = true)
     ParticipantsInEvents getParticipantInEvent(@Param("event_id") Integer event_id,
                           @Param("participant_id")Integer participant_id);
+
+
+    @Query(
+            value = "SELECT * " +
+                    "FROM participants_in_events " +
+                    "WHERE " +
+                    " participant_id = :participant_id",
+            nativeQuery = true)
+    @Transactional
+    List<ParticipantsInEvents> getParticipantEvents(@Param("participant_id")Integer participant_id);
 
 }

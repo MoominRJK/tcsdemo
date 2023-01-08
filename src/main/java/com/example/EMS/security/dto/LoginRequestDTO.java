@@ -9,9 +9,12 @@ import javax.validation.constraints.NotBlank;
 @Setter
 public class LoginRequestDTO {
 
-    @NotBlank(message = "Tc Kimlik no boş olamaz !")
-    private String tcKimlikNo;
 
-    @NotBlank(message = "Parola boş olamaz !")
+    private String schoolId;
+
+    @NotBlank(message = "Password cannot be empty !")
     private String password;
+
+    @NotBlank(message = "Username cannot be empty !")
+    private String username;
 }

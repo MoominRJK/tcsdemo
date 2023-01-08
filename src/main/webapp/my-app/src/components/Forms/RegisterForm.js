@@ -18,13 +18,14 @@ class RegisterForm extends Component {
         phone : '',
         password : '',
         repeatedPassword : '',
-        tcKimlikNo : '',
+        schoolId : '',
         birthDate : '',
         username : '',
         currentDate : '',
         message : '',
         messageType : '',
-        isOpenMessage : false
+        isOpenMessage : false,
+        grade : ''
     }
 
     updateInput = (e) => {
@@ -36,7 +37,7 @@ class RegisterForm extends Component {
     sendRegisterForm = async (e) =>{
         e.preventDefault();
         const {name,surname,email,phone,username,
-            password,userType,birthDate,tcKimlikNo,} = this.state;
+            password,userType,birthDate,schoolId, grade} = this.state;
         var newUser = {
             name : name.trim(),
             surname : surname.trim(),
@@ -45,15 +46,16 @@ class RegisterForm extends Component {
             username : username.trim(),
             password : password.trim(),
             birthDate,
-            tcKimlikNo,
-            authorities: [userType]
+            schoolId,
+            grade,
+            authorities: ["PARTICIPANT"]
         }
         if(!this.arePasswordsEqual()) {
             this.setMessageAs("The 2 passwords you typed do not match.","ERROR");
         }
         else {
            // const response = await axios.post(`/add/${userType}`,
-           const response = await axios.post(`/add/${userType}`,
+           const response = await axios.post(`/add/PARTICIPANT`,
                 newUser,
                 ).catch(err => {
                 this.props.history.push("/notFound404");
@@ -111,15 +113,21 @@ class RegisterForm extends Component {
         })
     }
 
+    handleGradeChange = (e) => {
+        this.setState({
+            grade : e.target.value
+        })
+    }
+
     render() {
         return (
             <Card className={"container w-50 mt-5 text-black bg-light text-center"}>
                 <Card.Header>
-                    <h4>Register</h4>
+                    <h4>Sign Up</h4>
                 </Card.Header>
                 <Card.Body>
                     <Form onSubmit={(e)=> this.sendRegisterForm(e)}>
-                        <Form.Group>
+                        {/* <Form.Group>
                             <Form.Label>What type of user do you want to register in our system ?</Form.Label>
                             <InputGroup>
                                 <Form.Control as="select" required
@@ -131,7 +139,7 @@ class RegisterForm extends Component {
                                     <option value="ORGANIZATOR">ORGANIZATOR</option>
                                 </Form.Control>
                             </InputGroup>
-                        </Form.Group>
+                        </Form.Group> */}
 
                         <div className={"row"}>
                             <div className={"col"}>
@@ -163,7 +171,7 @@ class RegisterForm extends Component {
                         <div className={"row"}>
                             <div className="col">
                                 <Form.Group>
-                                    <Form.Label>Set Username</Form.Label>
+                                    <Form.Label>Username</Form.Label>
                                     <Form.Control
                                         type="text"
                                         placeholder="User Name"
@@ -171,30 +179,6 @@ class RegisterForm extends Component {
                                         value={this.state.username}
                                         name="username"
                                         onChange={this.updateInput} />
-                                </Form.Group>
-                            </div>
-                            <div className="col">
-                                <Form.Group>
-                                    <Form.Label>Set Password</Form.Label>
-                                    <Form.Control
-                                        type="password"
-                                        placeholder="Password"
-                                        required id="password"
-                                        value={this.state.password}
-                                        name="password"
-                                        onChange={this.updateInput} />
-                                </Form.Group>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col">
-                                <Form.Group>
-                                    <Form.Label>Re-enter your password</Form.Label>
-                                    <Form.Control
-                                        type="password"
-                                        placeholder="Password"
-                                        required id="repeatedPassword"
-                                        value={this.state.repeatedPassword} name="repeatedPassword" onChange={this.updateInput} />
                                 </Form.Group>
                             </div>
                             <div className="col">
@@ -209,24 +193,80 @@ class RegisterForm extends Component {
                                         onChange={this.updateInput} />
                                 </Form.Group>
                             </div>
+                           
                         </div>
                         <div className="row">
-                            <div className="col">
+                        <div className="col">
                                 <Form.Group>
-                                    <Form.Label>Student ID</Form.Label>
+                                    <Form.Label>Password</Form.Label>
                                     <Form.Control
-                                        type="number"
-                                        placeholder="Student ID"
-                                        required id="tcKimlikNo"
-                                        min="0"
-                                        value={this.state.tcKimlikNo}
-                                        name="tcKimlikNo"
+                                        type="password"
+                                        placeholder="Password"
+                                        required id="password"
+                                        value={this.state.password}
+                                        name="password"
                                         onChange={this.updateInput} />
                                 </Form.Group>
                             </div>
                             <div className="col">
                                 <Form.Group>
-                                    <Form.Label>Phone</Form.Label>
+                                    <Form.Label>Re-enter your password</Form.Label>
+                                    <Form.Control
+                                        type="password"
+                                        placeholder="Password"
+                                        required id="repeatedPassword"
+                                        value={this.state.repeatedPassword} name="repeatedPassword" onChange={this.updateInput} />
+                                </Form.Group>
+                            </div>
+  
+                        </div>
+                        <div className="row">
+                            <div className="col">
+                                <Form.Group>
+                                    <Form.Label>School ID</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        placeholder="School ID"
+                                        required id="schoolId"
+                                        min="0"
+                                        value={this.state.schoolId}
+                                        name="schoolId"
+                                        onChange={this.updateInput} />
+                                </Form.Group>
+                            </div>
+                            <div className="col">
+                               <Form.Group>
+                                    <Form.Label>Grade</Form.Label>
+                                    <InputGroup>
+                                        <Form.Control as="select" required
+                                                    value={this.state.grade}
+                                                    onChange={(e) => this.handleGradeChange(e)}>
+                                            <option value=""> - </option>
+                                            <option value="9">9th Grade</option>
+                                            <option value="10">10th Grade</option>
+                                            <option value="11">11th Grade</option>
+                                            <option value="12">12th Grade</option>
+                                        </Form.Control>
+                                    </InputGroup>
+                               </Form.Group>
+                            </div>
+                        </div>
+                        <div className="row">
+                            {/* <div className="col-6">
+                                <Form.Group>
+                                    <Form.Label>Birth Date</Form.Label>
+                                    <Form.Control type="date"
+                                                  placeholder="Birth Date"
+                                                  required id="birthDate"
+                                                  value={this.state.birthDate}
+                                                  max ={this.state.currentDate}
+                                                  name="birthDate"
+                                                  onChange={this.updateInput} />
+                                </Form.Group>
+                            </div> */}
+                            <div className="col">
+                                <Form.Group>
+                                    <Form.Label>Cell Phone</Form.Label>
                                     <Form.Control
                                         type="tel"
                                         placeholder="xxx-xxx-xxxx"
@@ -238,20 +278,8 @@ class RegisterForm extends Component {
                                     <small>Format: 123-456-7890</small>
                                 </Form.Group>
                             </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-6">
-                                <Form.Group>
-                                    <Form.Label>Birth Date</Form.Label>
-                                    <Form.Control type="date"
-                                                  placeholder="Birth Date"
-                                                  required id="birthDate"
-                                                  value={this.state.birthDate}
-                                                  max ={this.state.currentDate}
-                                                  name="birthDate"
-                                                  onChange={this.updateInput} />
-                                </Form.Group>
-                            </div>
+                             
+                             
                         </div>
                         <Button variant="primary" type="submit">
                             Submit

@@ -34,6 +34,6 @@ public class JwtUtil {
                 .build()
                 .parseClaimsJws(jwtToken)
                 .getBody()
-                .getSubject(); // auth içindeki username imiz
+                .getSubject(); // Our username in auth
     }
 }

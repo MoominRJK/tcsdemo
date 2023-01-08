@@ -7,7 +7,7 @@ class ParticipantsOfEvent extends Component {
         columns: [
             { title: 'First Name', field: 'name' },
             { title: 'Last Name', field: 'surname'},
-            { title: 'Student ID', field: 'tcKimlikNo'},
+            { title: 'School ID', field: 'schoolId'},
             {title : 'Username', field : 'username'},
         ],
         participants : [],

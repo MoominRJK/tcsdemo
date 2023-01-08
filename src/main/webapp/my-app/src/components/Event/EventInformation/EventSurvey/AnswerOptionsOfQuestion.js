@@ -41,7 +41,7 @@ export default function AnswerOptionsOfQuestion(props) {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={props.handleClose} color="primary">
-                        Tamam
+                      Ok
                     </Button>
                 </DialogActions>
             </Dialog>

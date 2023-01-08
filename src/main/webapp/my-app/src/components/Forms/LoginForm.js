@@ -16,7 +16,7 @@ import Consumer from '../ContextAPI/Context';
 class LoginForm extends Component {
 
     state = {
-        tcKimlikNo : '',
+        username : '',
         password : '',
         isSnackbarOfLoginStatusOpen : false,
         loginStatusMessage : '',
@@ -32,10 +32,10 @@ class LoginForm extends Component {
         })
     }
 
-    login = async (dispatch,tcKimlikNo,password,e) =>{
+    login = async (dispatch,username,password,e) =>{
         e.preventDefault();
         var loginRequest = {
-            tcKimlikNo : tcKimlikNo,
+            username : username,
             password : password
         }
 
@@ -103,7 +103,7 @@ class LoginForm extends Component {
             alignItems: 'center',
         }
 
-        const {tcKimlikNo,password,loginStatusMessage, loginStatusMessageType} = this.state;
+        const {username,password,loginStatusMessage, loginStatusMessageType} = this.state;
         return (
             <Consumer>
                 {
@@ -116,18 +116,18 @@ class LoginForm extends Component {
                                     color="primary">
                                     Welcome to the Event Management System !
                                 </Typography>
-                                <form className={"w-75"} onSubmit = {(e) => this.login(dispatch,tcKimlikNo,password,e)}>
+                                <form className={"w-75"} onSubmit = {(e) => this.login(dispatch,username,password,e)}>
                                     <TextField
                                         variant="outlined"
                                         margin="normal"
                                         required
                                         fullWidth
-                                        id="tcKimlikNo"
-                                        value = {tcKimlikNo}
+                                        id="username"
+                                        value = {username}
                                         onChange = {this.changeInput}
-                                        label="Student ID"
-                                        name="tcKimlikNo"
-                                        autoComplete="Student ID"
+                                        label="username"
+                                        name="username"
+                                        autoComplete="Username"
                                         autoFocus
                                     />
                                     <TextField

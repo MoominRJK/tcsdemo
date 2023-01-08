@@ -10,6 +10,7 @@ import com.example.EMS.person.entity.Lecturer;
 import com.example.EMS.person.entity.Participant;
 import com.example.EMS.person.entity.ParticipantsInEvents;
 import com.example.EMS.person.repository.ParticipantRepository;
+import com.example.EMS.person.repository.ParticipantsInEventsRepository;
 import com.google.zxing.WriterException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,7 @@ public class ParticipantService {
     private final ParticipantRepository participantRepository;
     private final EventService eventService;
     private final FileService fileService;
+    private final ParticipantsInEventsRepository participantsInEventsRepository;
 
     public Optional<Participant> findByUsername(String username){
         return participantRepository.findByUsername(username);
@@ -39,13 +41,22 @@ public class ParticipantService {
 
         participantRepository.save(participant);
     }
-
+    @Transactional
     public List<Event> getEventsOfParticipant(Participant participant) {
         List<Event> events = new ArrayList<>() ;
        List<ParticipantsInEvents> participations = getParticipationsOf(participant);
        for(ParticipantsInEvents participation :  participations) {
            events.add(participation.getEvent());
        }
+        return events;
+    }
+
+    public List<Event> getEventsByParticipant(Participant participant) {
+        List<Event> events = new ArrayList<>() ;
+        List<ParticipantsInEvents> participations = participantsInEventsRepository.getParticipantEvents(participant.getId());
+        for(ParticipantsInEvents participation :  participations) {
+            events.add(participation.getEvent());
+        }
         return events;
     }
 

@@ -17,8 +17,8 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByUsername(username);
     }
-    public UserDetails loadUserByTcKimlikNo(String tcKimlikNo) {
-        return userRepository.findByTcKimlikNo(tcKimlikNo);
+    public UserDetails loadUserBySchoolIdNo(String schoolId) {
+        return userRepository.findBySchoolId(schoolId);
     }
 
     public UserDetails loadUserByPassword(String password) {

@@ -17,7 +17,7 @@ class EventDetails extends Component {
 
     getLecturerOfEvent = async () =>{
         const { eventName } = this.props.match.params;
-        const response = await axios.get(`/lecturer/of/${eventName}`, {
+        const response = await axios.get(`/events/${eventName}`, {
             headers : {
                 authorization : 'Bearer ' + localStorage.getItem('jwtToken')
             }
@@ -70,7 +70,7 @@ class EventDetails extends Component {
                         </p>
                     </div>
                     <div className="col">
-                        <strong>Current number of participants :</strong>
+                        <strong>Number of participants :</strong>
                         <p className={"ml-3 d-inline"}>{currentNumberOfPeople}</p>
                     </div>
                 </div>
@@ -91,10 +91,10 @@ class EventDetails extends Component {
                                 <strong>Organizer Username :</strong>
                                 <p className={"ml-3 d-inline"}>{localStorage.getItem("username")}</p>
                             </div>
-                            <div className="col">
+                            {/* <div className="col">
                                 <strong>The winner of the lottery at the event:</strong>
                                 <p className={"ml-3 d-inline"}>{raffleWinnerUsername}</p>
-                            </div>
+                            </div> */}
                         </div>
                     </div>: null }
 
