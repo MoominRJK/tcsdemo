@@ -1,4 +1,5 @@
 package com.example.EMS.person.repository;
+import com.example.EMS.person.entity.ParticipantsPoint;
 import  com.example.EMS.person.entity.pkclasses.ParticipantsInEventsPK;
 import com.example.EMS.event.entity.Event;
 import com.example.EMS.person.entity.Participant;
@@ -51,5 +52,18 @@ public interface ParticipantsInEventsRepository
             nativeQuery = true)
     @Transactional
     List<ParticipantsInEvents> getParticipantEvents(@Param("participant_id")Integer participant_id);
+
+
+    @Query(
+            value = "select username, participant_id as participantId, sum(point) as totalPoint, grade as grade, surname as lastName, p.name as firstName, email, phone " +
+                    "from participants_in_events as pie inner join event as e on e.id = pie.event_id " +
+                    "inner join participant p on pie.participant_id = p.id " +
+                    "WHERE " +
+                    " extract(year from end_date) = :year" +
+                    " and extract(quarter from end_date) = :quarter" +
+                    " group by username, participant_id, grade, surname, p.name, email, phone ",
+            nativeQuery = true)
+    @Transactional
+    List<ParticipantsPoint> getParticipantsPointByYearQuarter(@Param("year")Integer year, @Param("quarter")Integer quarter);
 
 }

@@ -13,6 +13,7 @@ import PositionedSnackbar from "../static/Snackbars/PositionedSnackbar";
 import Consumer from '../ContextAPI/Context';
 
 
+
 class LoginForm extends Component {
 
     state = {
@@ -105,6 +106,9 @@ class LoginForm extends Component {
 
         const {username,password,loginStatusMessage, loginStatusMessageType} = this.state;
         return (
+
+
+      
             <Consumer>
                 {
                     value => {
@@ -114,7 +118,7 @@ class LoginForm extends Component {
                                 <Typography
                                     variant ="h5"
                                     color="primary">
-                                    Welcome to the Event Management System !
+                                    Sign In
                                 </Typography>
                                 <form className={"w-75"} onSubmit = {(e) => this.login(dispatch,username,password,e)}>
                                     <TextField
@@ -151,10 +155,11 @@ class LoginForm extends Component {
                                     <Button
                                         onClick={this.setStateOfLoginStatusSnackbarForUsingAgain}
                                         type="submit"
+                                        className={"btn btn-primary"}
                                         fullWidth
                                         disabled = {this.state.disabledButton}
                                         variant="contained"
-                                        color="primary">
+                                        color="primary" >
                                         Login
                                     </Button>
                                     <Grid container>
@@ -172,13 +177,17 @@ class LoginForm extends Component {
                                         message = {loginStatusMessage}
                                         messageType = {loginStatusMessageType}
                                         vertical = {"bottom"}
-                                        horizontal = {"right"}/> : null}
+                                        horizontal = {"center"}/> : null}
                             </div>
 
                         )
                     }
                 }
             </Consumer>
+
+
+
+
         );
     }
 }

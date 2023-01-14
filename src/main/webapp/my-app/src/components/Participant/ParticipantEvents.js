@@ -43,13 +43,14 @@ class ParticipantEvents extends Component {
 
     render() {
         return (
-            <div  className={"container w-75 mt-5"}>
+            <>
+            <div  className={"mt-5 ml-5 mr-5"}>
                 <MaterialTable
                     title={<Typography variant="h4" component="h5">
-                        List of Your Events
+                        My Events
                     </Typography>}
                     columns={this.state.columns}
-                    data = {this.state.events}
+                    data = {this.state.events.filter(event => new Date(event.endDate) > new Date()) }
                     actions = {[ {
                         icon : 'info',
                         tooltip: 'Click for event information',
@@ -57,6 +58,21 @@ class ParticipantEvents extends Component {
                     }]}
                 ></MaterialTable>
             </div>
+            <div  className={"mt-5 ml-5 mr-5"}>
+                <MaterialTable
+                    title={<Typography variant="h4" component="h5">
+                        My Past Events
+                    </Typography>}
+                    columns={this.state.columns}
+                    data = {this.state.events.filter(event => new Date(event.endDate) <= new Date()) }
+                    actions = {[ {
+                        icon : 'info',
+                        tooltip: 'Click for event information',
+                        onClick: ( e,rowData ) => this.goToEventPage(e,rowData.name)
+                    }]}
+                ></MaterialTable>
+            </div>
+            </>
         );
     }
 }

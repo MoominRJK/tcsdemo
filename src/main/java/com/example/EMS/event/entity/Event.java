@@ -65,6 +65,9 @@ public class Event extends IdBaseEntity {
     @Column(name = "EVENT_TYPE")
     private int eventType;
 
+    @Column(name = "IMAGE_URL")
+    private String imageUrl;
+
     @JsonIgnore
     @ManyToOne()
     @JoinColumn(name = "organizator_id")

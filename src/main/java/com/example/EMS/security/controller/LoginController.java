@@ -2,6 +2,7 @@ package com.example.EMS.security.controller;
 
 import com.example.EMS.common.LoginResponse;
 import com.example.EMS.common.MessageResponse;
+import com.example.EMS.prize.service.ParticipantsPrizeService;
 import com.example.EMS.security.dto.LoginRequestDTO;
 import com.example.EMS.security.service.LoginService;
 import lombok.RequiredArgsConstructor;

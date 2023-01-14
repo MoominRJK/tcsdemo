@@ -9,6 +9,18 @@ export const getEvents  = async () => {
     return response;
 }
 
+export const getEventPoints = async (year, quarter) => {
+    const response = await axios.get(`/point/${year}/${quarter}}`, {
+        headers : {
+            authorization : 'Bearer ' + localStorage.getItem('jwtToken')
+        }
+    }).catch(err => {
+        this.props.history.push('/notFound404');
+    });
+
+    return response;
+}
+
 export const getEvent = async (eventName) => {
     const response = await axios.get(`/events/${eventName}`, {
         headers : {

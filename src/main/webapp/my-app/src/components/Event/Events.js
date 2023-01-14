@@ -16,8 +16,11 @@ class Events extends Component {
                         return (
                             <div className={"mt-5"}>
 
-                                    {isParticipant() ?
-                                      <div>
+                                {<EventTable events = {events} />}
+
+
+                                {isParticipant() ?
+                                      <div className={"mt-5"}>
                                           <Alert severity="info" className={"container"}>
                                                 <AlertTitle>Information</AlertTitle>
                                                 to the left of the event name. <InfoIcon></InfoIcon>
@@ -27,7 +30,7 @@ class Events extends Component {
                                         </Alert>
                                       </div> : null }
                                 {isOrganizator() ?
-                                    <div>
+                                    <div className={"mt-5"}>
                                         <Alert severity="info" className={"container"}>
                                             <AlertTitle>Information</AlertTitle>
                                             to the left of the event name. <InfoIcon></InfoIcon>
@@ -38,7 +41,6 @@ class Events extends Component {
                                         </Alert>
                                     </div>
                                     : null}
-                                {isLecturer() ? <EventsOfLecturer/> : <EventTable events = {events} />}
                             </div>
                         );
                     }

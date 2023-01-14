@@ -8,10 +8,11 @@ class NavigationBar extends Component {
 
     render() {
         const navbar = {
-            backgroundColor : "#3f51b5",
+            backgroundColor : "#6416FF",
             fontSize : "17px",
             letterSpacing : "1px",
             fontWeight : "500",
+            
         }
         const font = {
             fontSize: "15px"
@@ -25,29 +26,36 @@ class NavigationBar extends Component {
                         return(
                             <div>
                             <Navbar style = {navbar}  className = {"p-3"} variant = "dark">
-                                <Navbar.Brand href="#home">Event Management System</Navbar.Brand>
+                                <Navbar.Brand href="/">[SEAS] School Event Award System</Navbar.Brand>
                                 <Link className = {isLogin() ? "nav-item text-white ml-5": "d-none"}>
-                                Welcome {localStorage.getItem("username")}</Link>
-                                <Nav className="ml-auto">
-                                    {!isLogin() ? <Link className ="nav-link"
-                                                             to = {"/register"}>Register</Link> : null}
-                                    <Link className = {isLogin() ? "nav-link": "d-none"}
-                                          to ={"/events"} >Events </Link>
-                                    {isOrganizator() ? <Link className ="nav-link"
-                                                              to = {"/istatistik"}>Activity Statistics</Link> : null}
-                                    {isOrganizator() ? <Link className ="nav-link"
-                                                             to = {"/raffle"}>Event Draw</Link> : null}
-                                    {isOrganizator() ? <Link className ="nav-link"
-                                                             to = {"/survey"}>Surveys</Link> : null}
+                                Welcome {localStorage.getItem("username")} Role: {localStorage.getItem("authorities")} </Link>
+                                        <Nav className="ml-auto">
+                                            { !isLogin() ? <Link className ="nav-link" to = {"/login"}>Sign In</Link> : null}
+                                            { !isLogin() ? <Link className ="nav-link" to = {"/register"}>Sign Up</Link> : null}
+                                                                    
+                                            <Link className = {isLogin() ? "nav-link": "d-none"}
+                                                to ={"/events"} >Events </Link>
+                                            {  isOrganizator() ? <Link className ="nav-link"
+                                                to = {"/raffle"}>Raffle Drawing</Link> : null}
+                                            {  isOrganizator() ? <Link className ="nav-link"
+                                                to = {"/chart"}>Charts</Link> : null}
+                                            { isOrganizator() ? <Link className ="nav-link"
+                                               to = {"/report"}>Report</Link> : null}
 
-                                    <Link className = {isParticipant() ? "nav-link": "d-none"}
-                                          to ={`/myEvents/${localStorage.getItem('username')}`}>
-                                        My Events</Link>
-                                    <Link className = {isLogin() ? "nav-link": "d-none"}
-                                                      to ={"/login"}>
-                                       Sign out</Link>
+                                            {/* { isOrganizator() ? <Link className ="nav-link"
+                                                to = {"/survey"}>Surveys</Link> : null} */}
 
-                                </Nav>
+                                            <Link className = { isParticipant() ? "nav-link": "d-none"}
+                                                to ={`/myEvents/${localStorage.getItem('username')}`}>
+                                                My Events</Link>
+                                            <Link className = { isParticipant() ? "nav-link": "d-none"}
+                                                to ={`/myReport/${localStorage.getItem('username')}`}>
+                                                Report</Link>
+                                            <Link className = { isLogin() ? "nav-link": "d-none"}
+                                                            to ={"/login"}>
+                                            Sign out</Link>
+
+                                        </Nav>
                                 <Form inline>
 
                                 </Form>

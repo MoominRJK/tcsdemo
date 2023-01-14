@@ -11,6 +11,9 @@ import com.example.EMS.person.entity.Participant;
 import com.example.EMS.person.entity.ParticipantsInEvents;
 import com.example.EMS.person.repository.ParticipantRepository;
 import com.example.EMS.person.repository.ParticipantsInEventsRepository;
+import com.example.EMS.prize.entity.ParticipantsPrize;
+import com.example.EMS.prize.entity.Prize;
+import com.example.EMS.prize.service.PrizeService;
 import com.google.zxing.WriterException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -30,11 +33,15 @@ public class ParticipantService {
 
     private final ParticipantRepository participantRepository;
     private final EventService eventService;
-    private final FileService fileService;
+    private final PrizeService prizeService;
     private final ParticipantsInEventsRepository participantsInEventsRepository;
 
     public Optional<Participant> findByUsername(String username){
         return participantRepository.findByUsername(username);
+    }
+
+    public Optional<Participant> findById(int id){
+        return participantRepository.findById(id);
     }
 
     public void save(Participant participant) {
@@ -96,5 +103,20 @@ public class ParticipantService {
         participantInEvent.setEvent(event);
 
         return participantInEvent;
+    }
+
+    public ParticipantsPrize getPrizeInfoForParticipant(String prizeName,
+                                                        String username) {
+
+        final Prize prize = prizeService.findByName(prizeName);
+        final Optional<Participant> optionalParticipant = participantRepository.findByUsername(username);
+        final Participant participant = optionalParticipant.get();
+
+        ParticipantsPrize participantsPrize = new ParticipantsPrize();
+
+        participantsPrize.setParticipant(participant);
+        participantsPrize.setPrize(prize);
+
+        return participantsPrize;
     }
 }

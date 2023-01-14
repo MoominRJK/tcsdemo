@@ -22,25 +22,53 @@ import { animateScroll } from "react-scroll";
 
     getLightTheme() {
         let basicOptions = {
+            indexAxis: 'y',
+            maintainAspectRatio: false,
+            aspectRatio: .8,
             legend: {
                 labels: {
-                    fontColor: '#3f51b5'
+                    color: '#495057'
                 }
             },
             scales: {
-                xAxes: [{
+                x: {
                     ticks: {
-                        fontColor: '#495057'
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
                     }
-                }],
-                yAxes: [{
+                },
+                y: {
                     ticks: {
-                        fontColor: '#495057',
-                        min : 0
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
                     }
-                }]
+                }
             }
         };
+
+        //     legend: {
+        //         labels: {
+        //             fontColor: '#3f51b5'
+        //         }
+        //     },
+        //     scales: {
+        //         xAxes: [{
+        //             ticks: {
+        //                 fontColor: '#495057'
+        //             }
+        //         }],
+        //         yAxes: [{
+        //             ticks: {
+        //                 fontColor: '#495057',
+        //                 min : 0
+        //             }
+        //         }]
+        //     }
+        // };
 
         return {
             basicOptions

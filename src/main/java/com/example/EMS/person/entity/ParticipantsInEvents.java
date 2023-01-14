@@ -11,6 +11,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
@@ -33,6 +34,9 @@ public class ParticipantsInEvents implements Serializable {
 
     @Column(name ="PARTITION_DATE")
     private LocalDate partitionDate;
+
+    @Column(name = "CHECKED_IN_DATE")
+    private LocalDateTime created;
 
     @Lob
     private byte [] eventInfoDocument;

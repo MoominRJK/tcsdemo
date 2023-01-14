@@ -13,4 +13,6 @@ public interface ParticipantRepository extends JpaRepository<Participant, Intege
     Optional<Participant> findByPhone(String phone);
 
     Optional<Participant> findByEmail(String email);
+
+    Optional<Participant> findById(int id);
 }

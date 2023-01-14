@@ -48,14 +48,14 @@ class RegisterForm extends Component {
             birthDate,
             schoolId,
             grade,
-            authorities: ["PARTICIPANT"]
+            authorities: []
         }
         if(!this.arePasswordsEqual()) {
             this.setMessageAs("The 2 passwords you typed do not match.","ERROR");
         }
         else {
-           // const response = await axios.post(`/add/${userType}`,
-           const response = await axios.post(`/add/PARTICIPANT`,
+            const response = await axios.post(`/add/${userType}`,
+           //const response = await axios.post(`/add/PARTICIPANT`,
                 newUser,
                 ).catch(err => {
                 this.props.history.push("/notFound404");
@@ -127,19 +127,19 @@ class RegisterForm extends Component {
                 </Card.Header>
                 <Card.Body>
                     <Form onSubmit={(e)=> this.sendRegisterForm(e)}>
-                        {/* <Form.Group>
+                        <Form.Group>
                             <Form.Label>What type of user do you want to register in our system ?</Form.Label>
                             <InputGroup>
                                 <Form.Control as="select" required
                                               value={this.state.userType}
                                               onChange={(e) => this.handleUserTypeChange(e)}>
                                     <option value=""> - </option>
-                                    <option value="LECTURER">LECTURER</option>
+                            
                                     <option value="PARTICIPANT">PARTICIPANT</option>
                                     <option value="ORGANIZATOR">ORGANIZATOR</option>
                                 </Form.Control>
                             </InputGroup>
-                        </Form.Group> */}
+                        </Form.Group>
 
                         <div className={"row"}>
                             <div className={"col"}>

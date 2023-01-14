@@ -105,7 +105,7 @@ class EventStatistics extends Component {
                                               value={statisticsType}
                                               onChange={(e) => this.handleEventStatisticsChoice(e)}>
                                     <option value="">Create chart</option>
-                                    <option value="showGraphicsWithParticipationCount">Show Events by Number of Applicants</option>
+                                    <option value="showGraphicsWithParticipationCount">Number of Participants per Event</option>
                                     <option value="showGraphicsWithParticipationDate">Show by Date of Applications Made to the Event</option>
                                 </Form.Control>
                             </InputGroup>

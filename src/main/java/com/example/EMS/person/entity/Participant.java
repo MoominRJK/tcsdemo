@@ -3,6 +3,7 @@ package com.example.EMS.person.entity;
 import com.example.EMS.common.entity.Person;
 import com.example.EMS.event.entity.EventQuestions;
 import com.example.EMS.event.entity.Survey.EventSurveyAnswers;
+import com.example.EMS.prize.entity.ParticipantsPrize;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,6 +25,11 @@ public class Participant extends Person {
     @OneToMany(mappedBy = "participant",
             cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ParticipantAnswersForEventQuestions> participantAnswers;
+
+    @OneToMany(mappedBy = "participant",
+            cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<ParticipantsPrize> participantsPrizes;
+
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)

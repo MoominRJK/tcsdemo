@@ -46,9 +46,9 @@ class Event extends Component {
                     </Card.Header>
                    <Card.Body className = "container">
                        {linkContent === "Details" ? <EventDetails event ={event}></EventDetails> : null}
-                       {linkContent === "Location" ?  <EventLocation event ={event}></EventLocation>: null}
+                       {/* {linkContent === "Location" ?  <EventLocation event ={event}></EventLocation>: null}
                        {linkContent === "Questionnaire" ?   <EventSurvey event ={event}></EventSurvey> : null}
-                       {linkContent === "Event Specific Questions" ? <EventQuestions event ={event}></EventQuestions> : null}
+                       {linkContent === "Event Specific Questions" ? <EventQuestions event ={event}></EventQuestions> : null} */}
                        {linkContent === "Join the Event" ? <EventParticipation event = {event}></EventParticipation> : null}
                    </Card.Body>
                    <Card.Footer>

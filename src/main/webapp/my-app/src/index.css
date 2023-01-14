@@ -10,3 +10,9 @@ body {
 code {
   font-family: 'Lora', serif;
 }
+
+.btn-primary {
+  color: #fff;
+  background-color: #6416FF;
+
+}

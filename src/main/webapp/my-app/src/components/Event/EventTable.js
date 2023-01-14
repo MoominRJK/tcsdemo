@@ -7,13 +7,28 @@ import {withRouter} from 'react-router-dom';
 import PositionedSnackbar from "../static/Snackbars/PositionedSnackbar";
 import UpdateEventForm from "./Forms/UpdateEventForm";
 import Consumer from '../ContextAPI/Context';
+import EventCard from './EventCard';
+
+import {
+    MDBCard,
+    MDBCardImage,
+    MDBCardBody,
+    MDBCardTitle,
+    MDBCardText,
+    MDBCardFooter,
+    MDBRow,
+    MDBCol,
+    MDBContainer
+
+  } from 'mdb-react-ui-kit';
+
 class EventTable extends Component {
     state = {
         columns: [
             { title: 'Name', field: 'name' },
-            { title: 'Start Date', field: 'startDate', type : 'date'},
-            { title: 'End Date', field: 'endDate', type : 'date'},
-            {title : 'Address', field : 'address'},
+            { title: 'Event Date', field: 'startDate', type : 'date'},
+            { title: 'Reward Point', field: 'point'},
+            { title : 'Location', field : 'address'},
         ],
 
         isAdditionRequest : false,
@@ -22,6 +37,33 @@ class EventTable extends Component {
         responseMessageOfDeleteRequest : '',
         responseMessageTypeOfDeleteRequest  : '',
         updatedEventName: '',
+
+        events: [
+            {
+              id: 1,
+              time: "10:00",
+              title: "Breakfast with Simon",
+              location: "Lounge Caffe",
+              description: "Discuss Q3 targets"
+            },
+            {
+              id: 2,
+              time: "10:30",
+              title: "Daily Standup Meeting (recurring)",
+              location: "Warsaw Spire Office"
+            },
+            { id: 3, time: "11:00", title: "Call with HRs" },
+            {
+              id: 4,
+              time: "11:00",
+              title: "Lunch with Timothy",
+              location: "Canteen",
+              description:
+                "Project evaluation ile declaring a variable and using an if statement is a fine way to conditionally render a component, sometimes you might want to use a"
+            }
+          ]
+        
+          
     }
 
     deleteEvent = async  (e,eventName,dispatch) =>{
@@ -79,8 +121,14 @@ class EventTable extends Component {
         this.props.history.push(`/event/${eventName}`)
     }
 
+    
+
 
     render() {
+        //const cardInfo = this.events
+
+
+
         const{isAdditionRequest,updatedEventName,isUpdateRequest,isDeleteRequest,
         responseMessageOfDeleteRequest, responseMessageTypeOfDeleteRequest} = this.state;
         let username = localStorage.getItem("username");
@@ -89,19 +137,20 @@ class EventTable extends Component {
                 value => {
                     const {dispatch,events} = value;
                     return(
-                        <div className={"container w-75 mt-5"}>
+                        <div className={"ml-5 mr-5"}>
                             <MaterialTable
                                 title={<Typography variant="h4" component="h5">
                                             Event List
                                         </Typography>}
                                 columns={this.state.columns}
-                                data={isParticipant() ?
-                                     events.filter(event => new Date(event.startDate) > new Date()) : this.props.events}
+                                data={ this.props.events}
+                                // data={isParticipant() ?
+                                //      events.filter(event => new Date(event.startDate) > new Date()) : this.props.events}
                                 actions={[
                                     isOrganizator()  ?
                                         {
                                             icon :  'delete',
-                                            tooltip: 'Sil',
+                                            tooltip: 'Delete',
                                             onClick: (e, rowData,) => this.deleteEvent(e,rowData.name,dispatch)
                                         } : null,
                                     {
@@ -142,7 +191,14 @@ class EventTable extends Component {
                                     handleClose = {this.closeUpdateModal}
                                     eventName = {updatedEventName}/>
                                 : null }
+    
+          
+                              
+
+       
+                                    
                         </div>
+
                     );
                 }
             }
