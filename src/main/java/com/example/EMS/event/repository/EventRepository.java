@@ -18,8 +18,8 @@ public interface EventRepository extends JpaRepository<Event,Integer> {
     Collection<Object> findAllByName(String newName);
 
     @Query(
-            value = "SELECT * FROM event WHERE raffle_winner_username = '' " +
-                    "or raffle_winner_username is null",
+            value = "SELECT * FROM event WHERE (raffle_winner_username = ''  " +
+                    "or raffle_winner_username is null) and end_date > TIMESTAMP 'yesterday' ORDER BY name",
             nativeQuery = true)
     Collection<Event> getNonRaffledEvents();
 

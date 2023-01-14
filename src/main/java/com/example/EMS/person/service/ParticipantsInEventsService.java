@@ -107,6 +107,7 @@ public class ParticipantsInEventsService {
         participantService.save(participant);
     }
 
+
     public List<Participant> getParticipantsOfEvent(String eventName) {
         List<Participant> participants = new ArrayList<Participant>();
         Event event = eventService.getEventByName(eventName);
@@ -115,7 +116,7 @@ public class ParticipantsInEventsService {
         }
         return participants;
     }
-
+    @Transactional
     public List<ParticipationCountInADay> getPartipationDatesAndParticipantCountsOfEvent(Event event) {
         List<ParticipationCountInADay> participationCountInADays =
                 participantsInEventsRepository.countOfTotalParticipantsInDays(event.getId());

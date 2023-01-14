@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.util.*;
 import javax.mail.util.ByteArrayDataSource;
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 @RestController
@@ -59,6 +60,7 @@ public class ParticipantController {
 
     @GetMapping("/participants/{eventName}")
     @PreAuthorize("hasAuthority('ORGANIZATOR')")
+    @Transactional
     public List<ParticipantDTO> getParticipantsOfEvent(@PathVariable String eventName) {
         List<Participant> participants = participantsInEventsService.getParticipantsOfEvent(eventName);
         return participantMapper.mapToDto(participants);

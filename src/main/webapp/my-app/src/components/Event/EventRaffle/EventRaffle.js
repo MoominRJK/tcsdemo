@@ -98,7 +98,7 @@ class EventRaffle extends Component {
     chooseRaffleWinnerFrom = (participants) => {
         let raffleWinnerParticipant;
         this.openBackdrop();
-        this.setMessageAs("Drawing is being created !","SUCCESS");
+        this.setMessageAs("System is picking the winner!!!","SUCCESS");
         setTimeout(() =>{
             raffleWinnerParticipant = this.createRaffleWinnerFrom(participants);
             this.updateRaffleWinnerOfEventWith(raffleWinnerParticipant);
@@ -149,15 +149,16 @@ class EventRaffle extends Component {
             const {isOpenBackdrop,isMessageBoxOpen,messageType,selectedEvent,
                 selectedEventName,raffleWinnerUsername,message} = this.state;
         return (
-            <div className="container">
+            <div className={"container w-50 mt-5"}>
                 <form onSubmit={(e) => this.createRaffle(e)}>
                     <div className="col-md-12 text-center mt-5">
                         <EventSelectionForRaffle
                             onSelectEvent = {this.changeEventNameWith}
                         />
+                    
+                        <button className={"btn btn-primary mt-5 "}
+                            type="submit">Draw Raffle Winner!</button>
                     </div>
-                    <button className={"btn btn-secondary mt-5 "}
-                            type="submit">Create Sweepstakes</button>
                 </form>
                 {isOpenBackdrop ? <SimpleBackdrop
                                     handleOpen = {isOpenBackdrop}

@@ -28,18 +28,18 @@ public class EventController {
         return eventMapper.mapToDto(events);
     }
 
-//    @GetMapping("/WithSurvey")
-//    public List<EventDTO> getAllEventsWithSurvey() {
-//        List<Event> events = eventService.getAllEventsWithSurvey();
-//        return eventMapper.mapToDto(events);
-//
-//    }
-//
-//    @GetMapping("/NonRaffled")
-//    public List<EventDTO> getAllNonRaffledEvents() {
-//        List<Event> events = eventService.getAllNonRaffledEvents();
-//        return eventMapper.mapToDto(events);
-//    }
+    @GetMapping("/WithSurvey")
+    public List<EventDTO> getAllEventsWithSurvey() {
+        List<Event> events = eventService.getAllEventsWithSurvey();
+        return eventMapper.mapToDto(events);
+
+    }
+
+    @GetMapping("/NonRaffled")
+    public List<EventDTO> getAllNonRaffledEvents() {
+        List<Event> events = eventService.getAllNonRaffledEvents();
+        return eventMapper.mapToDto(events);
+    }
 
     @GetMapping("{eventName}")
     public EventDTO getEventByName(@PathVariable String eventName) {

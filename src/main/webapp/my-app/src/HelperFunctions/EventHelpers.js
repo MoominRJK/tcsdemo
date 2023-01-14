@@ -10,7 +10,7 @@ export const getEvents  = async () => {
 }
 
 export const getEventPoints = async (year, quarter) => {
-    const response = await axios.get(`/point/${year}/${quarter}}`, {
+    const response = await axios.get(`/point/${year}/${quarter}`, {
         headers : {
             authorization : 'Bearer ' + localStorage.getItem('jwtToken')
         }

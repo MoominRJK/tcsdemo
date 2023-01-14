@@ -38,7 +38,8 @@ public class EmailService {
         mail.setText("Dear " + participant.getName() + " " +
                     participant.getSurname() + " Please contact us for detailed information." +
                     " contact");
-        emailSender.send(mail);
+        //TODO: fix the email issue
+       // emailSender.send(mail);
     }
     
     public void sendEmailWithQrCode(Participant participant,Event event) throws Exception {

@@ -17,6 +17,7 @@ import Event from './components/Event/Event'
 import ParticipantsOfEvent from "./components/Participant/ParticipantsOfEvent";
 import EventStatistics from "./components/Event/StatisticsOfEvent/EventStatistics";
 import EventBarChartPoint from "./components/Event/StatisticsOfEvent/EventBarChartPoint";
+import EventBarMyPoint from "./components/Event/StatisticsOfEvent/EventBarMyPoint";
 import EventRaffle from "./components/Event/EventRaffle/EventRaffle";
 import ParticipantAnswers from "./components/Participant/ParticipantAnswers";
 import EventSurveyForm from "./components/Event/Forms/EventSurveyForm";
@@ -51,9 +52,10 @@ class App extends Component {
                     <OrganizatorRoute exacth path ={"/participants/:eventName"} component ={ParticipantsOfEvent}/>
                     <OrganizatorRoute exact path ={"/event/:eventName/addQuestion"} component = {EventQuestionsForm}/>
                     <OrganizatorRoute exact path = {"/createSurvey/:eventName"} component={EventSurveyForm}/>
+                    <OrganizatorRoute exact path ={"/report"} component={EventBarChartPoint}/>
                     <ParticipantRoute exact path = {"/participantAnswersOf/:eventName"} component = {ParticipantAnswers}/>
                     <ParticipantRoute exact path ={"/myEvents/:username"} component={ParticipantEvents}/>
-                    <ParticipantRoute exact path ={"/myReport/:username"} component={EventBarChartPoint}/>
+                    <ParticipantRoute exact path ={"/myReport/:username"} component={EventBarMyPoint}/>
                     <ParticipantRoute exact path ={"/:username/and/:eventName/information"}
                                       component ={InformationInsideOfQrCode}/>
                    <Route component={NotFound}/>
