@@ -10,7 +10,8 @@ import {
     MDBCol,
     MDBListGroup,
     MDBListGroupItem,
-    MDBRow
+    MDBRow,
+    MDBBadge
   } from 'mdb-react-ui-kit';
 class EventBarChartPoint extends Component {
 
@@ -150,46 +151,49 @@ class EventBarChartPoint extends Component {
         const {statisticsType,isOpenedEventBarChart} = this.state;
         return (
             <div className={"container w-75 mt-5"}>
-                                <form onSubmit={(e) => this.sendQuestions(e)}>
-                                                        <Form.Group>
-                                                            <Form.Label>Select Year:</Form.Label>
-                                                            <InputGroup>
-                                                                <Form.Control as="select" required
-                                                                            value={this.state.userType}
-                                                                            onChange={(e) => this.handleUserTypeChange(e)}>
-                                                                    <option value=""> - </option>
-                                                            
-                                                                    <option value="2022">2022</option>
-                                                                    <option value="2023">2023</option>
-                                                                </Form.Control>
-                                                            </InputGroup>
-                                                        </Form.Group>
+                    <div className={"container w-50 mt-5 mb-5"}> 
+                        <h3>Student Quarterly Reward Points</h3> 
+                            <form onSubmit={(e) => this.sendQuestions(e)}>
+                                <Form.Group>
+                                    <Form.Label>Select Year:</Form.Label>
+                                    <InputGroup>
+                                        <Form.Control as="select" required
+                                                    value={this.state.userType}
+                                                    onChange={(e) => this.handleUserTypeChange(e)}>
+                                            <option value=""> - </option>
+                                    
+                                            <option value="2022">2022</option>
+                                            <option value="2023">2023</option>
+                                        </Form.Control>
+                                    </InputGroup>
+                                </Form.Group>
 
-                                                        <Form.Group>
-                                                            <Form.Label>Select Quarter:</Form.Label>
-                                                            <InputGroup>
-                                                                <Form.Control as="select" required
-                                                                            value={this.state.userType1}
-                                                                            onChange={(e) => this.handleUserType1Change(e)}>
-                                                                    <option value=""> - </option>
-                                                            
-                                                                    <option value="1">Quarter 1</option>
-                                                                    <option value="2">Quarter 2</option>
-                                                                    <option value="3">Quarter 3</option>
-                                                                    <option value="4">Quarter 4</option>
-                                                                </Form.Control>
-                                                            </InputGroup>
-                                                        </Form.Group>
+                                <Form.Group>
+                                    <Form.Label>Select Quarter:</Form.Label>
+                                    <InputGroup>
+                                        <Form.Control as="select" required
+                                                    value={this.state.userType1}
+                                                    onChange={(e) => this.handleUserType1Change(e)}>
+                                            <option value=""> - </option>
+                                    
+                                            <option value="1">Quarter 1</option>
+                                            <option value="2">Quarter 2</option>
+                                            <option value="3">Quarter 3</option>
+                                            <option value="4">Quarter 4</option>
+                                        </Form.Control>
+                                    </InputGroup>
+                                </Form.Group>
 
-                                                    <div className="col-md-12 text-center mt-5">
-                                                        {/* <EventSelectionForRaffle
-                                                            onSelectEvent = {this.changeEventNameWith}
-                                                        /> */}
-                                                    
-                                                        <button className={"btn btn-primary mt-2 "}
-                                                            type="submit">Submit</button>
-                                                    </div>
-                                                </form>
+                            <div className="col-md-12 text-center mt-5">
+                                {/* <EventSelectionForRaffle
+                                    onSelectEvent = {this.changeEventNameWith}
+                                /> */}
+                            
+                                <button className={"btn btn-primary mt-2 "}
+                                    type="submit">Submit</button>
+                            </div>
+                            </form>
+                </div>
                 {/* <form onSubmit={(e) => this.showStatistics(e)}>
                     <div className="row">
                         <div className="col ">
@@ -217,9 +221,9 @@ class EventBarChartPoint extends Component {
                  </form> */}
 
 
-             <ul>
+             {/* <ul>
                   {this.state.pp.map(d => (<li key={d.firstName}>{d.lastName}</li>))} 
-            </ul>
+            </ul> */}
 
 
 
@@ -229,60 +233,45 @@ class EventBarChartPoint extends Component {
                 (
                 // <li key={d.firstName}>{d.lastName}</li>
                 
-                <MDBCol xl={4} lg={6} className='mb-4' key={d.firstName}>
+                <MDBCol xl={4} lg={6} className='mb-4'  key={d.name}>
                 <MDBCard>
                 <MDBCardBody>
-                    <div className='d-flex align-items-center'>
-                    <img
-                        src='https://mdbootstrap.com/img/new/avatars/8.jpg'
-                        alt=''
-                        style={{ width: '45px', height: '45px' }}
-                        className='rounded-circle'
-                    />
-                    <div className='ms-3'>
-                        <p className='fw-bold mb-1'>{d.lastName}</p>
-                        <p className='text-muted mb-0'>john.doe@gmail.com</p>
-                    </div>
+                    <div className='d-flex justify-content-between align-items-center'>
+                        <img
+                            src='https://mdbootstrap.com/img/new/avatars/8.jpg'
+                            alt=''
+                            style={{ width: '45px', height: '45px' }}
+                            className='rounded-circle'
+                        />
+                        <div className='ms-3 ml-1'>
+                            <p className='fw-bold mb-1'> {d.firstName} {d.lastName}</p>
+                            <p className='text-muted mb-0'>{d.email}</p>
+                        </div>
+                        <div className='ms-3'>
+                                <p className='fw-bold mb-1'>Grade</p>
+                                <p className='text-muted mb-0 ml-3'>{d.grade}</p>
+                        </div>
+                    
+                   
+                        <div className='d-flex'>
+                            <MDBBadge pill light className= 'ml-4 ms-2' color='success'>
+                                {d.totalPoint}
+                            </MDBBadge>
+                        </div>
                     </div>
                 </MDBCardBody>
                 </MDBCard>
-              </MDBCol>
-                
-                
-                
-                
-                
-                
+              </MDBCol> 
                 
                 ))} 
                  
-                 
-                 
-            <MDBCol xl={4} lg={6} className='mb-4'>
-                <MDBCard>
-                <MDBCardBody>
-                    <div className='d-flex align-items-center'>
-                    <img
-                        src='https://mdbootstrap.com/img/new/avatars/8.jpg'
-                        alt=''
-                        style={{ width: '45px', height: '45px' }}
-                        className='rounded-circle'
-                    />
-                    <div className='ms-3'>
-                        <p className='fw-bold mb-1'>John Doe</p>
-                        <p className='text-muted mb-0'>john.doe@gmail.com</p>
-                    </div>
-                    </div>
-                </MDBCardBody>
-                </MDBCard>
-            </MDBCol>
             </MDBRow>
                  
-                {(isOpenedEventBarChart) ?
+                {/* {(isOpenedEventBarChart) ?
                     <EventBarChart
                         labels = {this.state.eventNames}
                         label = "Total Reward Points"
-                        data = {this.state.participationCountsOfEvents}/> : null}
+                        data = {this.state.participationCountsOfEvents}/> : null} */}
                 {/* {(isOpenedEventBarChart) ?
                     <EventBarChart
                         labels = {this.state.participationDates}

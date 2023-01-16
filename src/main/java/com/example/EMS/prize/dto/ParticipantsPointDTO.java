@@ -44,7 +44,10 @@ public class ParticipantsPointDTO {
     @JsonProperty("phone")
     public final String phone;
 
-    public ParticipantsPointDTO(String userName, String lastName, String firstName, int quarter, int grade, String imageUrl, int totalPoint, int participantId, String awardType, String phone) {
+    @JsonProperty("email")
+    public final String email;
+
+    public ParticipantsPointDTO(String userName, String lastName, String firstName, int quarter, int grade, String imageUrl, int totalPoint, int participantId, String awardType, String phone, String email) {
         this.userName = userName;
         this.lastName = lastName;
         this.firstName = firstName;
@@ -55,5 +58,6 @@ public class ParticipantsPointDTO {
         this.participantId = participantId;
         this.awardType = awardType;
         this.phone = phone;
+        this.email = email;
     }
 }

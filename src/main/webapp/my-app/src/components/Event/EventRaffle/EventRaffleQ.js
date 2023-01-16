@@ -36,6 +36,7 @@ class EventRaffleQ extends Component {
             { title: 'Grade', field: 'grade'},
             {title : 'Total Points', field : 'totalPoint'},
         ],
+        doShow: false,
        
     }
 
@@ -91,12 +92,16 @@ class EventRaffleQ extends Component {
             }).catch(err => {
                 this.props.history.push('/notFound404');
             });
+
+            
             this.setState({
-                pp : response.data
+                pp : response.data,
+                doShow : response.data.length > 0 ? true : false
+
             })
 
     }
-    
+
     findIndexOfEvent = (selectedEventName) => {
         const {nonRaffledEvents} = this.state;
         return nonRaffledEvents.findIndex(event => event.name === selectedEventName);
@@ -253,34 +258,40 @@ class EventRaffleQ extends Component {
                             type="submit">Draw Raffle Winner!</button>
                     </div>
                 </form>
-                <div  className={"mt-5 ml-5 mr-5"}>
-                <MaterialTable
-                    title={<Typography variant="h4" component="h5">
-                        Winners of top point accumulator
-                    </Typography>}
-                    columns={this.state.columns}
-                    data = {this.state.pp.slice(0, 4)}
-                    // actions = {[ {
-                    //     icon : 'info',
-                    //     tooltip: 'Click for event information',
-                    //     onClick: ( e,rowData ) => this.goToEventPage(e,rowData.name)
-                    // }]}
-                ></MaterialTable>
-            </div>
-            <div  className={"mt-5 ml-5 mr-5"}>
-                <MaterialTable
-                    title={<Typography variant="h4" component="h5">
-                        Winners of quarterly raffle drawing
-                    </Typography>}
-                    columns={this.state.columns}
-                    data = {this.state.pp.slice(4, 9) }
-                    // actions = {[ {
-                    //     icon : 'info',
-                    //     tooltip: 'Click for event information',
-                    //     onClick: ( e,rowData ) => this.goToEventPage(e,rowData.name)
-                    // }]}
-                ></MaterialTable>
-            </div>
+               {this.state.doShow ? 
+                 <>
+                    <div  className={"mt-5 ml-5 mr-5"}>
+                        <MaterialTable
+                            title={<Typography variant="h4" component="h5">
+                                Winners of top point accumulator
+                            </Typography>}
+                            columns={this.state.columns}
+                            data = {this.state.pp.slice(0, 4)}
+                            // actions = {[ {
+                            //     icon : 'info',
+                            //     tooltip: 'Click for event information',
+                            //     onClick: ( e,rowData ) => this.goToEventPage(e,rowData.name)
+                            // }]}
+                        ></MaterialTable>
+                    </div>
+                    <div  className={"mt-5 ml-5 mr-5"}>
+                        <MaterialTable
+                            title={<Typography variant="h4" component="h5">
+                                Winners of quarterly raffle drawing
+                            </Typography>}
+                            columns={this.state.columns}
+                            data = {this.state.pp.slice(4, 9) }
+                            // actions = {[ {
+                            //     icon : 'info',
+                            //     tooltip: 'Click for event information',
+                            //     onClick: ( e,rowData ) => this.goToEventPage(e,rowData.name)
+                            // }]}
+                        ></MaterialTable>
+                    </div>
+                    </>
+                : null}
+
+
                 {isOpenBackdrop ? <SimpleBackdrop
                                     handleOpen = {isOpenBackdrop}
                                     handleClose = {this.closeBackdrop}>

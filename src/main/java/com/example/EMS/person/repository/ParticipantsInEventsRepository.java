@@ -61,7 +61,7 @@ public interface ParticipantsInEventsRepository
                     "WHERE " +
                     " extract(year from end_date) = :year" +
                     " and extract(quarter from end_date) = :quarter" +
-                    " group by username, participant_id, grade, surname, p.name, email, phone ",
+                    " group by username, participant_id, grade, surname, p.name, email, phone order by grade, totalPoint",
             nativeQuery = true)
     @Transactional
     List<ParticipantsPoint> getParticipantsPointByYearQuarter(@Param("year")Integer year, @Param("quarter")Integer quarter);
