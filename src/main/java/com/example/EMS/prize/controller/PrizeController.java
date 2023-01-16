@@ -85,31 +85,16 @@ public class PrizeController {
         return participantsPointTOs;
     }
 
-    @GetMapping("/prize/{year}/{quarter}")
-    @PreAuthorize("hasAuthority('ORGANIZER')")
-//    public List<ParticipantsPrizeDTO> generateQuarterPrizeWinner(@PathVariable int year,
-//                                                                  @PathVariable int quarter) {
-    public List<ParticipantsPointDTO> generateQuarterPrizeWinner(@PathVariable int year,
-                                                                 @PathVariable int quarter) {
-        final List<ParticipantsPoint> participantsPoints = participantsPrizeService.generateQuarterPrizeWinner(year, quarter);
+    @GetMapping("/prize/{year}/{quarter}/{save}")
+//    @PreAuthorize("hasAuthority('ORGANIZER')")
+    public List<ParticipantsPointDTO> generateQuarterPrizeWinner(@PathVariable String year,
+                                                                 @PathVariable String quarter,  @PathVariable String save) {
+        final List<ParticipantsPoint> participantsPoints = participantsPrizeService.generateQuarterPrizeWinner(Integer.parseInt(year),
+                Integer.parseInt(quarter), Boolean.parseBoolean(save));
 
 //        final List<ParticipantsPointDTO> participantsPointTOs = participantsPointMapper.mapToDto(participantsPoints);
-//
-//        for (int i = 0; i < participantsPointTOs.size(); i++){
-//
-//            ParticipantsPointDTO pto = participantsPointTOs.get(i);
-//            List<Prize> prizes = prizeService.getPrizesOfParticipant(new Participant());
-//
-//        }
 
-
-//        final List<ParticipantsPrize> participantsPrizes = prizeService.getPrizesOfParticipant();
-//
-//        final ParticipantsPrize participantPrize = participantService.getPrizeInfoForParticipant(prizeName,
-//                username);
-
-
-        return null;
+        return participantsPointMapper.mapToDto(participantsPoints);
     }
 
 

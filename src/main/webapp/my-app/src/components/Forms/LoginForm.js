@@ -49,7 +49,7 @@ class LoginForm extends Component {
             setTimeout(() => {
                 this.goToEventsPage();
                 dispatch({ type: 'jwtToken', payload: response.data.jwtToken });
-            }, 3000);
+            }, 2000);
 
         }
 

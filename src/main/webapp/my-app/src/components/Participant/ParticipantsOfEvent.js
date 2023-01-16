@@ -7,10 +7,11 @@ class ParticipantsOfEvent extends Component {
         columns: [
             { title: 'First Name', field: 'name' },
             { title: 'Last Name', field: 'surname'},
-            { title: 'School ID', field: 'schoolId'},
-            {title : 'Username', field : 'username'},
+            { title: 'Grade', field: 'grade'},
+            {title : 'Email', field : 'email'},
         ],
         participants : [],
+        eventName: ''
     }
 
     componentDidMount = () =>{
@@ -27,24 +28,27 @@ class ParticipantsOfEvent extends Component {
             this.props.history.push('/notFound404');
         });
         this.setState({
-            participants : response.data
+            participants : response.data,
+            eventName: eventName
         })
     }
 
     render() {
+       
+
         return (
-            <div  className={"container w-75 mt-5"}>
+            <div  className={"mr-5 ml-5 mt-5"}>
                 <MaterialTable
                     title={<Typography variant="h4" component="h5">
-                        User List
+                       {this.state.eventName} Participant List
                     </Typography>}
                     columns={this.state.columns}
                     data = {this.state.participants}
-                    actions = {[ {
-                            icon : 'info',
-                            tooltip: 'See the users information and questions answered about the event' +
-                                'click for',
-                    }]}
+                    // actions = {[ {
+                    //         icon : 'info',
+                    //         tooltip: 'See the users information and questions answered about the event' +
+                    //             'click for',
+                    // }]}
                     ></MaterialTable>
             </div>
         );

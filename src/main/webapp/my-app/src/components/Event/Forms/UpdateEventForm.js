@@ -269,7 +269,7 @@ class UpdateEventForm extends Component {
                                                           onChange={this.updateInput}/>
                                         </Form.Group> */}
                                         <Form.Group >
-                                            <Form.Label>Address</Form.Label>
+                                            <Form.Label>Location</Form.Label>
                                             <Form.Control type="address" placeholder="Address"
                                                           required
                                                           id = "address"
@@ -278,7 +278,7 @@ class UpdateEventForm extends Component {
                                                           onChange={this.updateInput}/>
                                         </Form.Group>
 
-                                        <Form.Group >
+                                        {/* <Form.Group >
                                             <Form.Label>City</Form.Label>
                                             <Form.Control type="city" placeholder="City"
                                                           required
@@ -296,9 +296,9 @@ class UpdateEventForm extends Component {
                                                           value = {this.state.state}
                                                           name = "state"
                                                           onChange={this.updateInput}/>
-                                        </Form.Group>
+                                        </Form.Group> */}
 
-                                        <Form.Group >
+                                        {/* <Form.Group >
                                             <Form.Label>Zip</Form.Label>
                                             <Form.Control type="zip" placeholder="Zip"
                                                           required
@@ -306,7 +306,7 @@ class UpdateEventForm extends Component {
                                                           value = {this.state.address}
                                                           name = "zip"
                                                           onChange={this.updateInput}/>
-                                        </Form.Group>
+                                        </Form.Group> */}
 
                                         <Button variant="primary" type="submit"
                                                 disabled = {this.state.isDisable}

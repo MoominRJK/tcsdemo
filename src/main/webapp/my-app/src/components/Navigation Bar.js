@@ -1,8 +1,20 @@
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 import {Navbar, Nav,Button,Form,FormControl} from 'react-bootstrap'
 import {Link,NavLink} from 'react-router-dom';
 import Consumer from '../components/ContextAPI/Context';
 import {isOrganizator, isLogin, isParticipant} from "../Authentication";
+
+import {
+    MDBNavbar,
+    MDBContainer,
+    MDBIcon,
+    MDBNavbarNav,
+    MDBNavbarItem,
+    MDBNavbarLink,
+    MDBNavbarToggler,
+    MDBNavbarBrand,
+    MDBCollapse
+  } from 'mdb-react-ui-kit';
 class NavigationBar extends Component {
 
 
@@ -18,13 +30,49 @@ class NavigationBar extends Component {
             fontSize: "15px"
         }
 
+
         return (
             <Consumer>
                 {
                     value => {
                         const {dispatch,username,authorities} = value;
                         return(
-                            <div>
+                            
+                            // <MDBNavbar sticky expand='lg' dark style = {navbar} >
+                            //     <MDBContainer fluid>
+                            //     <MDBNavbarBrand href='/'>[SEAS] School Event Award System</MDBNavbarBrand>
+                            //     <MDBNavbarToggler
+                            //         type='button'
+                            //         data-target='#navbarColor02'
+                            //         aria-controls='navbarColor02'
+                            //         aria-expanded='false'
+                            //         aria-label='Toggle navigation'
+                                   
+                            //     >
+                            //     <MDBIcon icon='bars' fas />
+                            //     </MDBNavbarToggler>
+                            //     <MDBCollapse  navbar>
+                            //         <MDBNavbarNav className='me-auto mb-2 mb-lg-0'>
+                            //         <MDBNavbarItem className='active'>
+                            //         { isLogin() ?  <MDBNavbarLink aria-current='page' href='#'>
+                            //             Home
+                            //             </MDBNavbarLink>  : null}
+                            //         </MDBNavbarItem>
+                            //         <MDBNavbarItem>
+                            //             <MDBNavbarLink href='/login'>Features</MDBNavbarLink>
+                            //         </MDBNavbarItem>
+                            //         <MDBNavbarItem>
+                            //             <MDBNavbarLink href='#'>Pricing</MDBNavbarLink>
+                            //         </MDBNavbarItem>
+                            //         <MDBNavbarItem>
+                            //             <MDBNavbarLink href='#'>About</MDBNavbarLink>
+                            //         </MDBNavbarItem>
+                            //         </MDBNavbarNav>
+                            //     </MDBCollapse>
+                            //     </MDBContainer>
+                            // </MDBNavbar>
+
+
                             <Navbar style = {navbar}  className = {"p-3"} variant = "dark">
                                 <Navbar.Brand href="/">[SEAS] School Event Award System</Navbar.Brand>
                                 <Link className = {isLogin() ? "nav-item text-white ml-5": "d-none"}>
@@ -37,6 +85,8 @@ class NavigationBar extends Component {
                                                 to ={"/events"} >Events </Link>
                                             {  isOrganizator() ? <Link className ="nav-link"
                                                 to = {"/raffle"}>Raffle Drawing</Link> : null}
+                                            {  isOrganizator() ? <Link className ="nav-link"
+                                                to = {"/raffleQ"}>Q Raffle Drawing</Link> : null}
                                             {  isOrganizator() ? <Link className ="nav-link"
                                                 to = {"/chart"}>Charts</Link> : null}
                                             { isOrganizator() ? <Link className ="nav-link"
@@ -60,7 +110,8 @@ class NavigationBar extends Component {
 
                                 </Form>
                             </Navbar>
-                            </div>
+
+                      
                         );
                     }
                 }

@@ -93,30 +93,31 @@ class EventStatistics extends Component {
         return (
             <div className={"container w-75 mt-5"}>
                 <form onSubmit={(e) => this.showStatistics(e)}>
-                    <div className="row">
-                        <div className="col ">
-                            {statisticsType === "showGraphicsWithParticipationDate" ?
-                                <EventSelectionForStatistics
-                                    onSelectEvent = {this.changeEventNameWith}/> : null }
-                        </div>
+                    {/* <div className="row"> */}
+                    
                         <div className="col">
                             <InputGroup>
                                 <Form.Control as="select" required
                                               value={statisticsType}
                                               onChange={(e) => this.handleEventStatisticsChoice(e)}>
-                                    <option value="">Create chart</option>
-                                    <option value="showGraphicsWithParticipationCount">Number of Participants pe</option>
-                                    <option value="showGraphicsWithParticipationDate">Show by Date of Applications Made to the Event</option>
+                                    <option value="">Select chart</option>
+                                    <option value="showGraphicsWithParticipationCount">Event Participants Count</option>
+                                    <option value="showGraphicsWithParticipationDate">Event registered participants</option>
                                 </Form.Control>
                             </InputGroup>
                         </div>
-                    </div>
+                        <div className="col mt-3 ">
+                            {statisticsType === "showGraphicsWithParticipationDate" ?
+                                <EventSelectionForStatistics
+                                    onSelectEvent = {this.changeEventNameWith}/> : null }
+                        </div>
+                    {/* </div> */}
                     <div className="col-md-12 text-center mt-5 mb-5">
                         <button type="submit"
                                 className="btn btn-primary">show chart</button>
 
                     </div>
-            </form>
+               </form>
                 {(isOpenedEventBarChart  && statisticsType === "showGraphicsWithParticipationCount") ?
                     <EventBarChart
                         labels = {this.state.eventNames}

@@ -33,6 +33,7 @@ export const getEvent = async (eventName) => {
     return response;
 }
 
+
 export const getEventInformationForParticipant = async (eventName,username) => {
 
     const response = await axios.get(`/${username}/and/${eventName}/information`, {

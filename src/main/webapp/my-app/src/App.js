@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect,browserHistory} from '
 import Events from "./components/Event/Events";
 import Login from "./components/Login";
 import Home from "./components/Home";
+import Footer from "./components/Footer";
 import NavigationBar from "./components/Navigation Bar";
 import NotFound from "./components/static/NotFound";
 import RegisterForm from "./components/Forms/RegisterForm";
@@ -19,6 +20,7 @@ import EventStatistics from "./components/Event/StatisticsOfEvent/EventStatistic
 import EventBarChartPoint from "./components/Event/StatisticsOfEvent/EventBarChartPoint";
 import EventBarMyPoint from "./components/Event/StatisticsOfEvent/EventBarMyPoint";
 import EventRaffle from "./components/Event/EventRaffle/EventRaffle";
+import EventRaffleQ from "./components/Event/EventRaffle/EventRaffleQ";
 import ParticipantAnswers from "./components/Participant/ParticipantAnswers";
 import EventSurveyForm from "./components/Event/Forms/EventSurveyForm";
 import SurveyStatistics from "./components/Event/EventInformation/EventSurvey/SurveyStatistics";
@@ -49,6 +51,7 @@ class App extends Component {
                     <OrganizatorRoute exact path={"/events/:username"} component={AddEventForm}/>
                     <OrganizatorRoute exact path = {"/survey"} component ={SurveyStatistics}/>
                     <OrganizatorRoute exact path={"/raffle"} component={EventRaffle}/>
+                    <OrganizatorRoute exact path={"/raffleQ"} component={EventRaffleQ}/>
                     <OrganizatorRoute exacth path ={"/participants/:eventName"} component ={ParticipantsOfEvent}/>
                     <OrganizatorRoute exact path ={"/event/:eventName/addQuestion"} component = {EventQuestionsForm}/>
                     <OrganizatorRoute exact path = {"/createSurvey/:eventName"} component={EventSurveyForm}/>
@@ -60,6 +63,7 @@ class App extends Component {
                                       component ={InformationInsideOfQrCode}/>
                    <Route component={NotFound}/>
                 </Switch>
+                <Footer/>
             </Router>
             // </div>
         );

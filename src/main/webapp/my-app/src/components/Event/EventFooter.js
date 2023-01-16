@@ -57,8 +57,6 @@ class EventFooter extends Component {
                     {this.isEventFull() ? 'The quota for this event is full.' : null }
                     {(!this.isEventFull() && isParticipant() && isJoinedBefore) ? 'You participated in this event' : null}
                 </p>
-
-
             </div>
         );
     }

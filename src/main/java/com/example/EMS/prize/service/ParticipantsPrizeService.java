@@ -101,7 +101,7 @@ public class ParticipantsPrizeService {
 
 
     @Transactional
-    public List<ParticipantsPoint> generateQuarterPrizeWinner(int year, int quarter) {
+    public List<ParticipantsPoint> generateQuarterPrizeWinner(int year, int quarter, boolean save) {
         List<ParticipantsPoint> participantsPoints = participantsInEventsRepository.getParticipantsPointByYearQuarter(year, quarter);
 
         List<ParticipantsPoint> topPointWinners = new ArrayList<>();
@@ -113,39 +113,64 @@ public class ParticipantsPrizeService {
                 .filter(p -> p.getGrade().equals(9)).max(comparator).stream().collect(Collectors.toList());
         if(winner9thGradeTop.size() == 1){
             ParticipantsPoint pp = winner9thGradeTop.get(0);
-            this.addParticipantToPrize(pp.getParticipantId(), year, quarter, pp.getGrade(),"Top");
+            if(save) {
+                this.addParticipantToPrize(pp.getParticipantId(), year, quarter, pp.getGrade(), "Top");
+            }
             topPointWinners.add(winner9thGradeTop.get(0));
         } else {
             int randomValue = new Random().nextInt(winner9thGradeTop.size() + 1);
-            this.addParticipantToPrize(winner9thGradeTop.get(randomValue).getParticipantId(), year, quarter, winner9thGradeTop.get(0).getGrade(),"Top");
+            if(save) {
+                this.addParticipantToPrize(winner9thGradeTop.get(randomValue).getParticipantId(), year, quarter, winner9thGradeTop.get(randomValue).getGrade(), "Top");
+            }
             topPointWinners.add(winner9thGradeTop.get(randomValue));
         }
 
         List<ParticipantsPoint> winner10thGradeTop = participantsPoints.stream()
                 .filter(p -> p.getGrade().equals(10)).max(comparator).stream().collect(Collectors.toList());
-        if(winner9thGradeTop.size() == 1){
-            this.addParticipantToPrize(winner10thGradeTop.get(0).getParticipantId(), year, quarter, winner10thGradeTop.get(0).getGrade(),"Top");
+        if(winner10thGradeTop.size() == 1){
+            ParticipantsPoint pp = winner10thGradeTop.get(0);
+            if(save) {
+                this.addParticipantToPrize(pp.getParticipantId(), year, quarter, pp.getGrade(), "Top");
+            }
+            topPointWinners.add(winner10thGradeTop.get(0));
         } else {
             int randomValue = new Random().nextInt(winner10thGradeTop.size() + 1);
-            this.addParticipantToPrize(winner10thGradeTop.get(randomValue).getParticipantId(), year, quarter, winner10thGradeTop.get(randomValue).getGrade(),"Top");
+            if(save) {
+                this.addParticipantToPrize(winner10thGradeTop.get(randomValue).getParticipantId(), year, quarter, winner10thGradeTop.get(randomValue).getGrade(), "Top");
+            }
+            topPointWinners.add(winner10thGradeTop.get(randomValue));
         }
 
         List<ParticipantsPoint> winner11thGradeTop = participantsPoints.stream()
                 .filter(p -> p.getGrade().equals(11)).max(comparator).stream().collect(Collectors.toList());
         if(winner11thGradeTop.size() == 1){
-            this.addParticipantToPrize(winner11thGradeTop.get(0).getParticipantId(), year, quarter, winner11thGradeTop.get(0).getGrade(),"Top");
+            ParticipantsPoint pp = winner11thGradeTop.get(0);
+            if(save) {
+                this.addParticipantToPrize(pp.getParticipantId(), year, quarter, pp.getGrade(), "Top");
+            }
+            topPointWinners.add(winner11thGradeTop.get(0));
         } else {
             int randomValue = new Random().nextInt(winner11thGradeTop.size() + 1);
-            this.addParticipantToPrize(winner11thGradeTop.get(randomValue).getParticipantId(), year, quarter, winner11thGradeTop.get(randomValue).getGrade(),"Top");
+            if(save) {
+                this.addParticipantToPrize(winner11thGradeTop.get(randomValue).getParticipantId(), year, quarter, winner11thGradeTop.get(randomValue).getGrade(), "Top");
+            }
+            topPointWinners.add(winner11thGradeTop.get(randomValue));
         }
         //For 12
         List<ParticipantsPoint> winner12thGradeTop = participantsPoints.stream()
                 .filter(p -> p.getGrade().equals(12)).max(comparator).stream().collect(Collectors.toList());
-        if(winner9thGradeTop.size() == 1){
-            this.addParticipantToPrize(winner12thGradeTop.get(0).getParticipantId(), year, quarter, winner12thGradeTop.get(0).getGrade(),"Top");
+        if(winner12thGradeTop.size() == 1){
+            ParticipantsPoint pp = winner12thGradeTop.get(0);
+            if(save) {
+                this.addParticipantToPrize(pp.getParticipantId(), year, quarter, pp.getGrade(), "Top");
+            }
+            topPointWinners.add(winner12thGradeTop.get(0));
         } else {
             int randomValue = new Random().nextInt(winner12thGradeTop.size() + 1);
-            this.addParticipantToPrize(winner12thGradeTop.get(randomValue).getParticipantId(), year, quarter, winner12thGradeTop.get(randomValue).getGrade(),"Top");
+            if(save) {
+                this.addParticipantToPrize(winner12thGradeTop.get(randomValue).getParticipantId(), year, quarter, winner12thGradeTop.get(randomValue).getGrade(), "Top");
+            }
+            topPointWinners.add(winner9thGradeTop.get(randomValue));
         }
 
 
@@ -157,38 +182,61 @@ public class ParticipantsPrizeService {
         List<ParticipantsPoint> winner9thGrade = excludeTopWinner.stream()
                 .filter(p -> p.getGrade().equals(9)).collect(Collectors.toList());
         if(winner9thGrade.size() == 1){
-            this.addParticipantToPrize(winner9thGrade.get(0).getParticipantId(), year, quarter, winner9thGrade.get(0).getGrade(),"Raffle");
+            if(save) {
+                this.addParticipantToPrize(winner9thGrade.get(0).getParticipantId(), year, quarter, winner9thGrade.get(0).getGrade(), "Raffle");
+            }
+            topPointWinners.add(winner9thGrade.get(0));
         } else {
             int randomValue = new Random().nextInt(winner9thGrade.size() );
-            gradeWinners.add(winner9thGrade.get(randomValue));
-            this.addParticipantToPrize(winner9thGrade.get(randomValue).getParticipantId(), year, quarter,winner9thGrade.get(randomValue).getGrade(),"Raffle");
+            if(save) {
+                this.addParticipantToPrize(winner9thGrade.get(randomValue).getParticipantId(), year, quarter,winner9thGrade.get(randomValue).getGrade(),"Raffle");
+            }
+            topPointWinners.add(winner9thGrade.get(randomValue));
         }
 
         List<ParticipantsPoint> winner10thGrade = excludeTopWinner.stream()
                 .filter(p -> p.getGrade().equals(10)).collect(Collectors.toList());
         if(winner10thGrade.size() == 1){
-            this.addParticipantToPrize(winner10thGrade.get(0).getParticipantId(), year, quarter, winner10thGrade.get(0).getGrade(),"Raffle");
+            if(save) {
+                this.addParticipantToPrize(winner10thGrade.get(0).getParticipantId(), year, quarter, winner10thGrade.get(0).getGrade(), "Raffle");
+            }
+            topPointWinners.add(winner10thGrade.get(0));
         } else {
             int randomValue = new Random().nextInt(winner10thGrade.size() );
-            this.addParticipantToPrize(winner10thGrade.get(randomValue).getParticipantId(), year, quarter,winner10thGrade.get(randomValue).getGrade(),"Raffle");
+            if(save) {
+                this.addParticipantToPrize(winner10thGrade.get(randomValue).getParticipantId(), year, quarter,winner10thGrade.get(randomValue).getGrade(),"Raffle");
+            }
+            topPointWinners.add(winner10thGrade.get(randomValue));
         }
 
         List<ParticipantsPoint> winner11thGrade = excludeTopWinner.stream()
                 .filter(p -> p.getGrade().equals(11)).collect(Collectors.toList());
         if(winner11thGrade.size() == 1){
-            this.addParticipantToPrize(winner11thGrade.get(0).getParticipantId(), year, quarter, winner11thGrade.get(0).getGrade(),"Raffle");
+            if(save) {
+                this.addParticipantToPrize(winner11thGrade.get(0).getParticipantId(), year, quarter, winner11thGrade.get(0).getGrade(), "Raffle");
+            }
+            topPointWinners.add(winner11thGrade.get(0));
         } else {
             int randomValue = new Random().nextInt(winner11thGrade.size() );
-            this.addParticipantToPrize(winner11thGrade.get(randomValue).getParticipantId(), year, quarter,winner11thGrade.get(randomValue).getGrade(),"Raffle");
+            if(save) {
+                this.addParticipantToPrize(winner11thGrade.get(randomValue).getParticipantId(), year, quarter,winner11thGrade.get(randomValue).getGrade(),"Raffle");
+            }
+            topPointWinners.add(winner11thGrade.get(randomValue));
         }
         //For 12
         List<ParticipantsPoint> winner12thGrade = excludeTopWinner.stream()
                 .filter(p -> p.getGrade().equals(12)).collect(Collectors.toList());
-        if(winner12thGrade.size() == 1){
-            this.addParticipantToPrize(winner12thGrade.get(0).getParticipantId(), year, quarter, winner12thGrade.get(0).getGrade(),"Raffle");
+        if(winner9thGrade.size() == 1){
+            if(save) {
+                this.addParticipantToPrize(winner12thGrade.get(0).getParticipantId(), year, quarter, winner12thGrade.get(0).getGrade(), "Raffle");
+            }
+            topPointWinners.add(winner12thGrade.get(0));
         } else {
             int randomValue = new Random().nextInt(winner12thGrade.size() );
-            this.addParticipantToPrize(winner12thGrade.get(randomValue).getParticipantId(), year, quarter,winner12thGrade.get(randomValue).getGrade(),"Raffle");
+            if(save) {
+                this.addParticipantToPrize(winner12thGrade.get(randomValue).getParticipantId(), year, quarter,winner12thGrade.get(randomValue).getGrade(),"Raffle");
+            }
+            topPointWinners.add(winner12thGrade.get(randomValue));
         }
 
 

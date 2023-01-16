@@ -28,7 +28,7 @@ class ParticipantsPrizeServiceTest {
     @Transactional
     @Rollback(true)
     void generateQuarterPrizeWinner() {
-        List<ParticipantsPoint> a =  participantsPrizeService.generateQuarterPrizeWinner(2022, 4);
+        List<ParticipantsPoint> a =  participantsPrizeService.generateQuarterPrizeWinner(2022, 4, false);
 
         System.out.println(a);
     }

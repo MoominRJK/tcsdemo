@@ -32,29 +32,9 @@ public class EventDTO {
     @NotBlank(message ="Address must not be blank")
     public final String address;
 
-    @JsonProperty("city")
-    @NotBlank(message ="City must not be blank")
-    public final String city;
-
-    @JsonProperty("state")
-    @NotBlank(message ="State must not be blank")
-    public final String state;
-
-    @JsonProperty("zip")
-    @NotBlank(message ="Zip must not be blank")
-    public final String zip;
-
-    @JsonProperty("point")
-    @Min(value = 1, message = "The award point must be created for at least 1 point")
-    public final int point;
-
     @JsonProperty("quota")
     @Min(value = 1, message = "The event must be created for at least 1 quota")
     public final int quota;
-
-    @JsonProperty("eventType")
-    @Min(value = 1, message = "The event must have an event type")
-    public final int eventType;
 
     @JsonProperty("longitude")
     public final double longitude;
@@ -69,6 +49,31 @@ public class EventDTO {
     @JsonProperty("raffleWinnerUsername")
     public final String raffleWinnerUsername;
 
+    @JsonProperty("city")
+    @NotBlank(message ="City must not be blank")
+    public final String city;
+
+    @JsonProperty("state")
+    @NotBlank(message ="State must not be blank")
+    public final String state;
+
+    @JsonProperty("zip")
+    @NotBlank(message ="Zip must not be blank")
+    public final String zip;
+
+    @JsonProperty("googleLoc")
+    public final String googleLoc;
+
+    @JsonProperty("point")
+    @Min(value = 1, message = "The award point must be created for at least 1 point")
+    public final int point;
+
+    @JsonProperty("eventType")
+    @Min(value = 1, message = "The event must have an event type")
+    public final int eventType;
+
+    @JsonProperty("imageUrl")
+    public final String imageUrl;
     @JsonProperty("organizator")
     public final int organizatorId;
 
@@ -77,7 +82,6 @@ public class EventDTO {
 
     @JsonProperty("eventQuestions")
     public final Set<EventQuestionsDTO> eventQuestions;
-
     @JsonProperty("participantsInEvents")
     public final Set<ParticipantsInEventsDTO> participantsInEventsDTO;
 
@@ -90,16 +94,18 @@ public class EventDTO {
                     @JsonProperty("startDate") LocalDate startDate,
                     @JsonProperty("endDate") LocalDate endDate,
                     @JsonProperty("address") String address,
-                    @JsonProperty("city") String city,
-                    @JsonProperty("state") String state,
-                    @JsonProperty("zip") String zip,
-                    @JsonProperty("eventType") int eventType,
-                    @JsonProperty("point") int point,
                     @JsonProperty("quota") int quota,
                     @JsonProperty("longitude")  double longitude,
                     @JsonProperty("latitude")  double latitude,
                     @JsonProperty("currentNumberOfPeople")  int currentNumberOfPeople,
                     @JsonProperty("raffleWinnerUsername") String raffleWinnerUsername,
+                    @JsonProperty("city") String city,
+                    @JsonProperty("state") String state,
+                    @JsonProperty("zip") String zip,
+                    @JsonProperty("googleLoc") String googleLoc,
+                    @JsonProperty("point") int point,
+                    @JsonProperty("eventType") int eventType,
+                    @JsonProperty("imageUrl") String imageUrl,
                     @JsonProperty("organizator")  int organizatorId,
                     @JsonProperty("lecturer")  String lecturerUsername,
                     @JsonProperty("eventQuestions") Set<EventQuestionsDTO> eventQuestions,
@@ -124,6 +130,8 @@ public class EventDTO {
         this.state = state;
         this.zip = zip;
         this.eventType = eventType;
+        this.googleLoc = googleLoc;
+        this.imageUrl = imageUrl;
     }
 
 }
