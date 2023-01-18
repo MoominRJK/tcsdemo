@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 // import './App.css';
 import { BrowserRouter as Router, Route, Switch, Redirect,browserHistory} from 'react-router-dom';
 import Events from "./components/Event/Events";
+import EventsAdmin from "./components/Event/EventsAdmin";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import Footer from "./components/Footer";
@@ -15,6 +16,8 @@ import AddEventForm from "./components/Event/Forms/AddEventForm";
 import EventQuestionsForm from './components/Event/Forms/EventQuestionsForm'
 import ParticipantEvents from "./components/Participant/ParticipantEvents";
 import Event from './components/Event/Event'
+import EventAdmin from './components/Event/EventAdmin'
+import Prize from './components/Prize/Prize'
 import ParticipantsOfEvent from "./components/Participant/ParticipantsOfEvent";
 import EventStatistics from "./components/Event/StatisticsOfEvent/EventStatistics";
 import EventBarChartPoint from "./components/Event/StatisticsOfEvent/EventBarChartPoint";
@@ -45,7 +48,10 @@ class App extends Component {
                     <Route exact path  ={"/"} component ={Home}/>
                     <Route exact path = {"/login"} component ={Login}/>
                     <Route exact path = {"/register"} component= {RegisterForm}/>
+                    <PrivateRoute exact path={"/eventsAdmin"} component={EventsAdmin}/>
                     <PrivateRoute exact path={"/events"} component={Events}/>
+                    
+                    <PrivateRoute exact path={"/eventAdmin/:eventName"} component={EventAdmin}/>
                     <PrivateRoute exact path={"/event/:eventName"} component={Event}/>
                     <OrganizatorRoute exact path ={"/chart"} component = {EventStatistics}/>
                     <OrganizatorRoute exact path={"/events/:username"} component={AddEventForm}/>
@@ -56,6 +62,7 @@ class App extends Component {
                     <OrganizatorRoute exact path ={"/event/:eventName/addQuestion"} component = {EventQuestionsForm}/>
                     <OrganizatorRoute exact path = {"/createSurvey/:eventName"} component={EventSurveyForm}/>
                     <OrganizatorRoute exact path ={"/report"} component={EventBarChartPoint}/>
+                    <OrganizatorRoute exact path ={"/allPrize"} component={Prize}/>
                     <ParticipantRoute exact path = {"/participantAnswersOf/:eventName"} component = {ParticipantAnswers}/>
                     <ParticipantRoute exact path ={"/myEvents/:username"} component={ParticipantEvents}/>
                     <ParticipantRoute exact path ={"/myReport/:username"} component={EventBarMyPoint}/>

@@ -81,8 +81,12 @@ class NavigationBar extends Component {
                                             { !isLogin() ? <Link className ="nav-link" to = {"/login"}>Sign In</Link> : null}
                                             { !isLogin() ? <Link className ="nav-link" to = {"/register"}>Sign Up</Link> : null}
                                                                     
-                                            <Link className = {isLogin() ? "nav-link": "d-none"}
-                                                to ={"/events"} >Events </Link>
+                                            {/* <Link className = {isLogin() ? "nav-link": "d-none"}
+                                                to ={"/events"} >Events </Link> */}
+                                            {  isParticipant() ? <Link className ="nav-link"
+                                                to = {"/events"}>Events</Link> : null}
+                                            {  isOrganizator() ? <Link className ="nav-link"
+                                                to = {"/eventsAdmin"}>Manage Events</Link> : null}
                                             {  isOrganizator() ? <Link className ="nav-link"
                                                 to = {"/raffle"}>Raffle Drawing</Link> : null}
                                             {  isOrganizator() ? <Link className ="nav-link"
@@ -91,6 +95,8 @@ class NavigationBar extends Component {
                                                 to = {"/chart"}>Charts</Link> : null}
                                             { isOrganizator() ? <Link className ="nav-link"
                                                to = {"/report"}>Report</Link> : null}
+                                            { isOrganizator() ? <Link className ="nav-link"
+                                               to = {"/allPrize"}>Prize</Link> : null}
 
                                             {/* { isOrganizator() ? <Link className ="nav-link"
                                                 to = {"/survey"}>Surveys</Link> : null} */}

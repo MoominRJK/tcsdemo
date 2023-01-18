@@ -1,5 +1,6 @@
 package com.example.EMS.prize.service;
 
+import com.example.EMS.event.entity.Event;
 import com.example.EMS.person.entity.Participant;
 import com.example.EMS.person.repository.ParticipantRepository;
 import com.example.EMS.prize.entity.ParticipantsPrize;
@@ -28,6 +29,11 @@ public class PrizeService {
 
         prizeRepository.save(prize);
     }
+
+    public List<Prize> getAllPrizes() {
+        return prizeRepository.findAll();
+    }
+
     @Transactional
     public List<Prize> getPrizesOfParticipant(Participant participant) {
         List<Prize> prizes = new ArrayList<>() ;

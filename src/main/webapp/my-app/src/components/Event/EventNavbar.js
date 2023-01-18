@@ -24,16 +24,16 @@ class EventNavbar extends Component {
                 <ul className="nav nav-tabs card-header-tabs" role="tablist">
                     <EventNavLink name ="Details"
                                   handleClick = {(e) =>this. navigateEventToRelatedPart(e)}></EventNavLink>
-                    <EventNavLink name ="Location"
-                                  handleClick = {(e) =>this.navigateEventToRelatedPart(e)}></EventNavLink>
+                    {/* <EventNavLink name ="Location"
+                                  handleClick = {(e) =>this.navigateEventToRelatedPart(e)}></EventNavLink> */}
                     {/* <EventNavLink name ="Questionnaire"
                                   handleClick = {(e) =>this.navigateEventToRelatedPart(e)}></EventNavLink>
                     <EventNavLink name ="Event Specific Questions"
                                   handleClick = {(e) => this.navigateEventToRelatedPart(e)}></EventNavLink> */}
-                    {/* {(isParticipant() && !this.isEventAlreadyStarted()) ?  <EventNavLink name ="Join the Event"
-                                  handleClick = {(e) => this.navigateEventToRelatedPart(e)}></EventNavLink> : null } */}
-                  <EventNavLink name ="Join the Event"
-                                  handleClick = {(e) => this.navigateEventToRelatedPart(e)}></EventNavLink> 
+                    {(isParticipant() && !this.isEventAlreadyStarted()) ?  <EventNavLink name ="Join the Event"
+                                  handleClick = {(e) => this.navigateEventToRelatedPart(e)}></EventNavLink> : null }
+                  {/* <EventNavLink name ="Join the Event"
+                                  handleClick = {(e) => this.navigateEventToRelatedPart(e)}></EventNavLink>  */}
                 </ul>
         );
     }

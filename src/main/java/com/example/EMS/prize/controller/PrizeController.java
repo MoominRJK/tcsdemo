@@ -32,6 +32,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -95,6 +97,19 @@ public class PrizeController {
 //        final List<ParticipantsPointDTO> participantsPointTOs = participantsPointMapper.mapToDto(participantsPoints);
 
         return participantsPointMapper.mapToDto(participantsPoints);
+    }
+
+    @GetMapping("/allPrize")
+//    @PreAuthorize("hasAuthority('PARTICIPANT')")
+    public List<PrizeDTO> getAllPrizes() {
+        List<Prize> prizes = prizeService.getAllPrizes();
+
+        Comparator<Prize> dateComparator = Comparator.comparing(Prize::getYear)
+                .thenComparing(Prize::getGrade)
+                .thenComparing(Prize::getAwardType);
+        Collections.sort(prizes, dateComparator);
+
+        return prizeMapper.mapToDto(prizes);
     }
 
 

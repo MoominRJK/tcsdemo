@@ -213,7 +213,7 @@ class EventRaffleQ extends Component {
             <div className={"container w-50 mt-5"}>
                 <form onSubmit={(e) => this.sendQuestions(e)}>
                          <Form.Group>
-                            <Form.Label>Choose Year:</Form.Label>
+                            <Form.Label>Select Year:</Form.Label>
                             <InputGroup>
                                 <Form.Control as="select" required
                                               value={this.state.userType}
@@ -227,7 +227,7 @@ class EventRaffleQ extends Component {
                         </Form.Group>
 
                         <Form.Group>
-                            <Form.Label>Choose Quarter:</Form.Label>
+                            <Form.Label>Select Quarter:</Form.Label>
                             <InputGroup>
                                 <Form.Control as="select" required
                                               value={this.state.userType1}

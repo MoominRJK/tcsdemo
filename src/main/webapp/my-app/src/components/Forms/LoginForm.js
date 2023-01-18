@@ -11,6 +11,7 @@ import axios from "axios";
 import { withRouter } from "react-router-dom";
 import PositionedSnackbar from "../static/Snackbars/PositionedSnackbar";
 import Consumer from '../ContextAPI/Context';
+import {isOrganizator, isLogin, isParticipant} from "../../Authentication";
 
 
 
@@ -76,7 +77,7 @@ class LoginForm extends Component {
         if(isUserRemembered){
             localStorage.setItem("isUserRemembered","true");
         }
-        this.props.history.push("/events");
+          this.props.history.push("/");
     }
 
     handleCheckboxChange = (e) =>{
@@ -89,7 +90,7 @@ class LoginForm extends Component {
 
     componentDidMount = () => {
         if(this.isUserRemembered()){
-            this.props.history.push("/events");
+             this.props.history.push("/");
         }
     }
     isUserRemembered = () => {
