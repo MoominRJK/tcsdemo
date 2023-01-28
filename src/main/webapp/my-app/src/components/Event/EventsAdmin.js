@@ -33,11 +33,7 @@ class EventsAdmin extends Component {
                                     <div className={"mt-5"}>
                                         <Alert severity="info" className={"container"}>
                                             <AlertTitle>Information</AlertTitle>
-                                            to the left of the event name. <InfoIcon></InfoIcon>
-                                            <strong>by pressing the icon
-                                                get information about the event,
-                                                You can create a poll and view the participants of the event.
-                                                you can view.</strong>
+                                            Admin can click + sign to add a new event, click any action items to view, edit or delete an event.
                                         </Alert>
                                     </div>
                                     : null}

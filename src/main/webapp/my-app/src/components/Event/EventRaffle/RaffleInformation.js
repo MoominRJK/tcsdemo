@@ -43,7 +43,7 @@ class RaffleInformation extends Component {
         const {raffleWinnerUsername} = this.props;
         return (
             <div className={"container mt-5"}>
-                <Alert severity="info"> {raffleWinnerUsername} is today's enevt raffle winner.
+                <Alert severity="info"> {raffleWinnerUsername} is today's event raffle winner.
                 The winner has been notified by the e-mail.</Alert>
             </div>
         );

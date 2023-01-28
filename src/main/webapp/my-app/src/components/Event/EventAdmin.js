@@ -41,8 +41,8 @@ class EventAdmin extends Component {
         return (
            <div className={"container col-md-9 mt-5 "}>
                <Card>
-                    <Card.Header  style = {{cursor : "pointer"}}>
-                        <EventNavbar handleNavigation = {this.setLinkContentWith} event = {event}></EventNavbar>
+                    <Card.Header >
+                        {/* <EventNavbar handleNavigation = {this.setLinkContentWith} event = {event}></EventNavbar> */}
                     </Card.Header>
                    <Card.Body className = "container">
                        {linkContent === "Details" ? <EventDetails event ={event}></EventDetails> : null}

@@ -37,14 +37,16 @@ public class PrizeDTO {
 
     @JsonProperty("description")
     public final String description;
-    @JsonProperty("participantsPrizes")
-    public final Set<ParticipantsPrize> participantsPrizes;
+
+
+//    @JsonProperty("participantsPrizes")
+//    public final Set<ParticipantsPrizeDTO> participantsPrizes;
 
 
     @JsonProperty("awardType")
     public final String awardType;
 
-    public PrizeDTO(String name, String type, int year, int quarter, String imageUrl, int grade, String description, Set<ParticipantsPrize> participantsPrizes, String awardType) {
+    public PrizeDTO(String name, String type, int year, int quarter, String imageUrl, int grade, String description, String awardType) {
         this.name = name;
         this.type = type;
         this.year = year;
@@ -52,7 +54,7 @@ public class PrizeDTO {
         this.imageUrl = imageUrl;
         this.grade = grade;
         this.description = description;
-        this.participantsPrizes = participantsPrizes;
+//        this.participantsPrizes = participantsPrizes;
         this.awardType = awardType;
     }
 }

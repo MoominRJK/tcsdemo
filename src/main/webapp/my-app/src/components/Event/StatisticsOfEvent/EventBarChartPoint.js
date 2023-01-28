@@ -11,7 +11,14 @@ import {
     MDBListGroup,
     MDBListGroupItem,
     MDBRow,
-    MDBBadge
+    MDBBadge,
+
+    MDBCardImage,
+
+    MDBCardTitle,
+    MDBCardText,
+    MDBCardFooter,
+
   } from 'mdb-react-ui-kit';
 class EventBarChartPoint extends Component {
 
@@ -151,6 +158,83 @@ class EventBarChartPoint extends Component {
         const {statisticsType,isOpenedEventBarChart} = this.state;
         return (
             <div className={"container w-75 mt-5"}>
+
+
+                    <div className='text-center mb-3' >
+                                                        <h3 className='text-dark'>Dashboard</h3>
+                                                        </div>
+                        <MDBRow className='row-cols-1 row-cols-md-4 g-4 mb-5'>
+                        
+                        <MDBCol>
+                            <MDBCard className='h-100'>
+                            
+                            <MDBCardBody className='bg-success shadow-1-strong'>
+                                <MDBCardTitle><h1 className= 'text-white text-center'>15</h1></MDBCardTitle>
+
+                            </MDBCardBody>
+                            <MDBCardFooter className='bg-success shadow-1-strong'>
+                                <h6 className= 'text-white text-center'>Events</h6>
+                            </MDBCardFooter>
+                            </MDBCard>
+                        </MDBCol>
+                        <MDBCol>
+                            <MDBCard className='h-100'>
+                            
+                            <MDBCardBody className='bg-warning shadow-1-strong'>
+                                <MDBCardTitle><h1 className= 'text-white text-center'>14</h1></MDBCardTitle>
+
+                            </MDBCardBody>
+                            <MDBCardFooter className='bg-warning shadow-1-strong'>
+                                <h6 className= 'text-white text-center'>Users</h6>
+                            </MDBCardFooter>
+                            </MDBCard>
+                        </MDBCol>
+                        <MDBCol>
+                            <MDBCard className='h-100'>
+                            
+                            <MDBCardBody className='bg-info shadow-1-strong'>
+                                <MDBCardTitle><h1 className= 'text-white text-center'>41</h1></MDBCardTitle>
+
+
+                            </MDBCardBody>
+                            <MDBCardFooter className='bg-info shadow-1-strong'>
+                                <h6 className= 'text-white text-center'>Total Participants</h6>
+                            </MDBCardFooter>
+                            </MDBCard>
+                        </MDBCol>
+                        <MDBCol>
+                            <MDBCard className='h-100'>
+                            
+                            <MDBCardBody className='bg-danger shadow-1-strong'>
+                                <MDBCardTitle><h1 className= 'text-white text-center'>16</h1></MDBCardTitle>
+
+
+                            </MDBCardBody>
+                            <MDBCardFooter className='bg-danger shadow-1-strong'>
+                                <h6 className= 'text-white text-center'>Total Prizes</h6>
+                            </MDBCardFooter>
+                            </MDBCard>
+                        </MDBCol>
+                        
+                        </MDBRow>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     <div className={"container w-50 mt-5 mb-5"}> 
                         <h3>Student Quarterly Reward Points</h3> 
                             <form onSubmit={(e) => this.sendQuestions(e)}>

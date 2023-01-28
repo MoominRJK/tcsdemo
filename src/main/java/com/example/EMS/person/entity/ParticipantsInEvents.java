@@ -36,7 +36,13 @@ public class ParticipantsInEvents implements Serializable {
     private LocalDate partitionDate;
 
     @Column(name = "CHECKED_IN_DATE")
-    private LocalDateTime created;
+    private LocalDateTime checkIn;
+
+    @Column(name = "CHECKED_OUT_DATE")
+    private LocalDateTime checkOut;
+
+    @Column(name = "HOURS")
+    private double hours;
 
     @Lob
     private byte [] eventInfoDocument;

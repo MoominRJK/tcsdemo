@@ -32,8 +32,8 @@ class EventNavbar extends Component {
                                   handleClick = {(e) => this.navigateEventToRelatedPart(e)}></EventNavLink> */}
                     {(isParticipant() && !this.isEventAlreadyStarted()) ?  <EventNavLink name ="Join the Event"
                                   handleClick = {(e) => this.navigateEventToRelatedPart(e)}></EventNavLink> : null }
-                  {/* <EventNavLink name ="Join the Event"
-                                  handleClick = {(e) => this.navigateEventToRelatedPart(e)}></EventNavLink>  */}
+                  <EventNavLink name ="Join the Event"
+                                  handleClick = {(e) => this.navigateEventToRelatedPart(e)}></EventNavLink> 
                 </ul>
         );
     }

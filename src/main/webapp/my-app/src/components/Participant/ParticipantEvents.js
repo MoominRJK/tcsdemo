@@ -9,10 +9,34 @@ class ParticipantEvents extends Component {
     state = {
         events : [],
         columns: [
-            { title: 'Name', field: 'name' },
-            { title: 'Start Date', field: 'startDate', type : 'date'},
-            { title: 'End Date', field: 'endDate', type : 'date'},
-            {title : 'Address', field : 'address'},
+            { title: 'Name', field: 'name',  headerStyle: {
+                backgroundColor: '#039be5',
+                color: '#FFF'
+              } },
+            { title: 'Start Date', field: 'startDate', type : 'date',  headerStyle: {
+                backgroundColor: '#039be5',
+                color: '#FFF'
+              }},
+            { title: 'Start Time', field: 'startTime', type : 'date',  headerStyle: {
+                backgroundColor: '#039be5',
+                color: '#FFF'
+              }},
+            {title : 'Where', field : 'location', headerStyle: {
+                backgroundColor: '#039be5',
+                color: '#FFF'
+              }},
+            {title : 'Reward Point', field : 'point', headerStyle: {
+            backgroundColor: '#039be5',
+            color: '#FFF'
+            }},
+            {title : 'Category', field : 'category', headerStyle: {
+                backgroundColor: '#039be5',
+                color: '#FFF'
+                }},
+            {title : 'Price', field : 'price', headerStyle: {
+                backgroundColor: '#039be5',
+                color: '#FFF'
+                }},
         ],
 
     }
@@ -56,6 +80,13 @@ class ParticipantEvents extends Component {
                         tooltip: 'Click for event information',
                         onClick: ( e,rowData ) => this.goToEventPage(e,rowData.name)
                     }]}
+                    options={{
+                        actionsColumnIndex: -1,
+                        headerStyle: {
+                            backgroundColor: '#039be5',
+                            color: '#FFF'
+                          }
+                    }}
                 ></MaterialTable>
             </div>
             <div  className={"mt-5 ml-5 mr-5"}>
@@ -70,6 +101,13 @@ class ParticipantEvents extends Component {
                         tooltip: 'Click for event information',
                         onClick: ( e,rowData ) => this.goToEventPage(e,rowData.name)
                     }]}
+                    options={{
+                        actionsColumnIndex: -1,
+                        headerStyle: {
+                            backgroundColor: '#039be5',
+                            color: '#FFF'
+                          }
+                    }}
                 ></MaterialTable>
             </div>
             </>

@@ -3,6 +3,9 @@ import {Navbar, Nav,Button,Form,FormControl} from 'react-bootstrap'
 import {Link,NavLink} from 'react-router-dom';
 import Consumer from '../components/ContextAPI/Context';
 import {isOrganizator, isLogin, isParticipant} from "../Authentication";
+import Container from 'react-bootstrap/Container';
+
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
 import {
     MDBNavbar,
@@ -37,85 +40,87 @@ class NavigationBar extends Component {
                     value => {
                         const {dispatch,username,authorities} = value;
                         return(
-                            
-                            // <MDBNavbar sticky expand='lg' dark style = {navbar} >
-                            //     <MDBContainer fluid>
-                            //     <MDBNavbarBrand href='/'>[SEAS] School Event Award System</MDBNavbarBrand>
-                            //     <MDBNavbarToggler
-                            //         type='button'
-                            //         data-target='#navbarColor02'
-                            //         aria-controls='navbarColor02'
-                            //         aria-expanded='false'
-                            //         aria-label='Toggle navigation'
-                                   
-                            //     >
-                            //     <MDBIcon icon='bars' fas />
-                            //     </MDBNavbarToggler>
-                            //     <MDBCollapse  navbar>
-                            //         <MDBNavbarNav className='me-auto mb-2 mb-lg-0'>
-                            //         <MDBNavbarItem className='active'>
-                            //         { isLogin() ?  <MDBNavbarLink aria-current='page' href='#'>
-                            //             Home
-                            //             </MDBNavbarLink>  : null}
-                            //         </MDBNavbarItem>
-                            //         <MDBNavbarItem>
-                            //             <MDBNavbarLink href='/login'>Features</MDBNavbarLink>
-                            //         </MDBNavbarItem>
-                            //         <MDBNavbarItem>
-                            //             <MDBNavbarLink href='#'>Pricing</MDBNavbarLink>
-                            //         </MDBNavbarItem>
-                            //         <MDBNavbarItem>
-                            //             <MDBNavbarLink href='#'>About</MDBNavbarLink>
-                            //         </MDBNavbarItem>
-                            //         </MDBNavbarNav>
-                            //     </MDBCollapse>
-                            //     </MDBContainer>
-                            // </MDBNavbar>
+                           
 
-
-                            <Navbar style = {navbar}  className = {"p-3"} variant = "dark">
-                                <Navbar.Brand href="/">[SEAS] School Event Award System</Navbar.Brand>
-                                <Link className = {isLogin() ? "nav-item text-white ml-5": "d-none"}>
-                                Welcome {localStorage.getItem("username")} Role: {localStorage.getItem("authorities")} </Link>
-                                        <Nav className="ml-auto">
-                                            { !isLogin() ? <Link className ="nav-link" to = {"/login"}>Sign In</Link> : null}
-                                            { !isLogin() ? <Link className ="nav-link" to = {"/register"}>Sign Up</Link> : null}
-                                                                    
+                            <>
+                            <Navbar  sticky="top" style = {navbar} collapseOnSelect expand="lg" variant="dark">
+                                    
+                                        <Navbar.Brand href="/">[SEAS] School Event Award System</Navbar.Brand>
+                                        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                                        <Navbar.Collapse id="responsive-navbar-nav">
+                                        <Nav className="me-auto nav-item text-white ml-5 mt-1">
+                                           
+                                           
                                             {/* <Link className = {isLogin() ? "nav-link": "d-none"}
                                                 to ={"/events"} >Events </Link> */}
-                                            {  isParticipant() ? <Link className ="nav-link"
-                                                to = {"/events"}>Events</Link> : null}
+                                           
                                             {  isOrganizator() ? <Link className ="nav-link"
                                                 to = {"/eventsAdmin"}>Manage Events</Link> : null}
-                                            {  isOrganizator() ? <Link className ="nav-link"
+
+                                            {  isOrganizator() ?            
+                                            <NavDropdown title="Raffle" id="collasible-nav-dropdown">
+                                                <NavDropdown.Item href="/raffle">Onsite Raffle Drawing</NavDropdown.Item>
+                                                <NavDropdown.Divider />
+                                                <NavDropdown.Item href="/raffleQ">
+                                                    Quarterly Raffle Drawing
+                                                </NavDropdown.Item>
+                                               
+                                            </NavDropdown>
+                                            : null}
+
+                                            {/* {  isOrganizator() ? <Link className ="nav-link"
                                                 to = {"/raffle"}>Raffle Drawing</Link> : null}
                                             {  isOrganizator() ? <Link className ="nav-link"
-                                                to = {"/raffleQ"}>Q Raffle Drawing</Link> : null}
+                                                to = {"/raffleQ"}>Q Raffle Drawing</Link> : null} */}
                                             {  isOrganizator() ? <Link className ="nav-link"
                                                 to = {"/chart"}>Charts</Link> : null}
                                             { isOrganizator() ? <Link className ="nav-link"
                                                to = {"/report"}>Report</Link> : null}
                                             { isOrganizator() ? <Link className ="nav-link"
-                                               to = {"/allPrize"}>Prize</Link> : null}
-
+                                               to = {"/allPrize"}>Manage Prize</Link> : null}
+                                            
                                             {/* { isOrganizator() ? <Link className ="nav-link"
                                                 to = {"/survey"}>Surveys</Link> : null} */}
-
+                                            {  isParticipant() ? <Link className ="nav-link"
+                                                to = {"/events"}>Events</Link> : null}
                                             <Link className = { isParticipant() ? "nav-link": "d-none"}
                                                 to ={`/myEvents/${localStorage.getItem('username')}`}>
                                                 My Events</Link>
+                                            {  isParticipant() ? <Link className ="nav-link"
+                                                to = {"/prize"}>Prizes</Link> : null}
                                             <Link className = { isParticipant() ? "nav-link": "d-none"}
                                                 to ={`/myReport/${localStorage.getItem('username')}`}>
                                                 Report</Link>
+
+                                            
+                                        </Nav>
+                                        <Nav className="ml-auto nav-item text-white ml-5 mt-1">
+                                            { !isLogin() ? <Link className ="nav-link" to = {"/login"}>Sign In</Link> : null}
+                                            { !isLogin() ? <Link className ="nav-link" to = {"/register"}>Sign Up</Link> : null}
+                                            
+                                            <Navbar.Text className={ isLogin() ? "nav-link text-white ": "d-none"}>
+                                                    Signed in as: <a href="#">{localStorage.getItem("username")} </a>
+                                            </Navbar.Text>
+                                            
                                             <Link className = { isLogin() ? "nav-link": "d-none"}
                                                             to ={"/login"}>
                                             Sign out</Link>
-
+                                            
                                         </Nav>
-                                <Form inline>
-
-                                </Form>
+                                        </Navbar.Collapse>
+                                  
                             </Navbar>
+
+
+
+
+
+
+
+
+
+  
+                            </>
 
                       
                         );

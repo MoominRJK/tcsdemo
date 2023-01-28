@@ -11,6 +11,7 @@ import lombok.Builder;
 
 import javax.validation.constraints.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Set;
 import java.util.List;
 import java.util.HashSet;
@@ -80,6 +81,24 @@ public class EventDTO {
     @JsonProperty("lecturer")
     public final String lecturerUsername;
 
+    @JsonProperty("category")
+    public final String category;
+
+    @JsonProperty("description")
+    public final String description;
+
+    @JsonProperty("location")
+    public final String location;
+
+    @JsonProperty("startTime")
+    public final LocalTime startTime;
+
+    @JsonProperty("endTime")
+    public final LocalTime endTime;
+
+    @JsonProperty("price")
+    public final double price;
+
     @JsonProperty("eventQuestions")
     public final Set<EventQuestionsDTO> eventQuestions;
     @JsonProperty("participantsInEvents")
@@ -108,6 +127,12 @@ public class EventDTO {
                     @JsonProperty("imageUrl") String imageUrl,
                     @JsonProperty("organizator")  int organizatorId,
                     @JsonProperty("lecturer")  String lecturerUsername,
+                    @JsonProperty("category")  String category,
+                    @JsonProperty("description")  String description,
+                    @JsonProperty("location") String location,
+                    @JsonProperty("startTime") LocalTime startTime,
+                    @JsonProperty("endTime") LocalTime endTime,
+                    @JsonProperty("price") double price,
                     @JsonProperty("eventQuestions") Set<EventQuestionsDTO> eventQuestions,
                     @JsonProperty("participantsInEvents") Set<ParticipantsInEventsDTO> participantsInEventsDTO,
                     @JsonProperty("eventSurveyQuestions")Set<EventSurveyQuestionDTO> eventSurveyQuestions) {
@@ -132,6 +157,12 @@ public class EventDTO {
         this.eventType = eventType;
         this.googleLoc = googleLoc;
         this.imageUrl = imageUrl;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.category = category;
+        this.location = location;
+        this.description = description;
+        this.price = price;
     }
 
 }

@@ -29,10 +29,19 @@ class Events extends Component {
                         const {events} = value;
                         return (
                             <div className={"mt-5"}>
-                                  <h5>All Events</h5>
+                                  
                                 {/* {<EventTable events = {events} />} */}
+                                
 
-                                <MDBContainer breakpoint="sm mt-5">
+
+
+
+
+                                <MDBContainer breakpoint="sm mt-5 ">
+                                    <div className='text-center purple-700' >
+                                      <h3 className='text-white'>Popular Events</h3>
+                                    </div>
+                                
                                 <MDBRow className='row-cols-1 row-cols-md-3 g-4'>
 
                                     {events.map(d => 
@@ -41,9 +50,9 @@ class Events extends Component {
                                         
                                         <MDBCol xl={4} lg={6} className='mb-4'  key={d.name}>
                                             <MDBCardLink href={'/event/' + d.name}>
-                                             <MDBCard className='h-100'>
+                                             <MDBCard className='h-100 w-100'>
                                                 <MDBCardImage
-                                                    src='https://mdbootstrap.com/img/new/standard/city/044.webp'
+                                                            src={`${process.env.PUBLIC_URL}/assets/event/${d.imageUrl}`} 
                                                     alt='...'
                                                     position='top'
                                                 />
@@ -53,8 +62,8 @@ class Events extends Component {
                                                     
                                                      {d.description}
                                                     </MDBCardText>
-                                                    <div className='ms-3 ml-1'>
-                                                            <p className='fw-bold mb-1'> Location: {d.address}</p>
+                                                    <div className='ms-3'>
+                                                            <p className='fw-bold mb-1'>Location: {d.location}</p>
                                                         </div>
                                                         <div className='ms-3'>
                                                                 <p className='fw-bold mb-1'>Reward Point: 
@@ -62,10 +71,11 @@ class Events extends Component {
                                                                             {d.point}
                                                                         </MDBBadge></p>
                                                                 <p className='fw-bold mb-1'>Date:{d.startDate}</p>
+                                                                <p className='fw-bold mb-1'>Time:{d.startTime}</p>
                                                         </div>
                                                 </MDBCardBody>
-                                                <MDBCardFooter>
-                                                    <small className='text-muted'>Last updated 3 mins ago</small>
+                                                <MDBCardFooter className='text-muted text-center'>
+                                                    <small className='text-muted text-center'>{d.category}</small>
                                                 </MDBCardFooter>
                                                 </MDBCard>
                                             </MDBCardLink>
@@ -79,22 +89,15 @@ class Events extends Component {
                                 {isParticipant() ?
                                       <div className={"mt-5"}>
                                           <Alert severity="info" className={"container"}>
-                                                <AlertTitle>Information</AlertTitle>
-                                                to the left of the event name. <InfoIcon></InfoIcon>
-                                                <strong>by pressing the icon
-                                                    get information about the event and
-                                                    you can attend the event.</strong>
+                                                <AlertTitle>Note:</AlertTitle>
+                                                 Click the event to see more information.
                                         </Alert>
                                       </div> : null }
                                 {isOrganizator() ?
                                     <div className={"mt-5"}>
                                         <Alert severity="info" className={"container"}>
-                                            <AlertTitle>Information</AlertTitle>
-                                            to the left of the event name. <InfoIcon></InfoIcon>
-                                            <strong>by pressing the icon
-                                                get information about the event,
-                                                You can create a poll and view the participants of the event.
-                                                you can view.</strong>
+                                            <AlertTitle>Note:</AlertTitle>
+                                            Click the event to see more information.
                                         </Alert>
                                     </div>
                                     : null}

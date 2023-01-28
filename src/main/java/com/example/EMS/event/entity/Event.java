@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Set;
 
 @Entity
@@ -68,6 +69,23 @@ public class Event extends IdBaseEntity {
     @Column(name = "IMAGE_URL")
     private String imageUrl;
 
+    @Column(name = "CATEGORY")
+    private String category;
+    @Column(name = "DESCRIPTION")
+    private String description;
+
+    @Column(name = "LOCATION")
+    private String location;
+
+    @Column(name = "PRICE")
+    private double price;
+
+    @Column(name = "START_TIME")
+    private LocalTime startTime;
+
+    @Column(name = "END_TIME")
+    private LocalTime endTime;
+
     @JsonIgnore
     @ManyToOne()
     @JoinColumn(name = "organizator_id")
@@ -109,7 +127,13 @@ public class Event extends IdBaseEntity {
                  final String zip,
                  final String googleLoc,
                  final int point,
-                 final int eventType
+                 final int eventType,
+                 final String category,
+                 final String description,
+                 final double price,
+                 final LocalTime startTime,
+                 final LocalTime endTime,
+                 final String location
                  ) {
         super(id);
         this.name = name;
@@ -131,5 +155,11 @@ public class Event extends IdBaseEntity {
         this.googleLoc = googleLoc;
         this.point = point;
         this.eventType = eventType;
+        this.category = category;
+        this.description = description;
+        this.location = location;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.price = price;
     }
 }

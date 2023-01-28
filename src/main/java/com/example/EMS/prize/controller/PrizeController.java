@@ -104,9 +104,9 @@ public class PrizeController {
     public List<PrizeDTO> getAllPrizes() {
         List<Prize> prizes = prizeService.getAllPrizes();
 
-        Comparator<Prize> dateComparator = Comparator.comparing(Prize::getYear)
-                .thenComparing(Prize::getGrade)
-                .thenComparing(Prize::getAwardType);
+        Comparator<Prize> dateComparator = Comparator.comparing(Prize::getYear )
+                .thenComparing(Prize::getAwardType )
+                .thenComparing(Prize::getGrade);
         Collections.sort(prizes, dateComparator);
 
         return prizeMapper.mapToDto(prizes);

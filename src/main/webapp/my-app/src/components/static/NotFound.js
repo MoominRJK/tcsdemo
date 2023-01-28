@@ -5,9 +5,9 @@ function NotFound() {
 
     return(
         <Alert severity="error" className={"container mt-5"}>
-            <AlertTitle>Page Not Found!</AlertTitle>
+            <AlertTitle>Error processing your request. Please contact administrator for helps.</AlertTitle>
             <strong>
-                <a className={"nav-item"} href = "/login">Click here</a> you can go to the login page.
+                <a className={"nav-item"} href = "/">Click here</a> you can go to the home page.
             </strong>
         </Alert>
     );

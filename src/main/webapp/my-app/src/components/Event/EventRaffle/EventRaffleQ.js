@@ -12,7 +12,13 @@ import Checkbox from "@material-ui/core/Checkbox";
 import {getEventPoints} from "../../../HelperFunctions/EventHelpers";
 import MaterialTable from "material-table";
 import Typography from "@material-ui/core/Typography";
-
+import {
+    MDBCard,
+    MDBCardImage,
+    MDBCardTitle,
+    MDBCardText,
+    MDBCardOverlay,
+  } from 'mdb-react-ui-kit';
 
 class EventRaffleQ extends Component {
     state = {
@@ -31,10 +37,26 @@ class EventRaffleQ extends Component {
         saveReocrd : false,
         pp: [],
         columns: [
-            { title: 'First Name', field: 'firstName' },
-            { title: 'Last Name', field: 'lastName' },
-            { title: 'Grade', field: 'grade'},
-            {title : 'Total Points', field : 'totalPoint'},
+            { title: 'First Name', field: 'firstName',
+            headerStyle: {
+              backgroundColor: '#039be5',
+              color: '#FFF'
+            } },
+            { title: 'Last Name', field: 'lastName',
+            headerStyle: {
+              backgroundColor: '#039be5',
+              color: '#FFF'
+            } },
+            { title: 'Grade', field: 'grade',
+            headerStyle: {
+              backgroundColor: '#039be5',
+              color: '#FFF'
+            }},
+            {title : 'Total Points', field : 'totalPoint',
+            headerStyle: {
+              backgroundColor: '#039be5',
+              color: '#FFF'
+            }},
         ],
         doShow: false,
        
@@ -208,9 +230,19 @@ class EventRaffleQ extends Component {
             const {isOpenBackdrop,isMessageBoxOpen,messageType,selectedEvent,
                 selectedEventName,raffleWinnerUsername,message} = this.state;
         return (
-
-            
-            <div className={"container w-50 mt-5"}>
+            <>
+            <MDBCard background='dark' className='text-white'>
+            <MDBCardImage overlay  src={`${process.env.PUBLIC_URL}/assets/raffle1.jpeg`}  alt='...' />
+            <MDBCardOverlay >
+                <MDBCardTitle className='display-3 text-center mt-50'>Raffle Drawing</MDBCardTitle>
+                <MDBCardText className='text-center'>
+                Quarterly Drawing
+                </MDBCardText>
+                {/* <MDBCardText>Last updated 3 mins ago</MDBCardText> */}
+            </MDBCardOverlay>
+          </MDBCard>
+            <div className={"container w-80 mt-5"}>
+                <div className={"container w-50 mt-5"}>
                 <form onSubmit={(e) => this.sendQuestions(e)}>
                          <Form.Group>
                             <Form.Label>Select Year:</Form.Label>
@@ -258,6 +290,7 @@ class EventRaffleQ extends Component {
                             type="submit">Draw Raffle Winner!</button>
                     </div>
                 </form>
+                </div>
                {this.state.doShow ? 
                  <>
                     <div  className={"mt-5 ml-5 mr-5"}>
@@ -307,6 +340,7 @@ class EventRaffleQ extends Component {
                     <RaffleInformation selectedEvent={selectedEvent}
                                         raffleWinnerUsername = {raffleWinnerUsername}/> : null}
             </div>
+            </>
         );
     }
 }

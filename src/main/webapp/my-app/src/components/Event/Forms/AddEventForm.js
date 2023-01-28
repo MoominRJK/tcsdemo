@@ -18,6 +18,8 @@ class AddEventForm extends Component {
         name : '',
         startDate : '',
         endDate : '',
+        startTime: '',
+        endTime: '',
         address : '',
         quota : 0,
         longitude : 0,
@@ -33,7 +35,11 @@ class AddEventForm extends Component {
         state : '',
         zip : '',
         point : 0,
-        eventType : 0 
+        eventType : 0,
+        location: '',
+        price: 0, 
+        imageUrl: '',
+        description: ''
     }
 
     resetAllInputs = () =>{
@@ -41,15 +47,18 @@ class AddEventForm extends Component {
     }
 
     addEvent = async (e,dispatch) =>{
-        const {name,startDate,endDate,quota,
+        const {name,startDate,endDate, startTime,
+            endTime,quota,
             longitude,latitude,address,lecturerUsername,
-            currentNumberOfPeople,raffleWinnerUsername, city, state, zip, point, eventType} = this.state;
+            currentNumberOfPeople,raffleWinnerUsername, city, state, zip, point, eventType, location, price, imageUrl,description} = this.state;
 
          e.preventDefault();
         var event  = {
             name : name.trim(),
             startDate,
             endDate,
+            startTime,
+            endTime,
             quota,
             longitude,
             latitude,
@@ -61,7 +70,11 @@ class AddEventForm extends Component {
             state,
             zip,
             point,
-            eventType
+            eventType,
+            location, 
+            price,
+            imageUrl,
+            description
         }
         var organizatorUsername = localStorage.getItem("username");
         const response = await axios.post(`/events/${organizatorUsername}/${this.state.lecturerUsername}`,
@@ -116,9 +129,10 @@ class AddEventForm extends Component {
     }
 
     render() {
-        const {name,startDate,endDate,quota,longitude,address,
+        const {name,startDate,endDate, startTime,
+            endTime,quota,longitude,address,
                latitude,isSubmittedForm,
-                message,messageType, city, state, zip, point, eventType} = this.state;
+                message,messageType, city, state, zip, point, eventType, location, price, imageUrl, description} = this.state;
 
         return (
             <Consumer>
@@ -128,7 +142,7 @@ class AddEventForm extends Component {
                         return(
                             <div>
                                 <Card className={"container w-50 mt-5"}>
-                                    <Card.Header>
+                                    <Card.Header className="bg-primary text-white">
                                        Add Event
                                     </Card.Header>
                                     <Form onReset={this.resetAllInputs} onSubmit={(e) => this.addEvent(e,dispatch)} >
@@ -140,19 +154,22 @@ class AddEventForm extends Component {
                                                         <Form.Control required autoComplete="off"
                                                                       type="text" name="name"
                                                                       value={name} onChange={(e) => this.changeInput(e)}
-                                                                      className={"bg-dark text-white"}
+                                                                    //   className={"text-white"}
                                                                       placeholder="Name" />
                                                     </InputGroup>
                                                 </Form.Group>
                                                 <Form.Group as={Col} controlId="formGridType">
-                                                    <Form.Label>Event Type</Form.Label>
+                                                    <Form.Label>Event Category</Form.Label>
                                                     <InputGroup>
                                                         <Form.Control as="select" required
                                                             value={this.state.eventType}
                                                             onChange={(e) => this.handleEventTypeChange(e)}>
                                                             <option value=""> Select </option>
-                                                            <option value="1">Sporting Event</option>
-                                                            <option value="2">Non-Sporting Event</option>
+                                                            <option value="1">Sporting</option>
+                                                            <option value="2">Art & Music</option>
+                                                            <option value="3">Conference & Seminars</option>
+                                                            <option value="4">Team Spirit</option>
+                                                            <option value="5">Food & Drink</option>
                                                         </Form.Control>
                                                     </InputGroup>
                                                     
@@ -161,12 +178,12 @@ class AddEventForm extends Component {
 
                                             <Form.Row>
                                                  <Form.Group as={Col} controlId="formGridStartDate">
-                                                    <Form.Label>Starting date</Form.Label>
+                                                    <Form.Label>Start date</Form.Label>
                                                     <InputGroup>
                                                         <Form.Control required autoComplete="off"
                                                                       type="date" name="startDate"
                                                                       value={startDate} onChange={(e) => this.changeInput(e)}
-                                                                      className={"bg-dark text-white"}
+                                                                    //   className={" text-white"}
                                                                       placeholder="Starting date" />
                                                     </InputGroup>
                                                 </Form.Group>
@@ -178,8 +195,35 @@ class AddEventForm extends Component {
                                                                       type="date" name="endDate"
                                                                       min = {startDate}
                                                                       value={endDate} onChange={this.changeInput}
-                                                                      className={"bg-dark text-white"}
+                                                                    //   className={" text-white"}
                                                                       placeholder="end date" />
+                                                    </InputGroup>
+                                                </Form.Group>
+
+                                            </Form.Row>
+
+
+                                            <Form.Row>
+                                                 <Form.Group as={Col} controlId="formGridStartTime">
+                                                    <Form.Label>Start time</Form.Label>
+                                                    <InputGroup>
+                                                        <Form.Control required autoComplete="off"
+                                                                      type="time" name="startTime"
+                                                                      value={startTime} onChange={(e) => this.changeInput(e)}
+                                                                    //   className={" text-white"}
+                                                                      placeholder="Starting time" />
+                                                    </InputGroup>
+                                                </Form.Group>
+                                                
+                                                <Form.Group as={Col} controlId="formGridEndTime">
+                                                    <Form.Label>End time</Form.Label>
+                                                    <InputGroup>
+                                                        <Form.Control required autoComplete="off"
+                                                                      type="time" name="endTime"
+                                                                      min = {startTime}
+                                                                      value={endTime} onChange={this.changeInput}
+                                                                    //   className={" text-white"}
+                                                                      placeholder="end time" />
                                                     </InputGroup>
                                                 </Form.Group>
 
@@ -193,7 +237,7 @@ class AddEventForm extends Component {
                                                                       type="number" name="point"
                                                                       min = "1"
                                                                       value={point} onChange={this.changeInput}
-                                                                      className={"bg-dark text-white"}
+                                                                    //   className={" text-white"}
                                                                       placeholder="Award Point" />
                                                     </InputGroup>
                                                 </Form.Group>
@@ -205,7 +249,7 @@ class AddEventForm extends Component {
                                                                       type="number" name="quota"
                                                                       min = "1"
                                                                       value={quota} onChange={this.changeInput}
-                                                                      className={"bg-dark text-white"}
+                                                                    //   className={" text-white"}
                                                                       placeholder="Event Quota" />
                                                     </InputGroup>
                                                 </Form.Group>
@@ -229,7 +273,7 @@ class AddEventForm extends Component {
                                                         <Form.Control required autoComplete="off"
                                                                       type="text" name="address"
                                                                       value={address} onChange={(e) => this.changeInput(e)}
-                                                                      className={"bg-dark text-white"}
+                                                                    //   className={"bg-dark text-white"}
                                                                       placeholder="Address" />
                                                     </InputGroup>
                                                 </Form.Group>
@@ -239,7 +283,7 @@ class AddEventForm extends Component {
                                                         <Form.Control required autoComplete="off"
                                                                       type="text" name="city"
                                                                       value={city} onChange={(e) => this.changeInput(e)}
-                                                                      className={"bg-dark text-white"}
+                                                                    //   className={"bg-dark text-white"}
                                                                       placeholder="City" />
                                                     </InputGroup>
                                                 </Form.Group>
@@ -252,7 +296,7 @@ class AddEventForm extends Component {
                                                         <Form.Control required autoComplete="off"
                                                                       type="text" name="state"
                                                                       value={state} onChange={(e) => this.changeInput(e)}
-                                                                      className={"bg-dark text-white"}
+                                                                    //   className={"bg-dark text-white"}
                                                                       placeholder="State" />
                                                     </InputGroup>
                                                 </Form.Group>
@@ -262,11 +306,63 @@ class AddEventForm extends Component {
                                                         <Form.Control required autoComplete="off"
                                                                       type="zip" name="zip"
                                                                       value={zip} onChange={(e) => this.changeInput(e)}
-                                                                      className={"bg-dark text-white"}
+                                                                    //   className={"bg-dark text-white"}
                                                                       placeholder="Zip" />
                                                     </InputGroup>
                                                 </Form.Group>
                                             </Form.Row>
+
+                                            <Form.Row>
+                                                <Form.Group as={Col} controlId="formGridLocation">
+                                                    <Form.Label>Location/Room</Form.Label>
+                                                    <InputGroup>
+                                                        <Form.Control required autoComplete="off"
+                                                                      type="text" name="location"
+                                                                      value={name} onChange={(e) => this.changeInput(e)}
+                                                                    //   className={"text-white"}
+                                                                      placeholder="Location/Room" />
+                                                    </InputGroup>
+                                                </Form.Group>
+                                                <Form.Group as={Col} controlId="formGridPrice">
+                                                    <Form.Label>Price</Form.Label>
+                                                    <InputGroup>
+                                                        <Form.Control required autoComplete="off"
+                                                                      type="number" name="price"
+                                                                      min = "0"
+                                                                      value={point} onChange={this.changeInput}
+                                                                    //   className={" text-white"}
+                                                                      placeholder="Price" />
+                                                    </InputGroup>
+                                                </Form.Group>
+                                            </Form.Row>
+                                            <Form.Row>
+                                                <Form.Group as={Col} controlId="formGridDescription">
+                                                    <Form.Label>Description (Max 255 words)</Form.Label>
+                                                    <InputGroup>
+                                                        <Form.Control required autoComplete="off" as="textarea" rows={5}
+                                                                      type="textarea" name="description"
+                                                                      value={description} onChange={(e) => this.changeInput(e)}
+                                                                    //   className={"text-white"}
+                                                                      placeholder="Description" />
+                                                    </InputGroup>
+                                                </Form.Group>
+                                               
+                                            </Form.Row>
+                                            <Form.Row>
+                                                <Form.Group as={Col} controlId="formGridImage">
+                                                    <Form.Label>Event Iamge </Form.Label>
+                                                    <InputGroup>
+                                                        <Form.Control required autoComplete="off"
+                                                                      type="file" name="iamgeUrl"
+                                                                      value={imageUrl} onChange={(e) => this.changeInput(e)}
+                                                                    //   className={"text-white"}
+                                                                      placeholder="Description" />
+                                                    </InputGroup>
+                                                </Form.Group>
+                                               
+                                            </Form.Row>
+
+
 
 
 
@@ -293,7 +389,7 @@ class AddEventForm extends Component {
                                             Create
                                             </Button>
                                             <Button  variant="info" type="reset">
-                                            reset
+                                            Reset
                                             </Button>
                                         </Card.Footer>
                                     </Form>

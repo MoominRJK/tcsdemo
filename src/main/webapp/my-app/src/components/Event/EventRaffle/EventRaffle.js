@@ -5,6 +5,14 @@ import PositionedSnackbar from "../../static/Snackbars/PositionedSnackbar";
 import SimpleBackdrop from "../../static/SimpleBackdrop";
 import CustomizedSnackbar from "../../static/Snackbars/CustomizedSnackbar";
 import RaffleInformation from "./RaffleInformation";
+
+import {
+    MDBCard,
+    MDBCardImage,
+    MDBCardTitle,
+    MDBCardText,
+    MDBCardOverlay,
+  } from 'mdb-react-ui-kit';
 class EventRaffle extends Component {
     state = {
         selectedEvent : '',
@@ -103,7 +111,7 @@ class EventRaffle extends Component {
             raffleWinnerParticipant = this.createRaffleWinnerFrom(participants);
             this.updateRaffleWinnerOfEventWith(raffleWinnerParticipant);
             this.closeBackdrop();
-        },2000);
+        },3000);
     }
 
     openBackdrop = () =>{
@@ -149,6 +157,20 @@ class EventRaffle extends Component {
             const {isOpenBackdrop,isMessageBoxOpen,messageType,selectedEvent,
                 selectedEventName,raffleWinnerUsername,message} = this.state;
         return (
+
+            <>
+
+                <MDBCard background='dark' className='text-white'>
+                            <MDBCardImage overlay  src={`${process.env.PUBLIC_URL}/assets/lucky.jpeg`}  alt='...' />
+                            <MDBCardOverlay >
+                                <MDBCardTitle className='display-3 text-center mt-50'>Today's Lucky</MDBCardTitle>
+                                
+                                {/* <MDBCardText>Last updated 3 mins ago</MDBCardText> */}
+                            </MDBCardOverlay>
+                            <MDBCardText className='text-center bg-danger'>
+                               <h1>is ...</h1> 
+                                </MDBCardText>
+                        </MDBCard>
             <div className={"container w-50 mt-5"}>
                 <form onSubmit={(e) => this.createRaffle(e)}>
                     <div className="col-md-12 text-center mt-5">
@@ -175,6 +197,7 @@ class EventRaffle extends Component {
                     <RaffleInformation selectedEvent={selectedEvent}
                                         raffleWinnerUsername = {raffleWinnerUsername}/> : null}
             </div>
+            </>
         );
     }
 }

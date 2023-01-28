@@ -4,6 +4,17 @@ import {Form, InputGroup} from "react-bootstrap";
 import EventSelectionForStatistics from "./EventSelectionForStatistics";
 import EventBarChart from './EventBarChart'
 import {getEventPoints, getEvents} from "../../../HelperFunctions/EventHelpers";
+
+import {
+    MDBCard,
+    MDBCardImage,
+    MDBCardBody,
+    MDBCardTitle,
+    MDBCardText,
+    MDBCardFooter,
+    MDBRow,
+    MDBCol
+  } from 'mdb-react-ui-kit';
 class EventBarMyPoint extends Component {
 
     state = {
@@ -14,6 +25,9 @@ class EventBarMyPoint extends Component {
         eventNames : [],
         isOpenedEventBarChart : false,
         participationDates : [],
+        username: localStorage.getItem('username'),
+        point: 0,
+        
     }
 
 
@@ -23,11 +37,32 @@ class EventBarMyPoint extends Component {
          this.setState({
              events: response.data,
              eventNames: participantPoints.map(event => event.firstName),
+             point: participantPoints.filter( p => p.name === localStorage.getItem('username'))[0].totalPoint,
              participationCountsOfEvents: participantPoints.map(event => event.totalPoint),
+             
          })
+
+         
 
         //  this.showStatistics();
     }
+
+    getEventsOfParticipant = async () => {
+        const participantUsername = localStorage.getItem('username');
+        console.log(participantUsername);
+        const response = await axios.get(`/eventsOfParticipant/${participantUsername}`, {
+            headers : {
+                authorization : 'Bearer ' + localStorage.getItem('jwtToken')
+            }
+        }).catch(err => {
+            this.props.history.push('/notFound404');
+        });
+
+        this.setState({
+            events : response.data
+        })
+    }
+
 
     handleEventStatisticsChoice = (e) => {
         e.preventDefault();
@@ -96,9 +131,78 @@ class EventBarMyPoint extends Component {
     }
 
     render() {
-        const {eventNames,participationCountsOfEvents} = this.state;
+        const {eventNames,participationCountsOfEvents, username, point} = this.state;
         return (
             <div className={"container w-75 mt-5"}>
+
+         <div className='text-center mb-3' >
+                                      <h3 className='text-dark'>Dashboard</h3>
+                                    </div>
+      <MDBRow className='row-cols-1 row-cols-md-4 g-4 mb-5'>
+       
+      <MDBCol>
+        <MDBCard className='h-100'>
+         
+          <MDBCardBody className='bg-success shadow-1-strong'>
+            <MDBCardTitle><h1 className= 'text-white text-center'>2</h1></MDBCardTitle>
+
+          </MDBCardBody>
+          <MDBCardFooter className='bg-success shadow-1-strong'>
+            <h6 className= 'text-white text-center'>Events</h6>
+          </MDBCardFooter>
+        </MDBCard>
+      </MDBCol>
+      <MDBCol>
+        <MDBCard className='h-100'>
+          
+        <MDBCardBody className='bg-warning shadow-1-strong'>
+            <MDBCardTitle><h1 className= 'text-white text-center'>225</h1></MDBCardTitle>
+
+          </MDBCardBody>
+          <MDBCardFooter className='bg-warning shadow-1-strong'>
+            <h6 className= 'text-white text-center'>Current Total Points</h6>
+          </MDBCardFooter>
+        </MDBCard>
+      </MDBCol>
+      <MDBCol>
+        <MDBCard className='h-100'>
+          
+        <MDBCardBody className='bg-info shadow-1-strong'>
+            <MDBCardTitle><h1 className= 'text-white text-center'>3</h1></MDBCardTitle>
+
+
+          </MDBCardBody>
+          <MDBCardFooter className='bg-info shadow-1-strong'>
+            <h6 className= 'text-white text-center'>Complete Events</h6>
+          </MDBCardFooter>
+        </MDBCard>
+      </MDBCol>
+      <MDBCol>
+        <MDBCard className='h-100'>
+        
+        <MDBCardBody className='bg-danger shadow-1-strong'>
+            <MDBCardTitle><h1 className= 'text-white text-center'>670</h1></MDBCardTitle>
+
+
+          </MDBCardBody>
+          <MDBCardFooter className='bg-danger shadow-1-strong'>
+            <h6 className= 'text-white text-center'>Complete Points</h6>
+          </MDBCardFooter>
+        </MDBCard>
+      </MDBCol>
+      
+    </MDBRow>
+
+
+                
+
+
+
+
+
+
+
+        
                    {/* <form onSubmit={(e) => this.showStatistics(e)}>
                     <div className="row">
                         <div className="col ">
@@ -126,16 +230,14 @@ class EventBarMyPoint extends Component {
                 </form> */}
                
                     <EventBarChart
-                        labels = {eventNames}
+                        labels = {['Career Day', 'Chicago Opera Performance', 'Basketball Game', 'International Day', 'Tea party' ]}
                         label = "Total Reward Points"
-                        data = {participationCountsOfEvents}/>
-                {/* {(isOpenedEventBarChart &&
-                    statisticsType === "showGraphicsWithParticipationDate"
-                && this.state.participationDates.length != 0) ?
-                    <EventBarChart
+                        data = {[100, 125,150,345,175]}/>
+              
+                    {/* <EventBarChart
                         labels = {this.state.participationDates}
                         label = "The number of participants"
-                        data = {this.state.participationCountsOfEvents}/> : null} */}
+                        data = {this.state.participationCountsOfEvents}/> */}
 
             </div>
         );

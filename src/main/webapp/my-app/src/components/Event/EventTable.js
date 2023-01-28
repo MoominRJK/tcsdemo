@@ -25,10 +25,27 @@ import {
 class EventTable extends Component {
     state = {
         columns: [
-            { title: 'Name', field: 'name' },
-            { title: 'Event Date', field: 'startDate', type : 'date'},
-            { title: 'Reward Point', field: 'point'},
-            { title : 'Location', field : 'address'},
+            { title: 'Name', field: 'name',
+              headerStyle: {
+                backgroundColor: '#039be5',
+                color: '#FFF'
+              }
+            },
+            { title: 'Event Date', field: 'startDate', type : 'date',
+            headerStyle: {
+                backgroundColor: '#039be5',
+                color: '#FFF'
+              }},
+            { title: 'Reward Point', field: 'point', 
+            headerStyle: {
+                backgroundColor: '#039be5',
+                color: '#FFF'
+              }},
+            { title : 'Location', field : 'location',
+            headerStyle: {
+                backgroundColor: '#039be5',
+                color: '#FFF'
+              }},
         ],
 
         isAdditionRequest : false,
@@ -138,7 +155,7 @@ class EventTable extends Component {
                     const {dispatch,events} = value;
                     return(
                         <div className={"ml-5 mr-5"}>
-                            <MaterialTable
+                            {/* <MaterialTable
                                 title={<Typography variant="h4" component="h5">
                                             Event List
                                         </Typography>}
@@ -176,7 +193,69 @@ class EventTable extends Component {
                                         } : null
 
                                 ]}
-                            />
+                            /> */}
+                            <MaterialTable
+                                     title={<Typography variant="h4" component="h5">
+                                     Event List
+                                 </Typography>}
+                                    columns={[
+                                        { title: 'Name', field: 'name',
+                                          headerStyle: {
+                                            backgroundColor: '#039be5',
+                                            color: '#FFF'
+                                          }
+                                        },
+                                        { title: 'Event Date', field: 'startDate', type : 'date',
+                                        headerStyle: {
+                                            backgroundColor: '#039be5',
+                                            color: '#FFF'
+                                          }},
+                                        { title: 'Reward Point', field: 'point', 
+                                        headerStyle: {
+                                            backgroundColor: '#039be5',
+                                            color: '#FFF'
+                                          }},
+                                        { title : 'Location', field : 'location',
+                                        headerStyle: {
+                                            backgroundColor: '#039be5',
+                                            color: '#FFF'
+                                          }},
+                                    ]}
+                                    data={ this.props.events}
+                                    actions={[
+                                        {
+                                            icon : 'info',
+                                            tooltip: 'To participate in the event or to enter the event information ' +
+                                            'click to view',
+                                            onClick: ( e,rowData ) => this.goToEventPage(e,rowData.name)
+                                        },
+                                        {
+                                            icon :  'edit',
+                                            tooltip: 'Update event',
+                                            onClick : (e, rowData) => this.openUpdateModal(e,rowData.name)
+                                        },
+                                        {
+                                            icon :  'delete',
+                                            tooltip: 'Delete',
+                                            onClick: (e, rowData,) => this.deleteEvent(e,rowData.name,dispatch)
+                                        },
+                                        {
+                                            icon: 'add',
+                                            tooltip: 'Add event',
+                                            isFreeAction: true ,
+                                            onClick : (event) => this.setState({
+                                                isAdditionRequest : true,
+                                            })
+                                        } 
+                                    ]}
+                                    options={{
+                                        actionsColumnIndex: -1,
+                                        headerStyle: {
+                                            backgroundColor: '#039be5',
+                                            color: '#FFF'
+                                          }
+                                    }}
+                                    />
                             {isAdditionRequest ? this.props.history.push(`/events/${username}`) : null }
                             {isDeleteRequest  ?
                                 <PositionedSnackbar

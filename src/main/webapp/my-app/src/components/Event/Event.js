@@ -11,6 +11,10 @@ import {isOrganizator,isParticipant} from "../../Authentication";
 import {Link} from 'react-router-dom';
 import ParticipantQuestionsArea from "../Participant/ParticipantQuestionsAboutEvent/ParticipantQuestionsArea";
 import {getEvent} from "../../HelperFunctions/EventHelpers";
+import NotificationToOrganizator from '../NotificationToOrganizator'
+import QrCode from "../QrCode/QrCode";
+import CustomizedSnackbar from "../static/Snackbars/CustomizedSnackbar";
+
 import {
     MDBCard,
     MDBCardTitle,
@@ -29,12 +33,29 @@ import {
 
 class Event extends Component {
 
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         linkContent : 'Details',
+    //         event : [],
+    //     }
+    // }
+
+
     constructor(props) {
         super(props);
-        this.state = {
-            linkContent : 'Details',
-            event : [],
-        }
+    }
+
+    state = {
+        isJoinedBefore: false,
+        message : '',
+        messageType : '',
+        isParticipationRequest : false,
+        isEventHaveQuestions : false,
+        isOpenedQrCode : false,
+        qrCode : '',
+        isSendNotification : false,
+        event : [],
     }
 
     setLinkContentWith = (newLink) => {
@@ -51,19 +72,101 @@ class Event extends Component {
         })
     }
 
+    joinEvent  = async (e) =>{
+        e.preventDefault();
+        var participantUsername = localStorage.getItem("username");
+        const {event} = this.state;
+       
+        if(this.isEventFull(event)){
+            this.setMessageStatesAs("Full of Activity","ERROR");
+        }
+        else{
+            this.sendJoinRequestWith(participantUsername);
+        }
+    }
+
+    sendJoinRequestWith  = async (participantUsername) => {
+        const {event} = this.state;
+        const response = await axios.post(`/join/${participantUsername}`,
+            event, {
+                headers : {
+                    'Authorization' : "Bearer " + localStorage.getItem("jwtToken")
+                }
+            }).catch(err => {
+            this.props.history.push("/notFound404");
+        })
+        this.sendEmailToParticipant();
+        this.setMessageStatesAs(response.data.message,response.data.messageType);
+        this.openQrCode();
+        this.sendNotificationToOrganizator();
+
+    }
+
+    sendEmailToParticipant = async () =>{
+        // var participantUsername = localStorage.getItem("username");
+        // const response = await axios.post(`/sendEmail/${participantUsername}`,
+        //     this.props.event, {
+        //         headers : {
+        //             'Authorization' : "Bearer " + localStorage.getItem("jwtToken")
+        //         }
+        //     }).catch(err => {
+        //     this.props.history.push("/notFound404");
+        // })
+    }
+
+    setMessageStatesAs = (message,messageType) =>{
+        this.setState({
+            message : message,
+            messageType : messageType,
+            isParticipationRequest : true
+        })
+    }
+
+    openQrCode = () => {
+        this.setState({
+            isOpenedQrCode : true
+        })
+    }
+
+    sendNotificationToOrganizator = () => {
+        this.setState({
+            isSendNotification : true
+        })
+
+    }
+
+    closeQrCode = () => {
+        this.setState({
+            isOpenedQrCode : false
+        })
+    }
+
+    isEventFull = (event) =>{
+        return event.quota === event.currentNumberOfPeople;
+    }
+
+    closeMessageBox = () =>{
+        this.setState({
+            isParticipationRequest : false,
+        })
+    }
+
+
     render() {
 
         const {linkContent,event} = this.state;
+        //   const {event} = this.props;
+        var participantUsername = localStorage.getItem('username');
+        const {isJoinedBefore, isParticipationRequest, message, messageType} = this.state;
         return (
 
             <>
             <MDBCard background='dark' className='text-white'>
-                <MDBCardImage overlay  src={`${process.env.PUBLIC_URL}/assets/event/baseball.jpeg`}  alt='...' />
+                <MDBCardImage overlay  src={`${process.env.PUBLIC_URL}/assets/event/${event.imageUrl}`}  alt='...' />
                 <MDBCardOverlay >
                     <MDBCardTitle className='display-3 text-center mt-50'>{event.name}</MDBCardTitle>
                     <MDBCardText className='text-center'>
-                    This is a wider card with supporting text below as a natural lead-in to additional content. This
-                    content is a little bit longer.
+                    {event.description}
                     </MDBCardText>
                     {/* <MDBCardText>Last updated 3 mins ago</MDBCardText> */}
                 </MDBCardOverlay>
@@ -80,16 +183,15 @@ class Event extends Component {
                     <MDBCol className='text-center'>
                          <MDBTypography tag='h1'>{event.name}</MDBTypography>
                          <MDBBadge pill color='success' light>
-                           Sports Event 
+                           {event.category}
                         </MDBBadge>
                         <MDBBadge pill className='mx-2' color='danger' light>
-                           250 Reward points
+                           {event.point} Reward points
                         </MDBBadge>
                         <MDBBadge pill color='warning' light>
-                            $5 dollars ticket
+                            Price: {event.price > 0 ? event.price + 'dollars ticket' : 'Free' }
                         </MDBBadge>
-                        <p className='mt-5'> What a wonderful event that you cannot miss this opportunity to see how the team perform. Buy the 
-                            ticket now!!
+                        <p className='mt-5'> {event.description}
                         </p>
                         
                     </MDBCol>
@@ -105,13 +207,31 @@ class Event extends Component {
                 <div className='bg-success' >
 
                 <MDBCard alignment='center'>
-                        <MDBCardHeader className="p-3 mb-2 bg-success bg-gradient text-white rounded-5">Featured</MDBCardHeader>
-                        <MDBCardBody>
-                            <MDBCardTitle tag='h3'>Join the event now</MDBCardTitle>
-                            
-                            <MDBBtn href='#'>Join the event</MDBBtn>
+                        <MDBCardHeader className="p-3  bg-primary bg-gradient text-white rounded-5">10 seats remines</MDBCardHeader>
+                        <MDBCardBody className='bg-primary shadow-1-strong text-white'>
+                            <MDBCardTitle tag='h3'>Join the event now</MDBCardTitle>                      
+                                <div>
+                                    {isJoinedBefore ? <p className={"text-muted float-right"}>You have joined this event</p>
+                                        :
+                                        <button className={"btn btn-primary "}
+                                                onClick={(e) => this.joinEvent(e)}>Join the event
+                                        </button>
+                                    }
+                                    {isParticipationRequest ? <CustomizedSnackbar  vertical = {"bottom"}
+                                                                                horizontal = {"right"}
+                                                                                open = {isParticipationRequest}
+                                                                                handleClose = {this.closeMessageBox}
+                                                                                message={message} messageType={messageType}/> : null }
+
+                                    {this.state.isOpenedQrCode ?
+                                    <QrCode
+                                        participantUsername = {participantUsername}
+                                        event = {event}
+                                        handleClose = {this.closeQrCode}/> : null }
+
+                                </div>
                         </MDBCardBody>
-                        <MDBCardFooter className='p-3 mb-2 bg-success bg-gradient text-white rounded-5-muted'>10 days left</MDBCardFooter>
+                        <MDBCardFooter className='p-3 mb-2 bg-primary bg-gradient text-white rounded-5-muted'>10 days left</MDBCardFooter>
                         </MDBCard>
 
                 </div>

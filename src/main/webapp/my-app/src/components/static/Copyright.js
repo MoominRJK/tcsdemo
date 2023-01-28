@@ -6,7 +6,7 @@ function Copyright() {
         <Typography variant="body2" color="textSecondary" align="center">
             {'Copyright © '}
             <Link color="inherit" href="https://localhost:3000">
-                Event Management System
+                 [SEAS] School Event Award System
             </Link>{' '}
             {new Date().getFullYear()}
             {'.'}

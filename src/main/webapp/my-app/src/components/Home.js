@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, IconButton, Toolbar, Collapse } from '@material-ui/core';
 import SortIcon from '@material-ui/icons/Sort';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { Link as Scroll } from 'react-scroll';
 import { CssBaseline } from '@material-ui/core';
+import {Redirect, withRouter} from "react-router-dom";
+import axios from 'axios';
 
 import {
     MDBCarousel,
@@ -18,13 +20,40 @@ import {
     MDBRow,
     MDBCol,
     MDBContainer,
+    MDBBadge,
   } from 'mdb-react-ui-kit';
 
+class Home extends Component {
+    state = {
+      data : [] 
+  }
 
 
+componentDidMount =  () => {
+    this.getAllPrizes();
+}
+
+  getAllPrizes = async () =>{
+
+    const response = await axios.get(`/allPrize`, {
+        headers : {
+             authorization : 'Bearer ' + localStorage.getItem('jwtToken')
+        }
+    }).catch(err => {
+        console.log(err);
 
 
-const useStyles = makeStyles((theme) => ({
+        //this.props.history.push('/notFound404');
+    });
+    
+    this.setState({
+        data: response.data.filter(prize => prize.year === 2023) ,
+    })
+
+}
+
+
+ useStyles = makeStyles((theme) => ({
     root: {
       minHeight: '100vh',
       backgroundImage: `url(${process.env.PUBLIC_URL + '/assets/bg1.png'})`,
@@ -33,18 +62,19 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-  export default function Home() {
+  render() {
+    const {data} = this.state;
     return (
         <>
         <MDBCarousel showIndicators showControls fade>
           <MDBCarouselItem
             className='w-100 d-block'
             itemId={1}
-            src={`${process.env.PUBLIC_URL}/assets/a1.png`} 
+            src={`${process.env.PUBLIC_URL}/assets/a3.png`} 
             alt='...'
           >
-            <h5>First slide label</h5>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+            {/* <h5>First slide label</h5>
+            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p> */}
           </MDBCarouselItem>
           
           <MDBCarouselItem
@@ -53,18 +83,18 @@ const useStyles = makeStyles((theme) => ({
             src={`${process.env.PUBLIC_URL}/assets/a2.png`} 
             alt='...'
           >
-            <h5>Second slide label</h5>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            {/* <h5>Second slide label</h5>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> */}
           </MDBCarouselItem>
     
           <MDBCarouselItem
             className='w-100 d-block'
             itemId={3}
-            src={`${process.env.PUBLIC_URL}/assets/a3.png`} 
+            src={`${process.env.PUBLIC_URL}/assets/a1.png`} 
             alt='...'
           >
-            <h5>Third slide label</h5>
-            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+            {/* <h5>Third slide label</h5>
+            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p> */}
           </MDBCarouselItem>
         </MDBCarousel>
 
@@ -72,13 +102,60 @@ const useStyles = makeStyles((theme) => ({
 
 
     <MDBContainer breakpoint="sm mt-5">
-   <h2 className='text-primary text-center'>More Event You Attend, More Points You Get !</h2>
-      <MDBRow className='row-cols-1 row-cols-md-4 g-4'>
+    <div className='text-center purple-700' >
+      <h3 className='text-white'>The More Events You Attend, The More Points You Get !</h3>
+    </div>
+          
+    <MDBRow className='row-cols-1 row-cols-md-4 g-4'>
+                  {data.map((item) => (
+              
+                          <MDBCol className='mb-2'>
+                              <MDBCard className='h-100'>
+                              <MDBCardImage
+                                  src={`${process.env.PUBLIC_URL}/assets/prize/${item.imageUrl}`} 
+                                  alt='...'
+                                  position='top'
+                              />
+                              <MDBCardBody>
+                                  <MDBCardTitle>{item.name}</MDBCardTitle>
+                                  <MDBCardText>
+                                  {item.description}
+                                  </MDBCardText>
+                              
+                              </MDBCardBody>
+                              <p className='fw-bold mb-1'>
+                                  <MDBBadge pill light className= 'ml-4 ms-2 center' color='warning'>
+                                              {item.type}
+                                          </MDBBadge></p>
+                              <MDBCardFooter className={`${item.awardType === "Top" ? 'bg-success shadow-1-strong': 'bg-primary shadow-1-strong'} `}>
+                                  <h6 className= 'text-white text-center'>{item.grade}th Grade: <br/>{item.awardType === "Top" ? 'Top Accumulator Prize' : 'Raffle Prize'}</h6>
+
+                                  <h6 className= 'text-white text-center'>{item.year} : {item.quarter} Quarter</h6>
+
+                              </MDBCardFooter>
+                              </MDBCard>
+                          </MDBCol>
+        
+                
+                ))}
+                                                  
+              </MDBRow> 
+
+
+
+
+
+
+
+
+
+   
+      {/* <MDBRow className='row-cols-1 row-cols-md-4 g-4'>
        
       <MDBCol>
         <MDBCard className='h-100'>
           <MDBCardImage
-             src={`${process.env.PUBLIC_URL}/assets/parkingspot.jpeg`} 
+             src={`${process.env.PUBLIC_URL}/assets/prize/parkingspot.jpeg`} 
             alt='...'
             position='top'
           />
@@ -96,14 +173,14 @@ const useStyles = makeStyles((theme) => ({
       <MDBCol>
         <MDBCard className='h-100'>
           <MDBCardImage
-            src='https://mdbootstrap.com/img/new/standard/city/044.webp'
+             src={`${process.env.PUBLIC_URL}/assets/prize/ramen.png`} 
             alt='...'
             position='top'
           />
           <MDBCardBody>
-            <MDBCardTitle>Special Parking Space</MDBCardTitle>
+            <MDBCardTitle>Authentic Japanese ramen</MDBCardTitle>
             <MDBCardText>
-              Designated school parking spot for one month.
+               ICHIRAN Ramen combines the rich umami flavors of the broth with Hakata-style noodles that are slender, chewy, and perfect.
             </MDBCardText>
           </MDBCardBody>
           <MDBCardFooter className='bg-success shadow-1-strong'>
@@ -114,14 +191,14 @@ const useStyles = makeStyles((theme) => ({
       <MDBCol>
         <MDBCard className='h-100'>
           <MDBCardImage
-            src='https://mdbootstrap.com/img/new/standard/city/044.webp'
+             src={`${process.env.PUBLIC_URL}/assets/prize/stick.jpeg`} 
             alt='...'
             position='top'
           />
           <MDBCardBody>
-            <MDBCardTitle>Special Parking Space</MDBCardTitle>
+            <MDBCardTitle>A streaming stick</MDBCardTitle>
             <MDBCardText>
-              Designated school parking spot for one month.
+            Upgrade their Netflix marathons without actually buying them a whole new TV. The Roku Streaming Stick 4K offers 4K, HD, and HDR streaming in a portable package and at an affordable price. 
             </MDBCardText>
           </MDBCardBody>
           <MDBCardFooter className='bg-success shadow-1-strong'>
@@ -132,12 +209,12 @@ const useStyles = makeStyles((theme) => ({
       <MDBCol>
         <MDBCard className='h-100'>
           <MDBCardImage
-            src='https://mdbootstrap.com/img/new/standard/city/044.webp'
+            src={`${process.env.PUBLIC_URL}/assets/prize/kit.jpeg`} 
             alt='...'
             position='top'
           />
           <MDBCardBody>
-            <MDBCardTitle>Special Parking Space</MDBCardTitle>
+            <MDBCardTitle>A 51-piece art kit</MDBCardTitle>
             <MDBCardText>
               Designated school parking spot for one month.
             </MDBCardText>
@@ -148,26 +225,26 @@ const useStyles = makeStyles((theme) => ({
         </MDBCard>
       </MDBCol>
       
-    </MDBRow>
+    </MDBRow> */}
 
 
-
-
-
-    <h2 className='text-primary text-center mt-5'>Raffle Prizes Are Drawn Every Quarter!</h2>
+{/* 
+    <div className='text-center purple-700 mt-5' >
+      <h3 className='text-white'>Raffle Prizes Are Drawn Every Quarter!</h3>
+    </div>
     <MDBRow className='row-cols-1 row-cols-md-4 g-4 '>
    
       <MDBCol>
         <MDBCard className='h-100'>
           <MDBCardImage
-            src='https://mdbootstrap.com/img/new/standard/city/044.webp'
+            src={`${process.env.PUBLIC_URL}/assets/prize/maker.jpeg`} 
             alt='...'
             position='top'
           />
           <MDBCardBody>
-            <MDBCardTitle>Special Parking Space</MDBCardTitle>
+            <MDBCardTitle>A cold brew coffee maker</MDBCardTitle>
             <MDBCardText>
-              Designated school parking spot for one month.
+            If their morning ritual includes a cup of cold brew, they'll appreciate this convenient cold brew maker. All they have to do is fill it with their favorite coffee grinds, add water, let it sit, and they've got a glass of delicious cold brew on the way. 
             </MDBCardText>
           </MDBCardBody>
           <MDBCardFooter className='bg-primary shadow-1-strong'>
@@ -178,14 +255,14 @@ const useStyles = makeStyles((theme) => ({
       <MDBCol>
         <MDBCard className='h-100'>
           <MDBCardImage
-            src='https://mdbootstrap.com/img/new/standard/city/044.webp'
+            src={`${process.env.PUBLIC_URL}/assets/prize/moes.jpeg`} 
             alt='...'
             position='top'
           />
           <MDBCardBody>
-            <MDBCardTitle>Special Parking Space</MDBCardTitle>
+            <MDBCardTitle>Moes Lunch meal</MDBCardTitle>
             <MDBCardText>
-              Designated school parking spot for one month.
+              Free meal
             </MDBCardText>
           </MDBCardBody>
           <MDBCardFooter className='bg-primary shadow-1-strong'>
@@ -196,14 +273,14 @@ const useStyles = makeStyles((theme) => ({
       <MDBCol>
         <MDBCard className='h-100'>
           <MDBCardImage
-            src='https://mdbootstrap.com/img/new/standard/city/044.webp'
+            src={`${process.env.PUBLIC_URL}/assets/prize/movies.jpeg`} 
             alt='...'
             position='top'
           />
           <MDBCardBody>
-            <MDBCardTitle>Special Parking Space</MDBCardTitle>
+            <MDBCardTitle>Movie Ticket</MDBCardTitle>
             <MDBCardText>
-              Designated school parking spot for one month.
+                Regal Movie Ticket
             </MDBCardText>
           </MDBCardBody>
           <MDBCardFooter className='bg-primary shadow-1-strong'>
@@ -214,14 +291,14 @@ const useStyles = makeStyles((theme) => ({
       <MDBCol>
         <MDBCard className='h-100'>
           <MDBCardImage
-            src='https://mdbootstrap.com/img/new/standard/city/044.webp'
+            src={`${process.env.PUBLIC_URL}/assets/prize/potter.jpeg`} 
             alt='...'
             position='top'
           />
           <MDBCardBody>
-            <MDBCardTitle>Special Parking Space</MDBCardTitle>
+            <MDBCardTitle>Harry Potter Book</MDBCardTitle>
             <MDBCardText>
-              Designated school parking spot for one month.
+               HarryPotter book
             </MDBCardText>
           </MDBCardBody>
           <MDBCardFooter className='bg-primary shadow-1-strong'>
@@ -230,7 +307,7 @@ const useStyles = makeStyles((theme) => ({
         </MDBCard>
       </MDBCol>
       
-    </MDBRow>
+    </MDBRow> */}
     </MDBContainer>
 
 
@@ -249,6 +326,8 @@ const useStyles = makeStyles((theme) => ({
     //   </div>
     // );
   }
+} 
+export default withRouter(Home);
 
 // export default function Home() {
 //   const classes = useStyles();

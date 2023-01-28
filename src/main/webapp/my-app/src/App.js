@@ -17,7 +17,8 @@ import EventQuestionsForm from './components/Event/Forms/EventQuestionsForm'
 import ParticipantEvents from "./components/Participant/ParticipantEvents";
 import Event from './components/Event/Event'
 import EventAdmin from './components/Event/EventAdmin'
-import Prize from './components/Prize/Prize'
+import PrizesAdmin from './components/Prize/PrizesAdmin'
+import Prizes from './components/Prize/Prizes'
 import ParticipantsOfEvent from "./components/Participant/ParticipantsOfEvent";
 import EventStatistics from "./components/Event/StatisticsOfEvent/EventStatistics";
 import EventBarChartPoint from "./components/Event/StatisticsOfEvent/EventBarChartPoint";
@@ -62,7 +63,8 @@ class App extends Component {
                     <OrganizatorRoute exact path ={"/event/:eventName/addQuestion"} component = {EventQuestionsForm}/>
                     <OrganizatorRoute exact path = {"/createSurvey/:eventName"} component={EventSurveyForm}/>
                     <OrganizatorRoute exact path ={"/report"} component={EventBarChartPoint}/>
-                    <OrganizatorRoute exact path ={"/allPrize"} component={Prize}/>
+                    <OrganizatorRoute exact path ={"/allPrize"} component={Prizes}/>
+                    <ParticipantRoute exact path ={"/prize"} component={Prizes}/>
                     <ParticipantRoute exact path = {"/participantAnswersOf/:eventName"} component = {ParticipantAnswers}/>
                     <ParticipantRoute exact path ={"/myEvents/:username"} component={ParticipantEvents}/>
                     <ParticipantRoute exact path ={"/myReport/:username"} component={EventBarMyPoint}/>
