@@ -102,7 +102,7 @@ componentDidMount =  () => {
 
 
     <MDBContainer breakpoint="sm mt-5">
-    <div className='text-center purple-700' >
+    <div className='text-center' >
       <h3 className='text-white'>The More Events You Attend, The More Points You Get !</h3>
     </div>
           

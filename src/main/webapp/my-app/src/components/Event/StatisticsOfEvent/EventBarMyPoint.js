@@ -4,6 +4,7 @@ import {Form, InputGroup} from "react-bootstrap";
 import EventSelectionForStatistics from "./EventSelectionForStatistics";
 import EventBarChart from './EventBarChart'
 import {getEventPoints, getEvents} from "../../../HelperFunctions/EventHelpers";
+import CountUp from 'react-countup';
 
 import {
     MDBCard,
@@ -135,8 +136,8 @@ class EventBarMyPoint extends Component {
         return (
             <div className={"container w-75 mt-5"}>
 
-         <div className='text-center mb-3' >
-                                      <h3 className='text-dark'>Dashboard</h3>
+         <div className='text-center  mb-3' >
+                                      <h1 className='text-white'>Dashboard</h1>
                                     </div>
       <MDBRow className='row-cols-1 row-cols-md-4 g-4 mb-5'>
        

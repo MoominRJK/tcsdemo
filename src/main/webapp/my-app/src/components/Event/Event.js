@@ -180,7 +180,7 @@ class Event extends Component {
                     <h3>{event.startDate}</h3>
                     </MDBCol> */}
 
-                    <MDBCol className='text-center'>
+                    <MDBCol className='text-center text-white'>
                          <MDBTypography tag='h1'>{event.name}</MDBTypography>
                          <MDBBadge pill color='success' light>
                            {event.category}
@@ -201,7 +201,7 @@ class Event extends Component {
                 
                 </MDBContainer>
                 <MDBContainer breakpoint="sm mt-5">
-                       <img src={`${process.env.PUBLIC_URL}/assets/event/when.png`}  className='img-fluid shadow-4' alt='...' />
+                       <img src={`${process.env.PUBLIC_URL}/assets/event/when1.png`}  className='img-fluid shadow-4 ml-5' alt='...' />
                     </MDBContainer>
 
                 <div className='bg-success' >

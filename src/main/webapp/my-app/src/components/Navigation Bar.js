@@ -5,6 +5,8 @@ import Consumer from '../components/ContextAPI/Context';
 import {isOrganizator, isLogin, isParticipant} from "../Authentication";
 import Container from 'react-bootstrap/Container';
 
+import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
+
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
 import {
@@ -58,7 +60,7 @@ class NavigationBar extends Component {
                                                 to = {"/eventsAdmin"}>Manage Events</Link> : null}
 
                                             {  isOrganizator() ?            
-                                            <NavDropdown title="Raffle" id="collasible-nav-dropdown">
+                                            <NavDropdown title="Raffle" id="collasible-nav-dropdown" renderMenuOnMount={true}>
                                                 <NavDropdown.Item href="/raffle">Onsite Raffle Drawing</NavDropdown.Item>
                                                 <NavDropdown.Divider />
                                                 <NavDropdown.Item href="/raffleQ">
@@ -101,10 +103,18 @@ class NavigationBar extends Component {
                                             <Navbar.Text className={ isLogin() ? "nav-link text-white ": "d-none"}>
                                                     Signed in as: <a href="#">{localStorage.getItem("username")} </a>
                                             </Navbar.Text>
-                                            
+                                            <NavDropdown title="Help" id="collasible-nav-dropdown" renderMenuOnMount={true}> 
+                                                <NavDropdown.Item href="/userguide">User Guide</NavDropdown.Item>
+                                                <NavDropdown.Divider />
+                                                <NavDropdown.Item href="/qanda">
+                                                    Q & A
+                                                </NavDropdown.Item>
+                                               
+                                            </NavDropdown>
                                             <Link className = { isLogin() ? "nav-link": "d-none"}
                                                             to ={"/login"}>
                                             Sign out</Link>
+                                      
                                             
                                         </Nav>
                                         </Navbar.Collapse>

@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 // import './App.css';
 import { BrowserRouter as Router, Route, Switch, Redirect,browserHistory} from 'react-router-dom';
 import Events from "./components/Event/Events";
+
+import QandA from "./components/Help/QandA";
 import EventsAdmin from "./components/Event/EventsAdmin";
 import Login from "./components/Login";
 import Home from "./components/Home";
@@ -32,6 +34,7 @@ import InformationInsideOfQrCode from './components/QrCode/InformationInsideOfQr
 
 import { makeStyles } from '@material-ui/core/styles';
 import { CssBaseline } from '@material-ui/core';
+import UserGuide from './components/Help/UserGuide';
 
 
 
@@ -70,6 +73,10 @@ class App extends Component {
                     <ParticipantRoute exact path ={"/myReport/:username"} component={EventBarMyPoint}/>
                     <ParticipantRoute exact path ={"/:username/and/:eventName/information"}
                                       component ={InformationInsideOfQrCode}/>
+                    <PrivateRoute exact path={"/userguide"} component={UserGuide}/>
+                    <PrivateRoute exact path={"/qanda"} component={QandA}/>
+                    <Route exact path="/userguide" render={() => {window.location.href="user_guide.html"}} />
+                    <Route exact path="/qanda" component={EventBarMyPoint}/>
                    <Route component={NotFound}/>
                 </Switch>
                 <Footer/>
