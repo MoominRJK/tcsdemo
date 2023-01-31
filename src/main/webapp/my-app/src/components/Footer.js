@@ -2,18 +2,39 @@ import React from 'react';
 import { MDBFooter, MDBContainer } from 'mdb-react-ui-kit';
 
 export default function Footer() {
+  var style = {
+    backgroundColor: "black",
+    borderTop: "1px solid #E7E7E7",
+    textAlign: "center",
+    padding: "20px",
+    position: "fixed",
+    left: "0",
+    bottom: "0",
+    height: "60px",
+    width: "100%",
+}
+
+var phantom = {
+  display: 'block',
+  padding: '20px',
+  height: '60px',
+  width: '100%',
+}
   return (
 
-    <div >
+    <div className='mt-5 bg-black text-white' >
 
-        {/* <MDBFooter bgColor='light' className='text-center text-lg-left'>
-            <div className='text-center p-3' style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
+       <footer className='bg-black'>
+       <div style={phantom} />
+        <MDBFooter style={style}  className='text-center mt-10 text-lg-left'>
+            <div className='text-center p-3 mb-3' >
                 &copy; {new Date().getFullYear()} Copyright:{' '}
-                <a className='text-dark' href='https://mdbootstrap.com/'>
+                
                 [SEAS] School Event Award System
-                </a>
+                
             </div>
-            </MDBFooter> */}
+            </MDBFooter>
+        </footer>
 
     </div>
   );

@@ -241,11 +241,11 @@ class EventRaffleQ extends Component {
                 {/* <MDBCardText>Last updated 3 mins ago</MDBCardText> */}
             </MDBCardOverlay>
           </MDBCard>
-            <div className={"container w-80 mt-5"}>
+            <div className={"container w-80  mt-5"}>
                 <div className={"container w-50 mt-5"}>
                 <form onSubmit={(e) => this.sendQuestions(e)}>
                          <Form.Group>
-                            <Form.Label>Select Year:</Form.Label>
+                            <Form.Label className='text-white'>Select Year:</Form.Label>
                             <InputGroup>
                                 <Form.Control as="select" required
                                               value={this.state.userType}
@@ -259,27 +259,28 @@ class EventRaffleQ extends Component {
                         </Form.Group>
 
                         <Form.Group>
-                            <Form.Label>Select Quarter:</Form.Label>
+                            <Form.Label className='text-white'>Select Quarter:</Form.Label>
                             <InputGroup>
                                 <Form.Control as="select" required
                                               value={this.state.userType1}
                                               onChange={(e) => this.handleUserType1Change(e)}>
                                     <option value=""> - </option>
                             
-                                    <option value="1">Quarter 1</option>
-                                    <option value="2">Quarter 2</option>
-                                    <option value="3">Quarter 3</option>
-                                    <option value="4">Quarter 4</option>
+                                    <option value="1"> 1st Quarter</option>
+                                    <option value="2"> 2nd Quarter</option>
+                                    <option value="3"> 3rd Quarter</option>
+                                    <option value="4"> 4th Quarter</option>
                                 </Form.Control>
                             </InputGroup>
                         </Form.Group>
-
-                        <FormControlLabel
+                       
+                        <FormControlLabel className="ml-1 text-black" style={{ backgroundColor: 'white' }}
                                         control={<Checkbox value="remember"
-                                                           color="primary"
+                                                           color="black"
                                                            onChange={(e) => this.handleCheckboxChange(e)}/>}
                                         label="Save the records"
                                     />
+                                 
 
                     <div className="col-md-12 text-center mt-5">
                         {/* <EventSelectionForRaffle
@@ -300,6 +301,12 @@ class EventRaffleQ extends Component {
                             </Typography>}
                             columns={this.state.columns}
                             data = {this.state.pp.slice(0, 4)}
+                            options={{
+                               
+                                  exportButton: true,
+                                  exportAllData: true
+
+                            }}
                             // actions = {[ {
                             //     icon : 'info',
                             //     tooltip: 'Click for event information',
@@ -314,6 +321,12 @@ class EventRaffleQ extends Component {
                             </Typography>}
                             columns={this.state.columns}
                             data = {this.state.pp.slice(4, 9) }
+                            options={{
+                     
+                                  exportButton: true,
+                                  exportAllData: true
+
+                            }}
                             // actions = {[ {
                             //     icon : 'info',
                             //     tooltip: 'Click for event information',

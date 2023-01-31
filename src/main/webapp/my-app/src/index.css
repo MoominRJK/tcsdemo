@@ -50,3 +50,24 @@ background-color:aquamarine
   background-image: none;
   background-color: white;
 }
+
+
+.circle {
+  display: inline-block;
+    background-color: #6416FF;
+    margin: 10px;
+    border-radius: 50%;
+}
+
+.circle-inner {
+  color: white;
+  display: table-cell;
+  vertical-align: middle; 
+  text-align: center;
+  text-decoration: none;
+  height: 50px;
+  width: 50px;  
+  font-size: 30px;
+}
+
+

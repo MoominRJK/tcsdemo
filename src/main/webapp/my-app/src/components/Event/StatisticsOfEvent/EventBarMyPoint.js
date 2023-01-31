@@ -145,7 +145,7 @@ class EventBarMyPoint extends Component {
         <MDBCard className='h-100'>
          
           <MDBCardBody className='bg-success shadow-1-strong'>
-            <MDBCardTitle><h1 className= 'text-white text-center'>2</h1></MDBCardTitle>
+            <MDBCardTitle><h1 className= 'text-white text-center'><CountUp start={0} end={2} /></h1></MDBCardTitle>
 
           </MDBCardBody>
           <MDBCardFooter className='bg-success shadow-1-strong'>
@@ -157,11 +157,11 @@ class EventBarMyPoint extends Component {
         <MDBCard className='h-100'>
           
         <MDBCardBody className='bg-warning shadow-1-strong'>
-            <MDBCardTitle><h1 className= 'text-white text-center'>225</h1></MDBCardTitle>
+            <MDBCardTitle><h1 className= 'text-black text-center'><CountUp start={0} end={225} /></h1></MDBCardTitle>
 
           </MDBCardBody>
           <MDBCardFooter className='bg-warning shadow-1-strong'>
-            <h6 className= 'text-white text-center'>Current Total Points</h6>
+            <h6 className= 'text-black text-center'>Current Total Points</h6>
           </MDBCardFooter>
         </MDBCard>
       </MDBCol>
@@ -169,7 +169,7 @@ class EventBarMyPoint extends Component {
         <MDBCard className='h-100'>
           
         <MDBCardBody className='bg-info shadow-1-strong'>
-            <MDBCardTitle><h1 className= 'text-white text-center'>3</h1></MDBCardTitle>
+            <MDBCardTitle><h1 className= 'text-white text-center'><CountUp start={0} end={3} /></h1></MDBCardTitle>
 
 
           </MDBCardBody>
@@ -182,7 +182,7 @@ class EventBarMyPoint extends Component {
         <MDBCard className='h-100'>
         
         <MDBCardBody className='bg-danger shadow-1-strong'>
-            <MDBCardTitle><h1 className= 'text-white text-center'>670</h1></MDBCardTitle>
+            <MDBCardTitle><h1 className= 'text-white text-center'><CountUp start={250} end={670} /></h1></MDBCardTitle>
 
 
           </MDBCardBody>

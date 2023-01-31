@@ -9,6 +9,7 @@ import UpdateEventForm from "./Forms/UpdateEventForm";
 import Consumer from '../ContextAPI/Context';
 import EventCard from './EventCard';
 
+
 import {
     MDBCard,
     MDBCardImage,
@@ -253,7 +254,10 @@ class EventTable extends Component {
                                         headerStyle: {
                                             backgroundColor: '#039be5',
                                             color: '#FFF'
-                                          }
+                                          },
+                                          exportButton: true,
+                                          exportAllData: true
+
                                     }}
                                     />
                             {isAdditionRequest ? this.props.history.push(`/events/${username}`) : null }

@@ -145,16 +145,17 @@ class Events extends Component {
                                                     alt='...'
                                                     position='top'
                                                 />
-                                                <MDBCardBody>
+                                                <MDBCardBody  >
                                                     <MDBCardTitle>{d.name}</MDBCardTitle>
                                                     <MDBCardText>
                                                     
                                                      {d.description}
                                                     </MDBCardText>
-                                                    <div className='ms-3'>
+
+                                                    <div className='ms-3 d-flex '>
                                                             <p className='fw-bold mb-1'>Location: {d.location}</p>
                                                         </div>
-                                                        <div className='ms-3'>
+                                                        <div className='ms-3 align-items-baseline'>
                                                                 <p className='fw-bold mb-1'>Reward Point: 
                                                                         <MDBBadge pill light className= 'ml-4 ms-2' color='success'>
                                                                             {d.point}

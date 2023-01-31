@@ -4,6 +4,7 @@ import {Form, InputGroup} from "react-bootstrap";
 import EventSelectionForStatistics from "./EventSelectionForStatistics";
 import EventBarChart from './EventBarChart'
 import {getEventPoints, getEvents} from "../../../HelperFunctions/EventHelpers";
+import CountUp from 'react-countup';
 import {
     MDBCard,
     MDBCardBody,
@@ -157,11 +158,11 @@ class EventBarChartPoint extends Component {
     render() {
         const {statisticsType,isOpenedEventBarChart} = this.state;
         return (
-            <div className={"container w-75 mt-5"}>
+            <div className={"container  w-75 mt-5"}>
 
 
                     <div className='text-center mb-3' >
-                                                        <h3 className='text-dark'>Dashboard</h3>
+                                                        <h1 className='text-white'>Dashboard</h1>
                                                         </div>
                         <MDBRow className='row-cols-1 row-cols-md-4 g-4 mb-5'>
                         
@@ -169,7 +170,7 @@ class EventBarChartPoint extends Component {
                             <MDBCard className='h-100'>
                             
                             <MDBCardBody className='bg-success shadow-1-strong'>
-                                <MDBCardTitle><h1 className= 'text-white text-center'>15</h1></MDBCardTitle>
+                                <MDBCardTitle><h1 className= 'text-white text-center'><CountUp start={0} end={15} /></h1></MDBCardTitle>
 
                             </MDBCardBody>
                             <MDBCardFooter className='bg-success shadow-1-strong'>
@@ -178,14 +179,14 @@ class EventBarChartPoint extends Component {
                             </MDBCard>
                         </MDBCol>
                         <MDBCol>
-                            <MDBCard className='h-100'>
+                            <MDBCard className='h-100 text-black'>
                             
                             <MDBCardBody className='bg-warning shadow-1-strong'>
-                                <MDBCardTitle><h1 className= 'text-white text-center'>14</h1></MDBCardTitle>
+                                <MDBCardTitle><h1 className= 'text-black text-center'><CountUp start={0} end={14} /></h1></MDBCardTitle>
 
                             </MDBCardBody>
                             <MDBCardFooter className='bg-warning shadow-1-strong'>
-                                <h6 className= 'text-white text-center'>Users</h6>
+                                <h6 className= 'text-black text-center'>Users</h6>
                             </MDBCardFooter>
                             </MDBCard>
                         </MDBCol>
@@ -193,7 +194,7 @@ class EventBarChartPoint extends Component {
                             <MDBCard className='h-100'>
                             
                             <MDBCardBody className='bg-info shadow-1-strong'>
-                                <MDBCardTitle><h1 className= 'text-white text-center'>41</h1></MDBCardTitle>
+                                <MDBCardTitle><h1 className= 'text-white text-center'><CountUp start={0} end={41} /></h1></MDBCardTitle>
 
 
                             </MDBCardBody>
@@ -206,7 +207,7 @@ class EventBarChartPoint extends Component {
                             <MDBCard className='h-100'>
                             
                             <MDBCardBody className='bg-danger shadow-1-strong'>
-                                <MDBCardTitle><h1 className= 'text-white text-center'>16</h1></MDBCardTitle>
+                                <MDBCardTitle><h1 className= 'text-white text-center'><CountUp start={0} end={16} /></h1></MDBCardTitle>
 
 
                             </MDBCardBody>
@@ -221,21 +222,7 @@ class EventBarChartPoint extends Component {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    <div className={"container w-50 mt-5 mb-5"}> 
+                    <div className={"container w-50 mt-5 text-white mb-5"}> 
                         <h3>Student Quarterly Reward Points</h3> 
                             <form onSubmit={(e) => this.sendQuestions(e)}>
                                 <Form.Group>
@@ -260,10 +247,10 @@ class EventBarChartPoint extends Component {
                                                     onChange={(e) => this.handleUserType1Change(e)}>
                                             <option value=""> - </option>
                                     
-                                            <option value="1">Quarter 1</option>
-                                            <option value="2">Quarter 2</option>
-                                            <option value="3">Quarter 3</option>
-                                            <option value="4">Quarter 4</option>
+                                            <option value="1"> 1st Quarter</option>
+                                            <option value="2"> 2nd Quarter</option>
+                                            <option value="3"> 3rd Quarter</option>
+                                            <option value="4"> 4th Quarter</option>
                                         </Form.Control>
                                     </InputGroup>
                                 </Form.Group>
@@ -319,16 +306,29 @@ class EventBarChartPoint extends Component {
                 
                 <MDBCol xl={4} lg={6} className='mb-4'  key={d.name}>
                 <MDBCard>
-                <MDBCardBody>
+                <MDBCardBody className= 'text-black'>
+                <div className='d-flex justify-content-between align-items-center text-left'>
+                        <div class="circle" >
+                                <p class="circle-inner">{d.firstName[0]}</p>
+                               
+                        </div>
+                        <div className='ms-3 ml-1 '>
+                            <p className='fw-bold mb-1'> {d.firstName} {d.lastName}</p>
+                     
+                        </div>
+
+                        </div>
                     <div className='d-flex justify-content-between align-items-center'>
-                        <img
+                        {/* <img
                             src='https://mdbootstrap.com/img/new/avatars/8.jpg'
                             alt=''
                             style={{ width: '45px', height: '45px' }}
                             className='rounded-circle'
-                        />
+                        ></img> */}
+                       
+
                         <div className='ms-3 ml-1'>
-                            <p className='fw-bold mb-1'> {d.firstName} {d.lastName}</p>
+                            <p className='fw-bold mb-1'> Email</p>
                             <p className='text-muted mb-0'>{d.email}</p>
                         </div>
                         <div className='ms-3'>
