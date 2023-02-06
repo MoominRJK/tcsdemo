@@ -53,8 +53,7 @@ class App extends Component {
                     <Route exact path = {"/login"} component ={Login}/>
                     <Route exact path = {"/register"} component= {RegisterForm}/>
                     <PrivateRoute exact path={"/eventsAdmin"} component={EventsAdmin}/>
-                    <PrivateRoute exact path={"/events"} component={Events}/>
-                    
+                    <PrivateRoute exact path={"/events"} component={Events}/>                   
                     <PrivateRoute exact path={"/eventAdmin/:eventName"} component={EventAdmin}/>
                     <PrivateRoute exact path={"/event/:eventName"} component={Event}/>
                     <OrganizatorRoute exact path ={"/chart"} component = {EventStatistics}/>
@@ -73,9 +72,10 @@ class App extends Component {
                     <ParticipantRoute exact path ={"/myReport/:username"} component={EventBarMyPoint}/>
                     <ParticipantRoute exact path ={"/:username/and/:eventName/information"}
                                       component ={InformationInsideOfQrCode}/>
-                    <PrivateRoute exact path={"/userguide"} component={UserGuide}/>
+                    {/* <PrivateRoute exact path={"/userguide"} component={UserGuide}/> */}
                     <PrivateRoute exact path={"/qanda"} component={QandA}/>
-                    <Route exact path="/userguide" render={() => {window.location.href="user_guide.html"}} />
+                    <Route exact path="/userguide" render={() => {window.location.href="SEAS.html"}} />
+                    {/* <Route exact path="/userguide" render={() => {window.open("http://localhost:3000/SEAS.html", '_blank', 'noreferrer')}} /> */}
                     <Route exact path="/qanda" component={EventBarMyPoint}/>
                    <Route component={NotFound}/>
                 </Switch>

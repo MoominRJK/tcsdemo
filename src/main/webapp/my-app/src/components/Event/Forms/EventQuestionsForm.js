@@ -220,7 +220,7 @@ class EventQuestionsForm extends Component {
                 {isOpenedMessageSnackbar ?
                     <CustomizedSnackbar
                         vertical={"bottom"}
-                        horizontal={"right"}
+                        horizontal={"center"}
                         open = {isOpenedMessageSnackbar}
                         handleClose = {this.closeMessageSnackbar}
                         message={message}

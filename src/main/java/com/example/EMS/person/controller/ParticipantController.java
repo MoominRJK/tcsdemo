@@ -51,7 +51,7 @@ public class ParticipantController {
     }
 
     @PostMapping("/isJoinedBefore/{username}")
-    @PreAuthorize("hasAuthority('PARTICIPANT')")
+//    @PreAuthorize("hasAuthority('PARTICIPANT')")
     public boolean isParticipatedBeforeToEvent(@PathVariable String username,
                                                @RequestBody @Valid EventDTO eventDTO) {
         Event event = eventMapper.mapToEntity(eventDTO);

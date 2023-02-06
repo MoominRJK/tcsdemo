@@ -35,6 +35,12 @@ export default function QrCode(props) {
         props.handleClose();
     }
 
+    const goToMyEventsPage = () =>{
+        const participantUsername = localStorage.getItem('username');
+        history.push(`/myEvents/${participantUsername}`);
+        props.handleClose();
+    }
+
     useEffect(() => {
         getQrCode();
 
@@ -59,7 +65,7 @@ export default function QrCode(props) {
                 open={open}
                 TransitionComponent={Transition}
                 keepMounted
-                onClose={goToEventsPage}
+                onClose={goToMyEventsPage}
                 aria-labelledby="alert-dialog-slide-title"
                 aria-describedby="alert-dialog-slide-description">
                 
@@ -106,7 +112,7 @@ export default function QrCode(props) {
                             <small className='text-muted'>WHERE: Baseball field</small>
                             </MDBCardText>
                             <MDBCardText>
-                            <button onClick={goToEventsPage} className={"btn btn-primary "}>
+                            <button onClick={goToMyEventsPage} className={"btn btn-primary "}>
                                 OK
                                 </button>
                             </MDBCardText>

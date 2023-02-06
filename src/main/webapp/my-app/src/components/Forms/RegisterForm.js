@@ -290,7 +290,7 @@ class RegisterForm extends Component {
                     vertical={"bottom"}
                     open = {this.state.isOpenMessage}
                     handleClose = {this.closeMessageBox}
-                    horizontal={"right"}
+                    horizontal={"center"}
                     message={this.state.message}
                     messageType={this.state.messageType}/> : null }
             </Card>

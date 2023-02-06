@@ -22,8 +22,8 @@ class EventsAdmin extends Component {
                                 {isParticipant() ?
                                       <div className={"mt-5"}>
                                           <Alert severity="info" className={"container"}>
-                                                <AlertTitle>Information</AlertTitle>
-                                                to the left of the event name. <InfoIcon></InfoIcon>
+                                                {/* <AlertTitle>Information</AlertTitle>
+                                                to the left of the event name. <InfoIcon></InfoIcon> */}
                                                 <strong>by pressing the icon
                                                     get information about the event and
                                                     you can attend the event.</strong>
@@ -32,7 +32,7 @@ class EventsAdmin extends Component {
                                 {isOrganizator() ?
                                     <div className={"mt-5"}>
                                         <Alert severity="info" className={"container"}>
-                                            <AlertTitle>Information</AlertTitle>
+                                            {/* <AlertTitle>Information</AlertTitle> */}
                                             Admin can click + sign to add a new event, click any action items to view, edit or delete an event.
                                         </Alert>
                                     </div>

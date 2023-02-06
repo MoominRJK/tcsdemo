@@ -5,10 +5,22 @@ import axios from "axios";
 class ParticipantsOfEvent extends Component {
     state = {
         columns: [
-            { title: 'First Name', field: 'name' },
-            { title: 'Last Name', field: 'surname'},
-            { title: 'Grade', field: 'grade'},
-            {title : 'Email', field : 'email'},
+            { title: 'First Name', field: 'name', headerStyle: {
+                backgroundColor: '#039be5',
+                color: '#FFF'
+              } },
+            { title: 'Last Name', field: 'surname',  headerStyle: {
+                backgroundColor: '#039be5',
+                color: '#FFF'
+              }},
+            { title: 'Grade', field: 'grade' , headerStyle: {
+                backgroundColor: '#039be5',
+                color: '#FFF'
+              }},
+            {title : 'Email', field : 'email',  headerStyle: {
+                backgroundColor: '#039be5',
+                color: '#FFF'
+              }},
         ],
         participants : [],
         eventName: ''

@@ -139,7 +139,9 @@ class EventTable extends Component {
         this.props.history.push(`/event/${eventName}`)
     }
 
-    
+    goToEventParticipantPage = (e,eventName) =>{
+        this.props.history.push(`/participants/${eventName}`)
+    }
 
 
     render() {
@@ -206,29 +208,50 @@ class EventTable extends Component {
                                             color: '#FFF'
                                           }
                                         },
-                                        { title: 'Event Date', field: 'startDate', type : 'date',
-                                        headerStyle: {
+                                        { title: 'Start Date', field: 'startDate', type : 'date',  headerStyle: {
                                             backgroundColor: '#039be5',
                                             color: '#FFF'
                                           }},
+                                        { title: 'Start Time', field: 'startTime', type : 'date',  headerStyle: {
+                                            backgroundColor: '#039be5',
+                                            color: '#FFF'
+                                          }},
+                                        {title : 'Where', field : 'location', headerStyle: {
+                                            backgroundColor: '#039be5',
+                                            color: '#FFF'
+                                          }},
+                                          {title : 'Category', field : 'category', headerStyle: {
+                                            backgroundColor: '#039be5',
+                                            color: '#FFF'
+                                            }},
+                            
                                         { title: 'Reward Point', field: 'point', 
                                         headerStyle: {
                                             backgroundColor: '#039be5',
                                             color: '#FFF'
                                           }},
-                                        { title : 'Location', field : 'location',
+                                        { title : 'Seats', field : 'quota',
                                         headerStyle: {
                                             backgroundColor: '#039be5',
                                             color: '#FFF'
                                           }},
+                                      
+                                        {title : 'Price', field : 'price', headerStyle: {
+                                            backgroundColor: '#039be5',
+                                            color: '#FFF'
+                                            }},
                                     ]}
                                     data={ this.props.events}
                                     actions={[
                                         {
                                             icon : 'info',
-                                            tooltip: 'To participate in the event or to enter the event information ' +
-                                            'click to view',
+                                            tooltip: 'View event details ',
                                             onClick: ( e,rowData ) => this.goToEventPage(e,rowData.name)
+                                        },
+                                        {
+                                            icon : 'man',
+                                            tooltip: 'View all participate in the event ' ,
+                                            onClick: ( e,rowData ) => this.goToEventParticipantPage(e,rowData.name)
                                         },
                                         {
                                             icon :  'edit',

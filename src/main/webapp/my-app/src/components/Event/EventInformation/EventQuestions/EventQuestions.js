@@ -225,7 +225,7 @@ class EventQuestions extends Component {
                                 {isParticipationSuccessfull ?
                                     <CustomizedSnackbar
                                         vertical={"bottom"}
-                                        horizontal={"right"}
+                                        horizontal={"center"}
                                         open = {isParticipationSuccessfull}
                                         handleClose = {this.closeMessage}
                                         message={message}

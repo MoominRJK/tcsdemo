@@ -3,14 +3,33 @@ import MuiAlert from '@material-ui/lab/Alert';
 import Alert from '@material-ui/lab/Alert';
 import axios from "axios";
 import {withRouter} from "react-router-dom";
+
+
+import {
+    MDBCard,
+    MDBCardTitle,
+    MDBCardText,
+    MDBCardOverlay,
+    MDBCardImage,
+    MDBContainer,
+    MDBCol,
+    MDBBadge, MDBIcon,
+    MDBTypography,
+    MDBCardBody,
+    MDBCardHeader,
+    MDBCardFooter,
+    MDBBtn
+  } from 'mdb-react-ui-kit';
+
 class RaffleInformation extends Component {
     constructor(props) {
         super(props);
     }
 
     componentDidMount = () => {
-        this.updateEventWithTheRaffleUsername();
-        this.sendEmailToRaffleWinner();
+         this.updateEventWithTheRaffleUsername();
+         this.sendEmailToRaffleWinner();
+       
     }
 
     updateEventWithTheRaffleUsername = async () => {
@@ -27,6 +46,22 @@ class RaffleInformation extends Component {
 
     }
 
+    getRaffleWinnerFullName = async () => {
+        const {selectedEvent,raffleWinnerUsername} = this.props;
+        const response = await axios.post(`/participant/${raffleWinnerUsername}`,
+            selectedEvent, {
+                headers : {
+                    'Authorization' : "Bearer " + localStorage.getItem("jwtToken")
+                }
+            }).catch(err => {
+            this.props.history.push("/notFound404");
+        })
+
+        this.setState({
+            participant : response.data
+        })
+    }
+
     sendEmailToRaffleWinner = async () => {
         const {selectedEvent,raffleWinnerUsername} = this.props;
         const response = await axios.post(`/sendEmail/toRaffleWinner/${raffleWinnerUsername}`,
@@ -40,11 +75,23 @@ class RaffleInformation extends Component {
     }
 
     render() {
-        const {raffleWinnerUsername} = this.props;
+        const {raffleWinnerUsername, raffleWinnerFullname} = this.props;
         return (
             <div className={"container mt-5"}>
-                <Alert severity="info"> {raffleWinnerUsername} is today's event raffle winner.
-                The winner has been notified by the e-mail.</Alert>
+                {/* <Alert severity="info"> {raffleWinnerFullname} is today's event raffle winner.
+                The winner has been notified by the e-mail.</Alert> */}
+                <MDBCard background='dark' className='text-white'>
+                <MDBCardImage overlay  src={`${process.env.PUBLIC_URL}/assets/winner.png`}  alt='...' />
+                <MDBCardOverlay >
+               
+                <MDBCardText className='text-center display-5'>
+                    Today's event raffle winner:
+                </MDBCardText>
+                    <MDBCardTitle className='display-3 text-center text-danger mt-50'> {raffleWinnerFullname} </MDBCardTitle>
+                   
+                   
+                </MDBCardOverlay>
+             </MDBCard>
             </div>
         );
     }

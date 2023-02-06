@@ -77,7 +77,7 @@ class NavigationBar extends Component {
                                             {  isOrganizator() ? <Link className ="nav-link"
                                                 to = {"/chart"}>Charts</Link> : null}
                                             { isOrganizator() ? <Link className ="nav-link"
-                                               to = {"/report"}>Report</Link> : null}
+                                               to = {"/report"}>Dashboard</Link> : null}
                                             { isOrganizator() ? <Link className ="nav-link"
                                                to = {"/allPrize"}>Manage Prize</Link> : null}
                                             
@@ -92,25 +92,29 @@ class NavigationBar extends Component {
                                                 to = {"/prize"}>Prizes</Link> : null}
                                             <Link className = { isParticipant() ? "nav-link": "d-none"}
                                                 to ={`/myReport/${localStorage.getItem('username')}`}>
-                                                Report</Link>
+                                                Dashboard</Link>
 
                                             
                                         </Nav>
                                         <Nav className="ml-auto nav-item text-white ml-5 mt-1">
-                                            { !isLogin() ? <Link className ="nav-link" to = {"/login"}>Sign In</Link> : null}
-                                            { !isLogin() ? <Link className ="nav-link" to = {"/register"}>Sign Up</Link> : null}
+
+
+                                         
                                             
                                             <Navbar.Text className={ isLogin() ? "nav-link text-white ": "d-none"}>
                                                     Signed in as: <a href="#">{localStorage.getItem("username")} </a>
                                             </Navbar.Text>
                                             <NavDropdown title="Help" id="collasible-nav-dropdown" renderMenuOnMount={true}> 
-                                                <NavDropdown.Item href="/userguide">User Guide</NavDropdown.Item>
+                                                <NavDropdown.Item href="/userguide" target="_blank" >User Guide</NavDropdown.Item>
                                                 <NavDropdown.Divider />
                                                 <NavDropdown.Item href="/qanda">
                                                     Q & A
                                                 </NavDropdown.Item>
                                                
                                             </NavDropdown>
+
+                                            { !isLogin() ? <Link className ="nav-link" to = {"/login"}>Sign In</Link> : null}
+                                            { !isLogin() ? <Link className ="nav-link" to = {"/register"}>Sign Up</Link> : null}
                                             <Link className = { isLogin() ? "nav-link": "d-none"}
                                                             to ={"/login"}>
                                             Sign out</Link>

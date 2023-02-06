@@ -344,7 +344,7 @@ class EventRaffleQ extends Component {
                 </SimpleBackdrop> : null}
                 {isMessageBoxOpen ?  <CustomizedSnackbar
                                     vertical={"bottom"}
-                                    horizontal={"right"}
+                                    horizontal={"center"}
                                     open = {isMessageBoxOpen}
                                     handleClose = {this.closeMessageBox}
                                     message={message}

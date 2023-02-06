@@ -56,7 +56,9 @@ class Events extends Component {
                     value => {
                         var {events} = value;
                      
-                         events = this.state.eventType === 0 ? events : events.filter(e => e.eventType === this.state.eventType)
+                        //  events = this.state.eventType === 0 ? events : events.filter(e => e.eventType === this.state.eventType)
+
+                        
                    
                         return (
                             <div className={"mt-1 mr-5 text-white text-right"}>
@@ -133,7 +135,7 @@ class Events extends Component {
                                 
                                 <MDBRow className='row-cols-1 row-cols-md-3 g-4'>
 
-                                    {events.map(d => 
+                                    {(isParticipant() ?  events.filter(event => new Date(event.startDate) > new Date()) : events).map(d => 
                                         (
                                         // <li key={d.firstName}>{d.lastName}</li>
                                         
@@ -179,14 +181,14 @@ class Events extends Component {
                                 {isParticipant() ?
                                       <div className={"mt-5"}>
                                           <Alert severity="info" className={"container"}>
-                                                <AlertTitle>Note:</AlertTitle>
+                                                {/* <AlertTitle>Note:</AlertTitle> */}
                                                  Click the event to see more information.
                                         </Alert>
                                       </div> : null }
                                 {isOrganizator() ?
                                     <div className={"mt-5"}>
                                         <Alert severity="info" className={"container"}>
-                                            <AlertTitle>Note:</AlertTitle>
+                                            {/* <AlertTitle>Note:</AlertTitle> */}
                                             Click the event to see more information.
                                         </Alert>
                                     </div>

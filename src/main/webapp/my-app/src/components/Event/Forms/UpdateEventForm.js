@@ -28,7 +28,7 @@ class UpdateEventForm extends Component {
         state : '',
         zip : '',
         point : 0,
-        eventType : 1 
+        eventType : '' 
     }
     componentDidMount = async () => {
         if(!isOrganizator()) {
@@ -43,7 +43,7 @@ class UpdateEventForm extends Component {
         });
 
         if(this.isEventStarted(response.data.startDate)) {
-            this.showErrorMessageAboutEventAs('This event cannot be updated because its start date has passed. !');
+            this.showErrorMessageAboutEventAs('This event has concluded and cannot be updated. !');
         }
         else {
            this.getValuesOfEvent(response.data);
@@ -188,13 +188,13 @@ class UpdateEventForm extends Component {
 
                                       
                                         <Form.Group>
-                                            <Form.Label>Event Type</Form.Label>
-                                            <Form.Control type="number" placeholder="Event Type"
+                                            <Form.Label>Event Category</Form.Label>
+                                            <Form.Control type="text" placeholder="Event Category"
                                                           required
-                                                          id = "eventType"
-                                                          min ={currentNumberOfPeople}
-                                                          value = {this.state.eventType}
-                                                          name = "eventType"
+                                                          id = "eventCategory"
+                                                        // min ={currentNumberOfPeople}
+                                                          value = {this.state.eventCategory}
+                                                          name = "eventCategory"
                                                           onChange={this.updateInput}/>
                                         </Form.Group>
 
@@ -320,7 +320,7 @@ class UpdateEventForm extends Component {
                                         message = {message}
                                         messageType = {messageType}
                                         vertical = {"bottom"}
-                                        horizontal = {"right"}/> : null}
+                                        horizontal = {"center"}/> : null}
                             </Modal>
 
                         );

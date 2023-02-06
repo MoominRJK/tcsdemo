@@ -17,6 +17,7 @@ class EventRaffle extends Component {
     state = {
         selectedEvent : '',
         raffleWinnerUsername : '',
+        raffleWinnerFullname : '',
         events : [],
         participants : [],
         selectedEventName : '',
@@ -133,6 +134,7 @@ class EventRaffle extends Component {
             nonRaffledEvents: nonRaffledEvents,
             selectedEvent : nonRaffledEvents[index],
             raffleWinnerUsername : raffleWinnerParticipant.username,
+            raffleWinnerFullname : raffleWinnerParticipant.name + ' ' + raffleWinnerParticipant.surname,
         })
     }
 
@@ -155,7 +157,7 @@ class EventRaffle extends Component {
 
     render() {
             const {isOpenBackdrop,isMessageBoxOpen,messageType,selectedEvent,
-                selectedEventName,raffleWinnerUsername,message} = this.state;
+                selectedEventName,raffleWinnerUsername, raffleWinnerFullname, message} = this.state;
         return (
 
             <>
@@ -188,14 +190,16 @@ class EventRaffle extends Component {
                 </SimpleBackdrop> : null}
                 {isMessageBoxOpen ?  <CustomizedSnackbar
                                     vertical={"bottom"}
-                                    horizontal={"right"}
+                                    horizontal={"center"}
                                     open = {isMessageBoxOpen}
                                     handleClose = {this.closeMessageBox}
                                     message={message}
                                     messageType={messageType}/>: null}
                 {this.isRaffleEnded() ?
                     <RaffleInformation selectedEvent={selectedEvent}
-                                        raffleWinnerUsername = {raffleWinnerUsername}/> : null}
+                                        raffleWinnerUsername = {raffleWinnerUsername} 
+                                        raffleWinnerFullname = {raffleWinnerFullname}/> 
+                                        : null}
             </div>
             </>
         );

@@ -199,7 +199,7 @@ class SurveyQuestions extends Component {
                     {this.state.isOpenedMessageSnackbar ?
                         <CustomizedSnackbar
                             vertical={"bottom"}
-                            horizontal={"right"}
+                            horizontal={"center"}
                             open = {this.state.isOpenedMessageSnackbar}
                             handleClose = {this.closeMessageSnackbar}
                             message={this.state.message}

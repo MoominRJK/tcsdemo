@@ -25,28 +25,7 @@ public class ScheduledTasks {
 
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 
-    @Scheduled(fixedRate = 2000)
-    public void scheduleTaskWithFixedRate() {
-        logger.info("Fixed Rate Task :: Execution Time - {}", dateTimeFormatter.format(LocalDateTime.now()) );
-    }
-
-    @Scheduled(fixedDelay = 2000)
-    public void scheduleTaskWithFixedDelay() {
-        logger.info("Fixed Delay Task :: Execution Time - {}", dateTimeFormatter.format(LocalDateTime.now()));
-        try {
-            TimeUnit.SECONDS.sleep(5);
-        } catch (InterruptedException ex) {
-            logger.error("Ran into an error {}", ex);
-            throw new IllegalStateException(ex);
-        }
-    }
-
-    @Scheduled(fixedRate = 2000, initialDelay = 5000)
-    public void scheduleTaskWithInitialDelay() {
-        logger.info("Fixed Rate Task with Initial Delay :: Execution Time - {}", dateTimeFormatter.format(LocalDateTime.now()));
-    }
-
-    @Scheduled(cron = "0 23 1 */3 *")
+    @Scheduled(cron = "0 23 1 */3 * *")
     @Transactional
     public void scheduleTaskWithCronExpression() {
         LocalDate today = LocalDate.now();
@@ -55,7 +34,7 @@ public class ScheduledTasks {
         int month = today.getMonthValue(); // 1 through 12
         int quarter = ((month- 1 ) / 3 ) + 1;
         participantsPrizeService.generateQuarterPrizeWinner(year, quarter, true);
-        logger.info("Cron Task :: Execution Time - {}", dateTimeFormatter.format(LocalDateTime.now()));
+        logger.info("Cron Task :: Quarterly drawing on the 1st day of Execution Time - {}", dateTimeFormatter.format(LocalDateTime.now()));
     }
 
 }

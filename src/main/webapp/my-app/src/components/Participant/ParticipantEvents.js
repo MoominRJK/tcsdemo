@@ -38,11 +38,38 @@ class ParticipantEvents extends Component {
                 color: '#FFF'
                 }},
         ],
+        dispatch: '',
 
     }
 
     componentDidMount = () =>  {
         this.getEventsOfParticipant();
+    }
+
+    deleteEvent = async  (e,eventName,dispatch) =>{
+
+        e.preventDefault();
+        axios.delete(`/events/delete/${eventName}`, {
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem("jwtToken")
+            },
+            data: {
+                name: eventName
+            }
+        }).then(response => {
+            this.showMessageOfDeleteRequest(response.data);
+            setTimeout(() => {
+                this.setState({
+                    isDeleteRequest : false,
+                })
+                if(this.isDeletionSuccess(response.data.messageType)) {
+                    dispatch({ type: 'deleteEvent', payload: eventName })
+                }
+            }, 3000);
+        }).catch(err => {
+           this.props.history.push("/notFound404");
+        });
+
     }
 
     getEventsOfParticipant = async () => {
@@ -78,8 +105,14 @@ class ParticipantEvents extends Component {
                     actions = {[ {
                         icon : 'info',
                         tooltip: 'Click for event information',
-                        onClick: ( e,rowData ) => this.goToEventPage(e,rowData.name)
-                    }]}
+                        onClick: ( e,rowData ) => this.goToEventPage(e,rowData.name),},
+                        {
+                            icon :  'delete',
+                            tooltip: 'Delete',
+                            onClick: (e, rowData,) => this.deleteEvent(e,rowData.name,this.state.dispatch)
+                        },
+                    
+                    ]}
                     options={{
                         actionsColumnIndex: -1,
                         headerStyle: {

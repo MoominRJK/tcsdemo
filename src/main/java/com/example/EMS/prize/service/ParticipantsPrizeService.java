@@ -21,6 +21,10 @@ import java.util.stream.Collectors;
 import static com.example.EMS.common.enums.MessageType.ERROR;
 import static com.example.EMS.common.enums.MessageType.SUCCESS;
 
+/**
+ * This class is providing the Participant prize service for the RESTfull api in the controller
+ *
+ */
 @Service
 @RequiredArgsConstructor
 public class ParticipantsPrizeService {
@@ -33,6 +37,13 @@ public class ParticipantsPrizeService {
     private final FileService fileService;
     ParticipantsPrize participantsPrize = new ParticipantsPrize();
 
+    /**
+     * Add participant to participant prize tables when participant are the winner
+     * of the prize
+     * @param username
+     * @param prize
+     * @return
+     */
     @Transactional
     public MessageResponse addParticipantToPrize(String username, Prize prize) {
         Prize prizeFromDB = prizeService.findByName(prize.getName());
@@ -56,19 +67,34 @@ public class ParticipantsPrizeService {
                 ERROR);
     }
 
-
+    /**
+     * saveNewParticipationToPrize
+     * @param prize
+     */
     private void saveNewParticipationToPrize(Prize prize) {
         prize.getParticipantsPrizes().add(participantsPrize);
         prizeService.save(prize);
     }
 
+    /**
+     * saveNewParticipationToParticipant
+     * @param participant
+     */
     private void saveNewParticipationToParticipant(Participant participant) {
         participant.getParticipantsPrizes().add(participantsPrize);
         participantService.save(participant);
     }
 
-    //
 
+    /**
+     * Add participant to the prize with overload params
+     * @param participateId
+     * @param year
+     * @param quarter
+     * @param grade
+     * @param winnerType
+     * @return
+     */
     @Transactional
     public MessageResponse addParticipantToPrize(int participateId, int year,int quarter, int grade, String winnerType) {
         Prize prizeFromDB  = prizeService.findByYearQuarter(year, quarter, grade, winnerType);
@@ -94,23 +120,43 @@ public class ParticipantsPrizeService {
                 ERROR);
     }
 
+    /**
+     * The metond provide quarterly participant point report
+     * @param year
+     * @param quarter
+     * @return
+     */
     public List<ParticipantsPoint> getQuarterParticipantsPoint(int year, int quarter) {
         List<ParticipantsPoint> participantsPoints = participantsInEventsRepository.getParticipantsPointByYearQuarter(year, quarter);
         return participantsPoints;
     }
 
 
+    /**
+     * The method provide logic to generate the quarterly winner by grade and by year,
+     * It also calculates the total points accumulate so for each participant by grade
+     * and by year. It does provide a way for users to choose whether the records should
+     * be recorded or not.
+     * @param year
+     * @param quarter
+     * @param save
+     * @return
+     */
     @Transactional
     public List<ParticipantsPoint> generateQuarterPrizeWinner(int year, int quarter, boolean save) {
+
+        //Getting all the events amd points for all students
         List<ParticipantsPoint> participantsPoints = participantsInEventsRepository.getParticipantsPointByYearQuarter(year, quarter);
 
         List<ParticipantsPoint> topPointWinners = new ArrayList<>();
-        List<ParticipantsPoint> gradeWinners = new ArrayList<>();
 
         Comparator<ParticipantsPoint> comparator = Comparator.comparing( ParticipantsPoint::getTotalPoint );
 
+        //Find 9 grade top accumulator
         List<ParticipantsPoint> winner9thGradeTop = participantsPoints.stream()
                 .filter(p -> p.getGrade().equals(9)).max(comparator).stream().collect(Collectors.toList());
+
+        //Find 9 grade top accumulator, if there is just one student then pick that one the winner.
         if(winner9thGradeTop.size() == 1){
             ParticipantsPoint pp = winner9thGradeTop.get(0);
             if(save) {
@@ -118,6 +164,7 @@ public class ParticipantsPrizeService {
             }
             topPointWinners.add(winner9thGradeTop.get(0));
         } else {
+            //Find 9 grade top accumulator, if there is more than one, system will randomly pick a student as the winner
             int randomValue = new Random().nextInt(winner9thGradeTop.size() + 1);
             if(save) {
                 this.addParticipantToPrize(winner9thGradeTop.get(randomValue).getParticipantId(), year, quarter, winner9thGradeTop.get(randomValue).getGrade(), "Top");
@@ -125,6 +172,7 @@ public class ParticipantsPrizeService {
             topPointWinners.add(winner9thGradeTop.get(randomValue));
         }
 
+        //Find 10 grade top accumulator, if there is just one student then pick that one the winner.
         List<ParticipantsPoint> winner10thGradeTop = participantsPoints.stream()
                 .filter(p -> p.getGrade().equals(10)).max(comparator).stream().collect(Collectors.toList());
         if(winner10thGradeTop.size() == 1){
@@ -134,6 +182,7 @@ public class ParticipantsPrizeService {
             }
             topPointWinners.add(winner10thGradeTop.get(0));
         } else {
+            //Find 10 grade top accumulator, if there is more than one, system will randomly pick a student as the winner
             int randomValue = new Random().nextInt(winner10thGradeTop.size() + 1);
             if(save) {
                 this.addParticipantToPrize(winner10thGradeTop.get(randomValue).getParticipantId(), year, quarter, winner10thGradeTop.get(randomValue).getGrade(), "Top");
@@ -141,6 +190,7 @@ public class ParticipantsPrizeService {
             topPointWinners.add(winner10thGradeTop.get(randomValue));
         }
 
+        //Find 11 grade top accumulator, if there is just one student then pick that one the winner.
         List<ParticipantsPoint> winner11thGradeTop = participantsPoints.stream()
                 .filter(p -> p.getGrade().equals(11)).max(comparator).stream().collect(Collectors.toList());
         if(winner11thGradeTop.size() == 1){
@@ -150,13 +200,15 @@ public class ParticipantsPrizeService {
             }
             topPointWinners.add(winner11thGradeTop.get(0));
         } else {
+            //Find 11 grade top accumulator, if there is more than one, system will randomly pick a student as the winner
             int randomValue = new Random().nextInt(winner11thGradeTop.size() + 1);
             if(save) {
                 this.addParticipantToPrize(winner11thGradeTop.get(randomValue).getParticipantId(), year, quarter, winner11thGradeTop.get(randomValue).getGrade(), "Top");
             }
             topPointWinners.add(winner11thGradeTop.get(randomValue));
         }
-        //For 12
+
+        //Find 12 grade top accumulator, if there is just one student then pick that one the winner.
         List<ParticipantsPoint> winner12thGradeTop = participantsPoints.stream()
                 .filter(p -> p.getGrade().equals(12)).max(comparator).stream().collect(Collectors.toList());
         if(winner12thGradeTop.size() == 1){
@@ -166,6 +218,7 @@ public class ParticipantsPrizeService {
             }
             topPointWinners.add(winner12thGradeTop.get(0));
         } else {
+            //Find 12 grade top accumulator, if there is more than one, system will randomly pick a student as the winner
             int randomValue = new Random().nextInt(winner12thGradeTop.size() + 1);
             if(save) {
                 this.addParticipantToPrize(winner12thGradeTop.get(randomValue).getParticipantId(), year, quarter, winner12thGradeTop.get(randomValue).getGrade(), "Top");
@@ -174,11 +227,12 @@ public class ParticipantsPrizeService {
         }
 
 
-        ////////////////////////////////////////Raffle//////////
+        // For Raffle Drawing
         List<ParticipantsPoint> excludeTopWinner = new ArrayList<>(participantsPoints);
 
         excludeTopWinner.removeAll(topPointWinners);
 
+        //Find 9 grade raffle winner, if just one participant, then the only one is the winner
         List<ParticipantsPoint> winner9thGrade = excludeTopWinner.stream()
                 .filter(p -> p.getGrade().equals(9)).collect(Collectors.toList());
         if(winner9thGrade.size() == 1){
@@ -187,6 +241,7 @@ public class ParticipantsPrizeService {
             }
             topPointWinners.add(winner9thGrade.get(0));
         } else {
+            //Find 9 grade raffle winner, if there is more than one participant, then randomly pick the winner
             int randomValue = new Random().nextInt(winner9thGrade.size() );
             if(save) {
                 this.addParticipantToPrize(winner9thGrade.get(randomValue).getParticipantId(), year, quarter,winner9thGrade.get(randomValue).getGrade(),"Raffle");
@@ -194,6 +249,7 @@ public class ParticipantsPrizeService {
             topPointWinners.add(winner9thGrade.get(randomValue));
         }
 
+        //Find 10 grade raffle winner, if just one participant, then the only one is the winner
         List<ParticipantsPoint> winner10thGrade = excludeTopWinner.stream()
                 .filter(p -> p.getGrade().equals(10)).collect(Collectors.toList());
         if(winner10thGrade.size() == 1){
@@ -202,6 +258,7 @@ public class ParticipantsPrizeService {
             }
             topPointWinners.add(winner10thGrade.get(0));
         } else {
+            //Find 10 grade raffle winner, if there is more than one participant, then randomly pick the winner
             int randomValue = new Random().nextInt(winner10thGrade.size() );
             if(save) {
                 this.addParticipantToPrize(winner10thGrade.get(randomValue).getParticipantId(), year, quarter,winner10thGrade.get(randomValue).getGrade(),"Raffle");
@@ -209,6 +266,7 @@ public class ParticipantsPrizeService {
             topPointWinners.add(winner10thGrade.get(randomValue));
         }
 
+        //Find 11 grade raffle winner, if just one participant, then the only one is the winner
         List<ParticipantsPoint> winner11thGrade = excludeTopWinner.stream()
                 .filter(p -> p.getGrade().equals(11)).collect(Collectors.toList());
         if(winner11thGrade.size() == 1){
@@ -217,13 +275,14 @@ public class ParticipantsPrizeService {
             }
             topPointWinners.add(winner11thGrade.get(0));
         } else {
+            //Find 11 grade raffle winner, if there is more than one participant, then randomly pick the winner
             int randomValue = new Random().nextInt(winner11thGrade.size() );
             if(save) {
                 this.addParticipantToPrize(winner11thGrade.get(randomValue).getParticipantId(), year, quarter,winner11thGrade.get(randomValue).getGrade(),"Raffle");
             }
             topPointWinners.add(winner11thGrade.get(randomValue));
         }
-        //For 12
+        //Find 12 grade raffle winner, if just one participant, then the only one is the winner
         List<ParticipantsPoint> winner12thGrade = excludeTopWinner.stream()
                 .filter(p -> p.getGrade().equals(12)).collect(Collectors.toList());
         if(winner9thGrade.size() == 1){
@@ -232,6 +291,7 @@ public class ParticipantsPrizeService {
             }
             topPointWinners.add(winner12thGrade.get(0));
         } else {
+            //Find 12 grade raffle winner, if there is more than one participant, then randomly pick the winner
             int randomValue = new Random().nextInt(winner12thGrade.size() );
             if(save) {
                 this.addParticipantToPrize(winner12thGrade.get(randomValue).getParticipantId(), year, quarter,winner12thGrade.get(randomValue).getGrade(),"Raffle");

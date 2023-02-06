@@ -167,7 +167,7 @@ class EventParticipation extends Component {
                     </button>
                 }
                 {isParticipationRequest ? <CustomizedSnackbar  vertical = {"bottom"}
-                                                               horizontal = {"right"}
+                                                               horizontal = {"center"}
                                                                open = {isParticipationRequest}
                                                                handleClose = {this.closeMessageBox}
                                                               message={message} messageType={messageType}/> : null }
