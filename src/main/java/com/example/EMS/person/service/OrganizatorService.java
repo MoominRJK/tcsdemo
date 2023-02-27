@@ -5,6 +5,7 @@ import com.example.EMS.person.repository.OrganizatorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,5 +18,9 @@ public class OrganizatorService {
 
     public void save(Organizator newOrganizator) {
         organizatorRepository.save(newOrganizator);
+    }
+
+    public List<Organizator> getAllOrganizators(){
+        return organizatorRepository.findAll();
     }
 }

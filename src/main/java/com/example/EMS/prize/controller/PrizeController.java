@@ -112,6 +112,18 @@ public class PrizeController {
         return prizeMapper.mapToDto(prizes);
     }
 
+    @GetMapping("/filterPrize/{category}/{awardType}/{year}/{quarter}/{grade}")
+    public List<PrizeDTO>  getPrizes(
+                                                                 @PathVariable String category,
+                                                                 @PathVariable String awardType,
+                                                                 @PathVariable int year,
+                                                                 @PathVariable int quarter,
+                                                                 @PathVariable int grade) {
+        final List<Prize> prizes = prizeService.getAllPrizes("", category, awardType, year, quarter, grade);
+
+        return prizeMapper.mapToDto(prizes);
+    }
+
 
 
 }

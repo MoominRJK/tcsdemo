@@ -105,6 +105,13 @@ public class ParticipantService {
         return participantInEvent;
     }
 
+    public List<ParticipantsInEvents> getAllEventParticipant() {
+
+       List<ParticipantsInEvents> participantInEvents = participantsInEventsRepository.getAllParticipantEvents();
+
+        return participantInEvents;
+    }
+
     public ParticipantsPrize getPrizeInfoForParticipant(String prizeName,
                                                         String username) {
 
@@ -118,5 +125,10 @@ public class ParticipantService {
         participantsPrize.setPrize(prize);
 
         return participantsPrize;
+    }
+
+    public List<Participant> getAllParticipant() {
+
+        return participantRepository.findAll();
     }
 }

@@ -7,6 +7,8 @@ import com.example.EMS.prize.entity.ParticipantsPrize;
 import com.example.EMS.prize.entity.Prize;
 import com.example.EMS.prize.repository.PrizeRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.logging.log4j.util.Strings;
+import org.dom4j.util.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -32,6 +34,19 @@ public class PrizeService {
 
     public List<Prize> getAllPrizes() {
         return prizeRepository.findAll();
+    }
+
+    public List<Prize> getAllPrizes(String name, String category, String awardType, int year, int quarter, int grade) {
+        List<Prize> prizes = prizeRepository.findAll();
+
+        List<Prize> result = prizes.stream().filter(p -> category.equals("0") ? true : p.getType().equals(category))
+                .filter(t -> awardType.equals("0") ? true : t.getAwardType().equals(awardType))
+                .filter(y -> year > 0 ? y.getYear() == year : true)
+                .filter(q -> quarter > 0 ? q.getQuarter() == quarter : true)
+                .filter(g -> grade > 0 ? g.getGrade() == grade : true)
+                .collect(Collectors.toList());
+
+        return result;
     }
 
     @Transactional

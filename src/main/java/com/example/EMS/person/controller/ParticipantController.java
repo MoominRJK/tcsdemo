@@ -95,6 +95,17 @@ public class ParticipantController {
         return participantsInEventsDTO;
     }
 
+    @GetMapping("/allEventParticipant")
+//    @PreAuthorize("hasAuthority('PARTICIPANT')")
+    public List<ParticipantsInEventsDTO> getAllEventParticipant() {
+
+        final List<ParticipantsInEvents> participantInEvent = participantService.getAllEventParticipant();
+
+        final List<ParticipantsInEventsDTO> participantsInEventsDTO = participantsInEventsMapper.mapToDto(participantInEvent);
+
+        return participantsInEventsDTO;
+    }
+
     @PostMapping(value = "/sendQrCodeOf/{username}",
             produces = MediaType.IMAGE_PNG_VALUE)
     public String sendQrCodeAsInnerHTMLToAfterParticipation(@PathVariable String username,

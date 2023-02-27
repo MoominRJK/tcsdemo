@@ -14,7 +14,7 @@ import javax.validation.constraints.NotBlank;
 @ToString
 public class ParticipantAnswersForEventQuestionsDTO {
     @JsonProperty("answer")
-    @NotBlank(message ="Cevap boş olmamalı")
+    @NotBlank(message ="Answer cannot be blank")
     public final String answer;
 
     @JsonProperty()

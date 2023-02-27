@@ -66,4 +66,13 @@ public interface ParticipantsInEventsRepository
     @Transactional
     List<ParticipantsPoint> getParticipantsPointByYearQuarter(@Param("year")Integer year, @Param("quarter")Integer quarter);
 
+
+    @Query(
+            value = "SELECT * " +
+                    "FROM participants_in_events "
+                   ,
+            nativeQuery = true)
+    @Transactional
+    List<ParticipantsInEvents> getAllParticipantEvents();
+
 }
