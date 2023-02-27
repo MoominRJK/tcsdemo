@@ -37,9 +37,7 @@ import { CssBaseline } from '@material-ui/core';
 import UserGuide from './components/Help/UserGuide';
 
 
-
 class App extends Component {
- 
 
     render() {
         return (

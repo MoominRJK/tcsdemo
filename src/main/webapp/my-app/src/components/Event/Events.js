@@ -8,7 +8,8 @@ import Consumer from '../ContextAPI/Context'
 import EventsOfLecturer from "../Lecturer/EventsOfLecturer";
 import {isLecturer, isOrganizator, isParticipant} from "../../Authentication";
 import Collapse from 'react-bootstrap/Collapse';
-
+import {getEvents} from "../../HelperFunctions/EventHelpers";
+import axios from "axios";
 import {
     MDBCard,
     MDBCardImage,
@@ -29,32 +30,56 @@ class Events extends Component {
         name: '',
         startDate: '',
         events: [],
-        eventType: 0,
+        eventType: 0
       }
 
+
+      componentDidMount = async () => {
+        this.loadSearchedEvents();
+        // const response = await getEvents();
+        // this.setState({
+        //     events : response.data
+        // })
+    };
+
+    loadSearchedEvents = async () =>{
+        const {name, eventType}  = this.state;
+        const response = await axios.get(`/events/category/${eventType}`, {
+            headers : {
+                authorization : 'Bearer ' + localStorage.getItem('jwtToken')
+            }
+        }).catch(err => {
+            this.props.history.push('/notFound404');
+        });
+        this.setState({
+            events : response.data,
+            
+        })
+    }
 
 
       toggle = () => this.setState((currentState) => ({show: !currentState.show}));
 
       handleEventTypeChange = (e) => {
+        e.preventDefault();
         this.setState({
             eventType : e.target.value,
-            // events : events.filter(e => e.eventType === this.state.eventType),
-        })
+        }, this.loadSearchedEvents)
     }
       changeInput = (e) =>{
         this.setState({
-            [e.target.name]:e.target.value
-        });
+            name :e.target.value
+        }, this.loadSearchedEvents)
     }
     
 
     render() {
 
-        return(<Consumer>
-                {
-                    value => {
-                        var {events} = value;
+        const {events, orgEvents} = this.state;
+        // return(<Consumer>
+        //         {
+        //             value = events => {
+        //                 var {events} = value;
                      
                         //  events = this.state.eventType === 0 ? events : events.filter(e => e.eventType === this.state.eventType)
 
@@ -77,7 +102,7 @@ class Events extends Component {
                                                 <Form.Group as={Col} controlId="formGridName">
                                                     <Form.Label>Search</Form.Label>
                                                     <InputGroup>
-                                                        <Form.Control required autoComplete="off"
+                                                        <Form.Control autoComplete="off"
                                                                       type="text" name="name"
                                                                       value={this.state.name} onChange={(e) => this.changeInput(e)}
                                                                       placeholder="Event Name" />
@@ -103,7 +128,7 @@ class Events extends Component {
                                                 <Form.Group as={Col} controlId="formGridStartDate">
                                                     <Form.Label>Start date</Form.Label>
                                                     <InputGroup>
-                                                        <Form.Control required autoComplete="off"
+                                                        <Form.Control autoComplete="off"
                                                                       type="date" name="startDate"
                                                                       value={this.state.startDate} onChange={(e) => this.changeInput(e)}
                                                                     //   className={" text-white"}
@@ -112,15 +137,15 @@ class Events extends Component {
                                                 </Form.Group>
                                             </Form.Row>
                                             </Card.Body>
-                                            <Card.Footer style={{"textAlign":"right"}}
+                                            {/* <Card.Footer style={{"textAlign":"right"}}
                                                      className={"d-flex justify-content-between"}>
                                             <div >
                                             
                                             </div>
-                                            <Button  variant="success" type="submit">
+                                            <button   onClick={() => this.loadSearchedEvents}>
                                             submit
-                                            </Button>
-                                        </Card.Footer>
+                                            </button>
+                                        </Card.Footer> */}
                                     </Form>
                                     </div>
                                     </Collapse>
@@ -195,10 +220,10 @@ class Events extends Component {
                                     : null}
                             </div>
                         );
-                    }
-                }
-            </Consumer>
-        )
+        //             }
+        //         }
+        //     </Consumer>
+        // )
 
     }
 }

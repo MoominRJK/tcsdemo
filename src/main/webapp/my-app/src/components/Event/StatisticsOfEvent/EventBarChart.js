@@ -77,7 +77,8 @@ import { animateScroll } from "react-scroll";
 
 
      componentDidMount = () => {
-         this.scrollToBottom();
+        //  this.scrollToBottom();
+        this.scrollToTop();
      }
 
      scrollToBottom = () => {
@@ -85,6 +86,12 @@ import { animateScroll } from "react-scroll";
              barChart: "options-holder"
          });
      }
+
+     scrollToTop = () => {
+        animateScroll.scrollToTop({
+            barChart: "options-holder"
+        });
+    }
 
     render() {
         const { basicOptions} = this.options;

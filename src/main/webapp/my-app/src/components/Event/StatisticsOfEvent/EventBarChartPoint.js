@@ -35,10 +35,16 @@ class EventBarChartPoint extends Component {
         userType1 : '',
         saveReocrd : false,
         pp: [],
+        allEvent : [],
+        allUser : [],
+        allParticipant : [],
+        allPrize : []
+
     }
 
 
     componentDidMount = async () => {
+        this.getReportCounts();
         //  const response = await getEventPoints(2022, 4);
         //  this.setState({
         //      events: response.data
@@ -88,6 +94,22 @@ class EventBarChartPoint extends Component {
             eventNames : names
         })
 
+    }
+    getReportCounts = async () =>{
+        await axios.get(`/events/report`, {
+            headers: {
+                authorization: 'Bearer ' + localStorage.getItem('jwtToken')
+            },
+        }).then((response) =>{
+            var counts = response.data;
+            
+            this.setState({
+                allEvent : counts.allEvent,
+                allUser : counts.allUser,
+                allParticipant : counts.allParticipant,
+                allPrize : counts.allPrize
+            })
+        })
     }
 
     getParticipationDatesAndParticipantCounts = async (eventName) =>{
@@ -170,7 +192,7 @@ class EventBarChartPoint extends Component {
                             <MDBCard className='h-100'>
                             
                             <MDBCardBody className='bg-success shadow-1-strong'>
-                                <MDBCardTitle><h1 className= 'text-white text-center'><CountUp start={0} end={15} /></h1></MDBCardTitle>
+                                <MDBCardTitle><h1 className= 'text-white text-center'><CountUp start={0} end={this.state.allEvent} /></h1></MDBCardTitle>
 
                             </MDBCardBody>
                             <MDBCardFooter className='bg-success shadow-1-strong'>
@@ -182,7 +204,7 @@ class EventBarChartPoint extends Component {
                             <MDBCard className='h-100 text-black'>
                             
                             <MDBCardBody className='bg-warning shadow-1-strong'>
-                                <MDBCardTitle><h1 className= 'text-black text-center'><CountUp start={0} end={14} /></h1></MDBCardTitle>
+                                <MDBCardTitle><h1 className= 'text-black text-center'><CountUp start={0} end={this.state.allUser} /></h1></MDBCardTitle>
 
                             </MDBCardBody>
                             <MDBCardFooter className='bg-warning shadow-1-strong'>
@@ -194,7 +216,7 @@ class EventBarChartPoint extends Component {
                             <MDBCard className='h-100'>
                             
                             <MDBCardBody className='bg-info shadow-1-strong'>
-                                <MDBCardTitle><h1 className= 'text-white text-center'><CountUp start={0} end={41} /></h1></MDBCardTitle>
+                                <MDBCardTitle><h1 className= 'text-white text-center'><CountUp start={0} end={this.state.allParticipant} /></h1></MDBCardTitle>
 
 
                             </MDBCardBody>
@@ -207,7 +229,7 @@ class EventBarChartPoint extends Component {
                             <MDBCard className='h-100'>
                             
                             <MDBCardBody className='bg-danger shadow-1-strong'>
-                                <MDBCardTitle><h1 className= 'text-white text-center'><CountUp start={0} end={16} /></h1></MDBCardTitle>
+                                <MDBCardTitle><h1 className= 'text-white text-center'><CountUp start={0} end={this.state.allPrize} /></h1></MDBCardTitle>
 
 
                             </MDBCardBody>

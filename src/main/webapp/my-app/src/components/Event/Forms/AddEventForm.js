@@ -39,7 +39,8 @@ class AddEventForm extends Component {
         location: '',
         price: 0, 
         imageUrl: '',
-        description: ''
+        description: '',
+        file : null
     }
 
     resetAllInputs = () =>{
@@ -50,7 +51,7 @@ class AddEventForm extends Component {
         const {name,startDate,endDate, startTime,
             endTime,quota,
             longitude,latitude,address,lecturerUsername,
-            currentNumberOfPeople,raffleWinnerUsername, city, state, zip, point, eventType, location, price, imageUrl,description} = this.state;
+            currentNumberOfPeople,raffleWinnerUsername, city, state, zip, point, eventType, location, price, imageUrl,description, file} = this.state;
 
          e.preventDefault();
         var event  = {
@@ -74,7 +75,8 @@ class AddEventForm extends Component {
             location, 
             price,
             imageUrl,
-            description
+            description,
+            file
         }
         var organizatorUsername = localStorage.getItem("username");
         const response = await axios.post(`/events/${organizatorUsername}/${this.state.lecturerUsername}`,
@@ -128,11 +130,21 @@ class AddEventForm extends Component {
         })
     }
 
+    handleFile = (e) => {
+        let file = e.target.files[0]
+
+        this.setState({
+            file : file,
+            imageUrl : file.name
+        })
+    }
+
+
     render() {
         const {name,startDate,endDate, startTime,
             endTime,quota,longitude,address,
                latitude,isSubmittedForm,
-                message,messageType, city, state, zip, point, eventType, location, price, imageUrl, description} = this.state;
+                message,messageType, city, state, zip, point, eventType, location, price, imageUrl, description, file} = this.state;
 
         return (
             <Consumer>
@@ -194,7 +206,7 @@ class AddEventForm extends Component {
                                                         <Form.Control required autoComplete="off"
                                                                       type="date" name="endDate"
                                                                       min = {startDate}
-                                                                      value={endDate} onChange={this.changeInput}
+                                                                      value={endDate} onChange={(e) => this.changeInput(e)}
                                                                     //   className={" text-white"}
                                                                       placeholder="end date" />
                                                     </InputGroup>
@@ -221,7 +233,7 @@ class AddEventForm extends Component {
                                                         <Form.Control required autoComplete="off"
                                                                       type="time" name="endTime"
                                                                       min = {startTime}
-                                                                      value={endTime} onChange={this.changeInput}
+                                                                      value={endTime} onChange={(e) => this.changeInput(e)}
                                                                     //   className={" text-white"}
                                                                       placeholder="end time" />
                                                     </InputGroup>
@@ -236,7 +248,7 @@ class AddEventForm extends Component {
                                                         <Form.Control required autoComplete="off"
                                                                       type="number" name="point"
                                                                       min = "1"
-                                                                      value={point} onChange={this.changeInput}
+                                                                      value={point} onChange={(e) => this.changeInput(e)}
                                                                     //   className={" text-white"}
                                                                       placeholder="Award Point" />
                                                     </InputGroup>
@@ -248,7 +260,7 @@ class AddEventForm extends Component {
                                                         <Form.Control required autoComplete="off"
                                                                       type="number" name="quota"
                                                                       min = "1"
-                                                                      value={quota} onChange={this.changeInput}
+                                                                      value={quota} onChange={(e) => this.changeInput(e)}
                                                                     //   className={" text-white"}
                                                                       placeholder="Event Quota" />
                                                     </InputGroup>
@@ -257,16 +269,6 @@ class AddEventForm extends Component {
 
 
                                             <Form.Row>
-                                                {/* <Form.Group as={Col} controlId="formGridLongitude">
-                                                    <Form.Label>Longitude</Form.Label>
-                                                    <InputGroup>
-                                                        <Form.Control required autoComplete="off"
-                                                                      type="number" name="longitude"
-                                                                      value={longitude} onChange={this.changeInput}
-                                                                      className={"bg-dark text-white"}
-                                                                      placeholder="Longitude" />
-                                                    </InputGroup>
-                                                </Form.Group> */}
                                                  <Form.Group as={Col} controlId="formGridAddress">
                                                     <Form.Label>Address</Form.Label>
                                                     <InputGroup>
@@ -318,7 +320,7 @@ class AddEventForm extends Component {
                                                     <InputGroup>
                                                         <Form.Control required autoComplete="off"
                                                                       type="text" name="location"
-                                                                      value={name} onChange={(e) => this.changeInput(e)}
+                                                                      value={location} onChange={(e) => this.changeInput(e)}
                                                                     //   className={"text-white"}
                                                                       placeholder="Location/Room" />
                                                     </InputGroup>
@@ -329,7 +331,7 @@ class AddEventForm extends Component {
                                                         <Form.Control required autoComplete="off"
                                                                       type="number" name="price"
                                                                       min = "0"
-                                                                      value={point} onChange={this.changeInput}
+                                                                      value={price} onChange={(e) => this.changeInput(e)}
                                                                     //   className={" text-white"}
                                                                       placeholder="Price" />
                                                     </InputGroup>
@@ -352,11 +354,11 @@ class AddEventForm extends Component {
                                                 <Form.Group as={Col} controlId="formGridImage">
                                                     <Form.Label>Event Iamge </Form.Label>
                                                     <InputGroup>
-                                                        <Form.Control required autoComplete="off"
-                                                                      type="file" name="iamgeUrl"
-                                                                      value={imageUrl} onChange={(e) => this.changeInput(e)}
+                                                        <Form.Control 
+                                                                      type="file" 
+                                                                       onChange={(e) => this.handleFile(e)}
                                                                     //   className={"text-white"}
-                                                                      placeholder="Description" />
+                                                                      />
                                                     </InputGroup>
                                                 </Form.Group>
                                                

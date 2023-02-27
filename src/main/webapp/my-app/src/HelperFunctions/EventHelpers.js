@@ -33,6 +33,18 @@ export const getEvent = async (eventName) => {
     return response;
 }
 
+export const getEventbyNameCateDate = async (eventName, category) => {
+    const response = await axios.get(`/events/${eventName}/${category}`, {
+        headers : {
+            authorization : 'Bearer ' + localStorage.getItem('jwtToken')
+        }
+    }).catch(err => {
+        this.props.history.push('/notFound404');
+    });
+
+    return response;
+}
+
 
 export const getEventInformationForParticipant = async (eventName,username) => {
 

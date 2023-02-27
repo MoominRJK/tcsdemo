@@ -28,24 +28,32 @@ class EventBarMyPoint extends Component {
         participationDates : [],
         username: localStorage.getItem('username'),
         point: 0,
+        currentEvent : 0,
+        currentTotal : 0,
+        completeEvent : 0,
+        completeTotal : 0,
+        currentEvents: [],
+        completeEvents: [],
+        eventPoints : [],
         
     }
 
 
     componentDidMount = async () => {
-         const response = await getEventPoints(2022, 4);
-         const participantPoints = response.data;
-         this.setState({
-             events: response.data,
-             eventNames: participantPoints.map(event => event.firstName),
-             point: participantPoints.filter( p => p.name === localStorage.getItem('username'))[0].totalPoint,
-             participationCountsOfEvents: participantPoints.map(event => event.totalPoint),
+        this.getEventsOfParticipant();
+        //  const response = await getEventPoints(2022, 4);
+        //  const participantPoints = response.data;
+        //  this.setState({
+        //      events: response.data,
+        //      eventNames: participantPoints.map(event => event.firstName),
+        //      point: participantPoints.filter( p => p.name === localStorage.getItem('username'))[0].totalPoint,
+        //      participationCountsOfEvents: participantPoints.map(event => event.totalPoint),
              
-         })
+        //  })
 
          
 
-        //  this.showStatistics();
+        //   this.showStatistics();
     }
 
     getEventsOfParticipant = async () => {
@@ -60,7 +68,11 @@ class EventBarMyPoint extends Component {
         });
 
         this.setState({
-            events : response.data
+            events : response.data,
+            currentEvents : response.data.filter(event => new Date(event.endDate) > new Date()),
+            completeEvents : response.data.filter(event => new Date(event.endDate) <= new Date()),
+            eventPoints : response.data.map(event => event.point),
+            eventNames : response.data.map(event => event.name),
         })
     }
 
@@ -96,14 +108,14 @@ class EventBarMyPoint extends Component {
 
     setParticipationCountsOfEvents = () => {
         const {events} = this.state;
-        var participationCountsOfEvents = events.map(event => event.totalPoint);
+        var eventPoints = events.map(event => event.point);
         this.setState({
-            participationCountsOfEvents : participationCountsOfEvents
+            eventPoints : eventPoints
         })
     }
     setNamesOfEvents = () => {
         const {events} = this.state;
-        var names = events.map(event => event.firstName);
+        var names = events.map(event => event.name);
         this.setState({
             eventNames : names
         })
@@ -131,8 +143,44 @@ class EventBarMyPoint extends Component {
         })
     }
 
+    // showStatistics = () =>{
+        
+    //     const {statisticsType,eventName,events} = this.state;
+    //     if(statisticsType === 'showGraphicsWithParticipationCount') {
+    //         this.setParticipationCountsOfEvents();
+    //         this.setNamesOfEvents();
+    //     }
+
+    //     else if(statisticsType === 'showGraphicsWithParticipationDate') {
+    //         this.getParticipationDatesAndParticipantCounts(eventName);
+    //     }
+    //     this.openEventChart();
+    // }
+
+    // setParticipationCountsOfEvents = () => {
+    //     const {events} = this.state;
+    //     var participationCountsOfEvents = events.map(event => event.currentNumberOfPeople);
+    //     this.setState({
+    //         participationCountsOfEvents : participationCountsOfEvents
+    //     })
+    // }
+    // setNamesOfEvents = () => {
+    //     const {events} = this.state;
+    //     var names = events.map(event => event.name);
+    //     this.setState({
+    //         eventNames : names
+    //     })
+    // }
+
+
+
+
+
+
+
+
     render() {
-        const {eventNames,participationCountsOfEvents, username, point} = this.state;
+        const {eventNames,participationCountsOfEvents, username, point,  currentEvents, completeEvents} = this.state;
         return (
             <div className={"container w-75 mt-5"}>
 
@@ -145,7 +193,7 @@ class EventBarMyPoint extends Component {
         <MDBCard className='h-100'>
          
           <MDBCardBody className='bg-success shadow-1-strong'>
-            <MDBCardTitle><h1 className= 'text-white text-center'><CountUp start={0} end={3} /></h1></MDBCardTitle>
+            <MDBCardTitle><h1 className= 'text-white text-center'><CountUp start={0} end={ this.state.currentEvents.length} /></h1></MDBCardTitle>
 
           </MDBCardBody>
           <MDBCardFooter className='bg-success shadow-1-strong'>
@@ -157,7 +205,7 @@ class EventBarMyPoint extends Component {
         <MDBCard className='h-100'>
           
         <MDBCardBody className='bg-warning shadow-1-strong'>
-            <MDBCardTitle><h1 className= 'text-black text-center'><CountUp start={0} end={481} /></h1></MDBCardTitle>
+            <MDBCardTitle><h1 className= 'text-black text-center'><CountUp start={0} end={this.state.currentEvents.reduce((a,v) => a = a + v.point, 0) } /></h1></MDBCardTitle>
 
           </MDBCardBody>
           <MDBCardFooter className='bg-warning shadow-1-strong'>
@@ -169,7 +217,7 @@ class EventBarMyPoint extends Component {
         <MDBCard className='h-100'>
           
         <MDBCardBody className='bg-info shadow-1-strong'>
-            <MDBCardTitle><h1 className= 'text-white text-center'><CountUp start={0} end={2} /></h1></MDBCardTitle>
+            <MDBCardTitle><h1 className= 'text-white text-center'><CountUp start={0} end={this.state.completeEvents.length} /></h1></MDBCardTitle>
 
 
           </MDBCardBody>
@@ -182,7 +230,7 @@ class EventBarMyPoint extends Component {
         <MDBCard className='h-100'>
         
         <MDBCardBody className='bg-danger shadow-1-strong'>
-            <MDBCardTitle><h1 className= 'text-white text-center'><CountUp start={0} end={495} /></h1></MDBCardTitle>
+            <MDBCardTitle><h1 className= 'text-white text-center'><CountUp start={0} end={this.state.completeEvents.reduce((a,v) => a = a + v.point, 0) } /></h1></MDBCardTitle>
 
 
           </MDBCardBody>
@@ -231,6 +279,9 @@ class EventBarMyPoint extends Component {
                 </form> */}
                
                     <EventBarChart
+                        // labels = {this.state.eventNames}
+                        // label = "Total Reward Points"
+                        // data = {this.state.eventPoints}/>
                         labels = {['Career Day', 'Chicago Opera Performance', 'Basketball Game', 'International Day', 'Tea party' ]}
                         label = "Total Reward Points"
                         data = {[100, 125,150,345,175]}/>

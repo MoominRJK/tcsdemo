@@ -99,6 +99,15 @@ public class EventService {
         return optionalEvent.get();
     }
 
+    public List <Event> getEventByNameCatDate(String eventName, int category, String startDate) {
+        List <Event> allEvents = eventRepository.findAll();
+        List<Event> optionalEvent = allEvents.stream().filter( n -> (eventName != null && eventName.length() > 0) ? n.getName().startsWith(eventName) : true)
+                .filter(c -> (category > 0) ? c.getEventType() == category : true)
+                .collect(Collectors.toList());
+
+        return optionalEvent;
+    }
+
     @Transactional
     public MessageResponse updateEvent(String eventName, Event event)  {
         Optional<Event> eventOptional = eventRepository.findByName(eventName);
