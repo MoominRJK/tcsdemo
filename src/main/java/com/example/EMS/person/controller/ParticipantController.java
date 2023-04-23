@@ -66,6 +66,12 @@ public class ParticipantController {
         return participantMapper.mapToDto(participants);
     }
 
+    @DeleteMapping("/unregisterEvent/{eventName}/{participantUsername}")
+    @Transactional
+    public MessageResponse unregisterEvent(@PathVariable String eventName, @PathVariable String participantUsername) {
+        return participantsInEventsService.unregisterEvent(eventName, participantUsername);
+    }
+
     @GetMapping("/participant/{username}")
     public ParticipantDTO getParticipant(@PathVariable String username) {
         Optional<Participant> optionalParticipant = participantService.findByUsername(username);

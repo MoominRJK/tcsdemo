@@ -42,6 +42,8 @@ public class EventService {
         if(areDateValuesNonsense(event.getStartDate(),event.getEndDate())) {
             return new MessageResponse("Please enter valid date.",ERROR);
         }
+
+        fillCategory(event);
 //        Optional<Organizator> organizatorOptional = organizatorService.findByUsername(organizatorUsername);
 //        Optional<Lecturer> lecturerOptional = lecturerService.findByUsername(lecturerUsername);
 
@@ -54,6 +56,24 @@ public class EventService {
          //   return new MessageResponse("This event cannot be added",ERROR);
 //        }
         return new MessageResponse("Event successfully added.",SUCCESS);
+    }
+
+    private void fillCategory(Event event) {
+        if(event.getEventType() == 1){
+            event.setCategory("Sporting");
+        }
+        else if(event.getEventType() == 2){
+            event.setCategory("Art & Music");
+        }
+        else if(event.getEventType() == 3){
+            event.setCategory("Conference & Seminars");
+        }
+        else if(event.getEventType() == 4){
+            event.setCategory("Team Spirit");
+        }
+        else if(event.getEventType() == 5){
+            event.setCategory("Food & Drink");
+        }
     }
 
     private boolean isAnyEventNameSameWith(String name) {

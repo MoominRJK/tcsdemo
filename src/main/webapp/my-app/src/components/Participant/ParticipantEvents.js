@@ -47,9 +47,9 @@ class ParticipantEvents extends Component {
     }
 
     deleteEvent = async  (e,eventName,dispatch) =>{
-
+        const participantUsername = localStorage.getItem('username');
         e.preventDefault();
-        axios.delete(`/events/delete/${eventName}`, {
+        axios.delete(`/unregisterEvent/${eventName}/${participantUsername}`, {
             headers: {
                 Authorization: "Bearer " + localStorage.getItem("jwtToken")
             },
@@ -63,13 +63,27 @@ class ParticipantEvents extends Component {
                     isDeleteRequest : false,
                 })
                 if(this.isDeletionSuccess(response.data.messageType)) {
-                    dispatch({ type: 'deleteEvent', payload: eventName })
+                    // dispatch({ type: 'deleteEvent', payload: eventName })
+                    this.props.history.push(`/events`)
+                    this.props.history.push(`/myEvents/${localStorage.getItem('username')}`)
                 }
             }, 3000);
         }).catch(err => {
            this.props.history.push("/notFound404");
         });
 
+    }
+
+    showMessageOfDeleteRequest = (messageResponse) =>{
+        this.setState({
+            isDeleteRequest : true,
+            responseMessageOfDeleteRequest : messageResponse.message,
+            responseMessageTypeOfDeleteRequest : messageResponse.messageType
+        })
+
+    }
+    isDeletionSuccess = (messageType) =>{
+        return messageType === "SUCCESS"
     }
 
     getEventsOfParticipant = async () => {

@@ -6,6 +6,7 @@ import com.example.EMS.person.entity.Participant;
 import com.example.EMS.person.entity.ParticipantsInEvents;
 import com.example.EMS.person.entity.ParticipationCountInADay;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -75,4 +76,15 @@ public interface ParticipantsInEventsRepository
     @Transactional
     List<ParticipantsInEvents> getAllParticipantEvents();
 
+
+    @Transactional
+    @Modifying(clearAutomatically = true)
+    @Query(
+            value = "DELETE  " +
+                    "FROM participants_in_events pie " +
+                    "WHERE pie.event_id = :event_id " +
+                    "and" +
+                    " pie.participant_id = :participant_id",
+            nativeQuery = true)
+    void unregisterEvent(@Param("event_id")Integer event_id, @Param("participant_id")Integer participant_id);
 }

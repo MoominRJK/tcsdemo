@@ -135,4 +135,24 @@ public class ParticipantsInEventsService {
         return participantsInEventsRepository.getParticipantInEvent(eventByName.getId(), participantId).getEventInfoDocument();
 
     }
+
+    @Transactional
+    public MessageResponse unregisterEvent(String eventName, String userName) {
+        final Event eventByName = eventService.getEventByName(eventName);
+        final Optional<Participant> optionalParticipant = participantService.findByUsername(userName);
+        final Integer participantId = optionalParticipant.get().getId();
+
+
+        if(eventByName != null && participantId != null) {
+            participantsInEventsRepository.unregisterEvent(eventByName.getId(), participantId );
+//            List<ParticipantsInEvents> all = participantsInEventsRepository.findAll();
+//            Optional<ParticipantsInEvents> participantsInEvents = all.stream().filter( e -> e.getEvent().getName().equals(eventName)
+//            && e.getParticipant().getUsername().equals(userName)).findFirst();
+//            participantsInEventsRepository.delete(participantsInEvents.get());
+
+
+            return new MessageResponse("Event deleted.",SUCCESS);
+        }
+        return new MessageResponse("Failed to delete event.",ERROR);
+    }
 }

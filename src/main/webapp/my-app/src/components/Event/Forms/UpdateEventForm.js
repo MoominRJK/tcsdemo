@@ -14,6 +14,8 @@ class UpdateEventForm extends Component {
         name : '',
         startDate : '',
         endDate : '',
+        startTime : '',
+        endTime : '',
         address : '',
         quota : 0,
         currentNumberOfPeople : 0,
@@ -28,7 +30,11 @@ class UpdateEventForm extends Component {
         state : '',
         zip : '',
         point : 0,
-        eventType : '' 
+        eventType : '' ,
+        location: '',
+        price: 0, 
+        imageUrl: '',
+        description: '',
     }
     componentDidMount = async () => {
         if(!isOrganizator()) {
@@ -67,11 +73,14 @@ class UpdateEventForm extends Component {
     }
 
     getValuesOfEvent = (event) =>{
-    const { name, endDate,startDate,quota,address,longitude,latitude,currentNumberOfPeople, city,
+    const { name, endDate,startDate,endTime,startTime,quota,address,longitude,latitude,currentNumberOfPeople, city,
         state,
         zip,
         point,
-        eventType } = event;
+        eventType,location,
+        price, 
+        imageUrl,
+        description } = event;
         this.setState({
             name,
             endDate,
@@ -85,13 +94,20 @@ class UpdateEventForm extends Component {
             state,
             zip,
             point,
-            eventType
+            eventType,
+            location,
+            price, 
+            imageUrl,
+            description,
         });
     }
 
     updateEvent = async (e,dispatch) =>{
         e.preventDefault();
-        const { name, endDate,startDate,quota,address,longitude,latitude,currentNumberOfPeople, city, state, zip, point, eventType} = this.state;
+        const { name, endDate,startDate,quota,address,longitude,latitude,currentNumberOfPeople, city, state, zip, point, eventType,location,
+            price, 
+            imageUrl,
+            description} = this.state;
 
         const updatedEvent = {
             name : name.trim(),
@@ -105,7 +121,11 @@ class UpdateEventForm extends Component {
             state,
             zip,
             point,
-            eventType
+            eventType,
+            location,
+            price, 
+            imageUrl,
+            description,
         }
         const response = await axios.put(`/events/${this.props.eventName}`, updatedEvent,{
             headers : {
@@ -207,6 +227,15 @@ class UpdateEventForm extends Component {
                                                           name = "startDate"
                                                           onChange={this.updateInput}/>
                                         </Form.Group>
+                                        <Form.Group >
+                                            <Form.Label>Start Time</Form.Label>
+                                            <Form.Control type="time" placeholder="Start Time"
+                                                          required
+                                                          id = "startTime"
+                                                          value = {this.state.startTime}
+                                                          name = "startTime"
+                                                          onChange={this.updateInput}/>
+                                        </Form.Group>
 
                                         <Form.Group>
                                             <Form.Label>End Date</Form.Label>
@@ -216,6 +245,17 @@ class UpdateEventForm extends Component {
                                                           min = {this.state.startDate}
                                                           value = {this.state.endDate}
                                                           name = "endDate"
+                                                          onChange={this.updateInput}/>
+                                        </Form.Group>
+
+                                        <Form.Group>
+                                            <Form.Label>End Time</Form.Label>
+                                            <Form.Control type="time" placeholder="End Time"
+                                                          required
+                                                          id = "endTime"
+                                                          min = {this.state.startTime}
+                                                          value = {this.state.endTime}
+                                                          name = "endTime"
                                                           onChange={this.updateInput}/>
                                         </Form.Group>
 
@@ -268,17 +308,9 @@ class UpdateEventForm extends Component {
                                                           name = "longitude"
                                                           onChange={this.updateInput}/>
                                         </Form.Group> */}
-                                        <Form.Group >
-                                            <Form.Label>Location</Form.Label>
-                                            <Form.Control type="address" placeholder="Address"
-                                                          required
-                                                          id = "address"
-                                                          value = {this.state.address}
-                                                          name = "address"
-                                                          onChange={this.updateInput}/>
-                                        </Form.Group>
+                                   
 
-                                        {/* <Form.Group >
+                                        <Form.Group >
                                             <Form.Label>City</Form.Label>
                                             <Form.Control type="city" placeholder="City"
                                                           required
@@ -296,9 +328,9 @@ class UpdateEventForm extends Component {
                                                           value = {this.state.state}
                                                           name = "state"
                                                           onChange={this.updateInput}/>
-                                        </Form.Group> */}
+                                        </Form.Group> 
 
-                                        {/* <Form.Group >
+                                        <Form.Group >
                                             <Form.Label>Zip</Form.Label>
                                             <Form.Control type="zip" placeholder="Zip"
                                                           required
@@ -306,7 +338,45 @@ class UpdateEventForm extends Component {
                                                           value = {this.state.address}
                                                           name = "zip"
                                                           onChange={this.updateInput}/>
-                                        </Form.Group> */}
+                                        </Form.Group>
+
+                                        <Form.Group >
+                                            <Form.Label>Location/Room</Form.Label>
+                                            <Form.Control type="location" placeholder="location"
+                                                          required
+                                                          id = "location"
+                                                          value = {this.state.location}
+                                                          name = "location"
+                                                          onChange={this.updateInput}/>
+                                        </Form.Group>
+
+                                        <Form.Group>
+                                            <Form.Label>Price</Form.Label>
+                                            <Form.Control type="price" placeholder="price"
+                                                          required
+                                                          id = "price"
+                                                          value = {this.state.price}
+                                                          name = "price"
+                                                          onChange={this.updateInput}/>
+                                        </Form.Group>
+                                        <Form.Group>
+                                            <Form.Label>Description</Form.Label>
+                                            <Form.Control type="description" placeholder="description"
+                                                          required
+                                                          id = "description"
+                                                          value = {this.state.description}
+                                                          name = "latitdescriptionude"
+                                                          onChange={this.updateInput}/>
+                                        </Form.Group>
+                                        <Form.Group>
+                                            <Form.Label>Event Image</Form.Label>
+                                            <Form.Control type="imageUrl" placeholder="imageUrl"
+                                                          required
+                                                          id = "imageUrl"
+                                                          value = {this.state.imageUrl}
+                                                          name = "imageUrl"
+                                                          onChange={this.updateInput}/>
+                                        </Form.Group>
 
                                         <Button variant="primary" type="submit"
                                                 disabled = {this.state.isDisable}

@@ -6,6 +6,7 @@ import Consumer from "../../ContextAPI/Context"
 import LecturerSelection from "../../Lecturer/LecturerSelection";
 import DesicionDialogForAddingQuestionsToEvent from "../DesicionDialogForAddingQuestionsToEvent";
 import Events from '../../../components/Event/Events'
+import CloseButton from 'react-bootstrap/CloseButton';
 
 class AddEventForm extends Component {
 
@@ -90,6 +91,7 @@ class AddEventForm extends Component {
 
         this.showMessage(response.data);
         if(this.isAdditionSuccess(response.data.messageType)) {
+            this.saveFile();
             dispatch({ type: 'addEvent', payload: event })
 
         }
@@ -98,6 +100,37 @@ class AddEventForm extends Component {
                 isSubmittedForm : false,
             })
         }, 2000);
+
+
+
+    }
+
+    saveFile = async () => {
+
+        // const formData = new FormData();
+        // formData.append('name',this.state.imageUrl);
+        // formData.append('myImg',this.state.file);
+        // const participantUsername = localStorage.getItem('username');
+
+        // await fetch("http://localhost:3000/file/upload",
+        // {
+        //   method:'POST',
+        //   body:formData
+        // }).catch(err=>console.log(err.message))
+       
+        let formData = new FormData();
+
+        formData.append("file", this.state.file);
+        const response = await axios.post(`/file/upload`, 
+        formData,
+        {
+            headers : {
+                "Content-Type": "multipart/form-data",
+            }
+        }).catch(err => {
+            // this.props.history.push('/notFound404');
+            console.log(err);
+        });
 
     }
 
@@ -139,6 +172,10 @@ class AddEventForm extends Component {
         })
     }
 
+    close = () =>{
+        this.props.history.push('/eventsAdmin');
+    }
+
 
     render() {
         const {name,startDate,endDate, startTime,
@@ -156,6 +193,7 @@ class AddEventForm extends Component {
                                 <Card className={"container w-50 mt-5"}>
                                     <Card.Header className="bg-primary text-white">
                                        Add Event
+                                       <CloseButton className="text-white"  onClick={this.close} />
                                     </Card.Header>
                                     <Form onReset={this.resetAllInputs} onSubmit={(e) => this.addEvent(e,dispatch)} >
                                         <Card.Body>
@@ -352,7 +390,7 @@ class AddEventForm extends Component {
                                             </Form.Row>
                                             <Form.Row>
                                                 <Form.Group as={Col} controlId="formGridImage">
-                                                    <Form.Label>Event Iamge </Form.Label>
+                                                    <Form.Label>Event Image </Form.Label>
                                                     <InputGroup>
                                                         <Form.Control 
                                                                       type="file" 
@@ -390,6 +428,7 @@ class AddEventForm extends Component {
                                             <Button variant="success" type="submit" disabled = {isSubmittedForm}>
                                             Create
                                             </Button>
+                                            
                                             <Button  variant="info" type="reset">
                                             Reset
                                             </Button>

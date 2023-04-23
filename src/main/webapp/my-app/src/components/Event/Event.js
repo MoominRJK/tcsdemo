@@ -72,17 +72,17 @@ class Event extends Component {
         this.setState({
           event : response.data
         })
-        if(isParticipant()) {
-            // this.isJoinedBeforeAsParticipantToEvent()
-            //     .then(isJoinedBefore => {
-            //         this.setState({
-            //             isJoinedBefore : isJoinedBefore
-            //         })
-            //     })
-        }
-        else {
-            this.props.history.push('/notFound404');
-        }
+        // if(isParticipant()) {
+        //     // this.isJoinedBeforeAsParticipantToEvent()
+        //     //     .then(isJoinedBefore => {
+        //     //         this.setState({
+        //     //             isJoinedBefore : isJoinedBefore
+        //     //         })
+        //     //     })
+        // }
+        // else {
+        //     this.props.history.push('/notFound404');
+        // }
 
     }
 
