@@ -36,17 +36,17 @@ public class Event extends IdBaseEntity {
     @Column(name = "QUOTA")
     private int quota;
 
-    @Column(name = "LONGITUDE")
-    private double longitude;
+    @Column(name = "Employer")
+    private String employer;
 
-    @Column(name = "LATITUDE")
-    private double latitude;
+    @Column(name = "Contact")
+    private String contact;
 
     @Column(name = "CURRENT_NUMBER_OF_PEOPLE")
     private int currentNumberOfPeople;
 
-    @Column(name = "RAFFLE_WINNER_USERNAME")
-    private String raffleWinnerUsername;
+    @Column(name = "Qualification", length = 1000)
+    private String qualification;
 
     @Column(name = "CITY")
     private String city;
@@ -57,8 +57,8 @@ public class Event extends IdBaseEntity {
     @Column(name = "ZIP")
     private String zip;
 
-    @Column(name = "GOOGLE_LOC")
-    private String googleLoc;
+    @Column(name = "responsibility", length = 1000)
+    private String responsibility;
 
     @Column(name = "POINT")
     private int point;
@@ -71,11 +71,11 @@ public class Event extends IdBaseEntity {
 
     @Column(name = "CATEGORY")
     private String category;
-    @Column(name = "DESCRIPTION")
+    @Column(name = "DESCRIPTION", length = 2000)
     private String description;
 
-    @Column(name = "LOCATION")
-    private String location;
+    @Column(name = "SALARY")
+    private String salary;
 
     @Column(name = "PRICE")
     private double price;
@@ -116,8 +116,8 @@ public class Event extends IdBaseEntity {
     private Set<ParticipantsInEvents> participantsInEvents;
 
     public Event(final Integer id,final String name, final LocalDate startDate, final LocalDate endDate, final String address,
-                 final int quota, final double longitude,
-                 final double latitude,
+                 final int quota, final String employer,
+                 final String contact,
                  final Organizator organizator,
                  final Set<EventQuestions> eventQuestions,
                  final Set<ParticipantsInEvents> participantsInEvents,
@@ -125,7 +125,7 @@ public class Event extends IdBaseEntity {
                  final String city,
                  final String state,
                  final String zip,
-                 final String googleLoc,
+                 final String responsibility,
                  final int point,
                  final int eventType,
                  final String category,
@@ -133,7 +133,7 @@ public class Event extends IdBaseEntity {
                  final double price,
                  final LocalTime startTime,
                  final LocalTime endTime,
-                 final String location
+                 final String salary
                  ) {
         super(id);
         this.name = name;
@@ -141,10 +141,10 @@ public class Event extends IdBaseEntity {
         this.endDate = endDate;
         this.address = address;
         this.quota = quota;
-        this.longitude = longitude;
-        this.latitude = latitude;
+        this.employer = employer;
+        this.contact = contact;
         this.currentNumberOfPeople = 0;
-        this.raffleWinnerUsername = "";
+        this.qualification = "";
         this.organizator = organizator;
         this.eventQuestions = eventQuestions;
         this.participantsInEvents = participantsInEvents;
@@ -152,12 +152,12 @@ public class Event extends IdBaseEntity {
         this.city = city;
         this.state = state;
         this.zip = zip;
-        this.googleLoc = googleLoc;
+        this.responsibility = responsibility;
         this.point = point;
         this.eventType = eventType;
         this.category = category;
         this.description = description;
-        this.location = location;
+        this.salary = salary;
         this.startTime = startTime;
         this.endTime = endTime;
         this.price = price;

@@ -60,6 +60,7 @@ public class UserService {
             }
             addUserToRelatedTable(userDTO,userType);
             authorityRepository.saveAll(authorities);
+
             addUserToUsersTable(userDTO,authorities);
             return new MessageResponse( "Congratulations, you have registered in the system. " +
                     "You can now login.",SUCCESS);
@@ -129,7 +130,8 @@ public class UserService {
 
     private void addUserToUsersTable(UserDTO userDTO,Set<Authority> authorities) {
         Users users = new Users(null,userDTO.getUsername(),
-                userDTO.getPassword(),userDTO.getSchoolId(),userDTO.getEmail(),userDTO.getPhone(),
+                userDTO.getPassword(),userDTO.getSchoolId(),userDTO.getEmail(),userDTO.getPhone(),userDTO.getName(),
+                userDTO.getSurname(),
                 true,true,
                 true,true,authorities);
         userRepository.save(users);

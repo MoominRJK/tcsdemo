@@ -39,6 +39,12 @@ public class Users implements UserDetails {
     @Column(name = "phone", unique = true, nullable = false)
     private String phone;
 
+    @Column(name = "NAME")
+    private String name;
+
+    @Column(name = "SURNAME")
+    private String surname;
+
     private boolean isAccountNonExpired;
     private boolean isAccountNonLocked;
     private boolean isCredentialsNonExpired;

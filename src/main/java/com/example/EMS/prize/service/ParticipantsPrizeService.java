@@ -121,7 +121,7 @@ public class ParticipantsPrizeService {
     }
 
     /**
-     * The metond provide quarterly participant point report
+     * The method provide quarterly participant point report
      * @param year
      * @param quarter
      * @return
@@ -133,8 +133,8 @@ public class ParticipantsPrizeService {
 
 
     /**
-     * The method provide logic to generate the quarterly winner by grade and by year,
-     * It also calculates the total points accumulate so for each participant by grade
+     * The method provides logic to generate the quarterly winners by grade and by year,
+     * It also calculates the total points accumulated for each participant by grade
      * and by year. It does provide a way for users to choose whether the records should
      * be recorded or not.
      * @param year
@@ -163,7 +163,7 @@ public class ParticipantsPrizeService {
                 this.addParticipantToPrize(pp.getParticipantId(), year, quarter, pp.getGrade(), "Top");
             }
             topPointWinners.add(winner9thGradeTop.get(0));
-        } else {
+        } else if(winner9thGradeTop.size() > 1) {
             //Find 9 grade top accumulator, if there is more than one, system will randomly pick a student as the winner
             int randomValue = new Random().nextInt(winner9thGradeTop.size() + 1);
             if(save) {
@@ -181,7 +181,7 @@ public class ParticipantsPrizeService {
                 this.addParticipantToPrize(pp.getParticipantId(), year, quarter, pp.getGrade(), "Top");
             }
             topPointWinners.add(winner10thGradeTop.get(0));
-        } else {
+        } else  if(winner10thGradeTop.size() > 1){
             //Find 10 grade top accumulator, if there is more than one, system will randomly pick a student as the winner
             int randomValue = new Random().nextInt(winner10thGradeTop.size() + 1);
             if(save) {
@@ -199,7 +199,7 @@ public class ParticipantsPrizeService {
                 this.addParticipantToPrize(pp.getParticipantId(), year, quarter, pp.getGrade(), "Top");
             }
             topPointWinners.add(winner11thGradeTop.get(0));
-        } else {
+        } else if(winner11thGradeTop.size() > 1) {
             //Find 11 grade top accumulator, if there is more than one, system will randomly pick a student as the winner
             int randomValue = new Random().nextInt(winner11thGradeTop.size() + 1);
             if(save) {
@@ -217,7 +217,7 @@ public class ParticipantsPrizeService {
                 this.addParticipantToPrize(pp.getParticipantId(), year, quarter, pp.getGrade(), "Top");
             }
             topPointWinners.add(winner12thGradeTop.get(0));
-        } else {
+        } else if(winner12thGradeTop.size() > 1) {
             //Find 12 grade top accumulator, if there is more than one, system will randomly pick a student as the winner
             int randomValue = new Random().nextInt(winner12thGradeTop.size() + 1);
             if(save) {
@@ -240,7 +240,7 @@ public class ParticipantsPrizeService {
                 this.addParticipantToPrize(winner9thGrade.get(0).getParticipantId(), year, quarter, winner9thGrade.get(0).getGrade(), "Raffle");
             }
             topPointWinners.add(winner9thGrade.get(0));
-        } else {
+        } else if (winner9thGradeTop.size() > 1) {
             //Find 9 grade raffle winner, if there is more than one participant, then randomly pick the winner
             int randomValue = new Random().nextInt(winner9thGrade.size() );
             if(save) {
@@ -257,7 +257,7 @@ public class ParticipantsPrizeService {
                 this.addParticipantToPrize(winner10thGrade.get(0).getParticipantId(), year, quarter, winner10thGrade.get(0).getGrade(), "Raffle");
             }
             topPointWinners.add(winner10thGrade.get(0));
-        } else {
+        } else if (winner10thGrade.size() > 1){
             //Find 10 grade raffle winner, if there is more than one participant, then randomly pick the winner
             int randomValue = new Random().nextInt(winner10thGrade.size() );
             if(save) {
@@ -274,7 +274,7 @@ public class ParticipantsPrizeService {
                 this.addParticipantToPrize(winner11thGrade.get(0).getParticipantId(), year, quarter, winner11thGrade.get(0).getGrade(), "Raffle");
             }
             topPointWinners.add(winner11thGrade.get(0));
-        } else {
+        } else  if(winner11thGrade.size() > 1) {
             //Find 11 grade raffle winner, if there is more than one participant, then randomly pick the winner
             int randomValue = new Random().nextInt(winner11thGrade.size() );
             if(save) {
@@ -290,7 +290,7 @@ public class ParticipantsPrizeService {
                 this.addParticipantToPrize(winner12thGrade.get(0).getParticipantId(), year, quarter, winner12thGrade.get(0).getGrade(), "Raffle");
             }
             topPointWinners.add(winner12thGrade.get(0));
-        } else {
+        } else  if(winner9thGrade.size() > 1)  {
             //Find 12 grade raffle winner, if there is more than one participant, then randomly pick the winner
             int randomValue = new Random().nextInt(winner12thGrade.size() );
             if(save) {

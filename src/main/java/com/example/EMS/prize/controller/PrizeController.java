@@ -101,8 +101,7 @@ public class PrizeController {
 
     @GetMapping("/allPrize")
 //    @PreAuthorize("hasAuthority('PARTICIPANT')")
-    public List<PrizeDTO> getAllPrizes() {
-        List<Prize> prizes = prizeService.getAllPrizes();
+    public List<PrizeDTO> getAllPrizes() { List<Prize> prizes = prizeService.getAllPrizes();
 
         Comparator<Prize> dateComparator = Comparator.comparing(Prize::getYear )
                 .thenComparing(Prize::getAwardType )

@@ -184,10 +184,10 @@ public class EventService {
         eventFromDB.setName(event.getName());
         eventFromDB.setAddress(event.getAddress());
         eventFromDB.setEndDate(event.getEndDate());
-        eventFromDB.setLatitude(event.getLatitude());
-        eventFromDB.setLongitude(event.getLongitude());
+        eventFromDB.setContact(event.getContact());
+        eventFromDB.setEmployer(event.getEmployer());
         eventFromDB.setQuota(event.getQuota());
-        eventFromDB.setRaffleWinnerUsername(event.getRaffleWinnerUsername());
+        eventFromDB.setQualification(event.getQualification());
         eventFromDB.setStartDate(event.getStartDate());
         //TODO: add more fields
     }

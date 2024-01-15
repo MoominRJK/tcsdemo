@@ -37,18 +37,18 @@ public class EventDTO {
     @Min(value = 1, message = "The event must be created for at least 1 quota")
     public final int quota;
 
-    @JsonProperty("longitude")
-    public final double longitude;
+    @JsonProperty("employer")
+    public final String employer;
 
-    @JsonProperty("latitude")
-    public final double latitude;
+    @JsonProperty("contact")
+    public final String contact;
 
     @JsonProperty("currentNumberOfPeople")
     @Min(value = 0)
     public final int currentNumberOfPeople;
 
-    @JsonProperty("raffleWinnerUsername")
-    public final String raffleWinnerUsername;
+    @JsonProperty("qualification")
+    public final String qualification;
 
     @JsonProperty("city")
     @NotBlank(message ="City must not be blank")
@@ -62,8 +62,8 @@ public class EventDTO {
     @NotBlank(message ="Zip must not be blank")
     public final String zip;
 
-    @JsonProperty("googleLoc")
-    public final String googleLoc;
+    @JsonProperty("responsibility")
+    public final String responsibility;
 
     @JsonProperty("point")
     @Min(value = 1, message = "The award point must be created for at least 1 point")
@@ -87,8 +87,8 @@ public class EventDTO {
     @JsonProperty("description")
     public final String description;
 
-    @JsonProperty("location")
-    public final String location;
+    @JsonProperty("salary")
+    public final String salary;
 
     @JsonProperty("startTime")
     public final LocalTime startTime;
@@ -114,14 +114,14 @@ public class EventDTO {
                     @JsonProperty("endDate") LocalDate endDate,
                     @JsonProperty("address") String address,
                     @JsonProperty("quota") int quota,
-                    @JsonProperty("longitude")  double longitude,
-                    @JsonProperty("latitude")  double latitude,
+                    @JsonProperty("employer")  String employer,
+                    @JsonProperty("contact")  String contact,
                     @JsonProperty("currentNumberOfPeople")  int currentNumberOfPeople,
-                    @JsonProperty("raffleWinnerUsername") String raffleWinnerUsername,
+                    @JsonProperty("qualification") String qualification,
                     @JsonProperty("city") String city,
                     @JsonProperty("state") String state,
                     @JsonProperty("zip") String zip,
-                    @JsonProperty("googleLoc") String googleLoc,
+                    @JsonProperty("responsibility") String responsibility,
                     @JsonProperty("point") int point,
                     @JsonProperty("eventType") int eventType,
                     @JsonProperty("imageUrl") String imageUrl,
@@ -129,7 +129,7 @@ public class EventDTO {
                     @JsonProperty("lecturer")  String lecturerUsername,
                     @JsonProperty("category")  String category,
                     @JsonProperty("description")  String description,
-                    @JsonProperty("location") String location,
+                    @JsonProperty("salary") String salary,
                     @JsonProperty("startTime") LocalTime startTime,
                     @JsonProperty("endTime") LocalTime endTime,
                     @JsonProperty("price") double price,
@@ -142,10 +142,10 @@ public class EventDTO {
         this.address = address;
         this.quota = quota;
         this.point = point;
-        this.longitude = longitude;
-        this.latitude = latitude;
+        this.employer = employer;
+        this.contact = contact;
         this.currentNumberOfPeople = currentNumberOfPeople;
-        this.raffleWinnerUsername = raffleWinnerUsername;
+        this.qualification = qualification;
         this.organizatorId = organizatorId;
         this.lecturerUsername = lecturerUsername;
         this.eventQuestions = eventQuestions;
@@ -155,12 +155,12 @@ public class EventDTO {
         this.state = state;
         this.zip = zip;
         this.eventType = eventType;
-        this.googleLoc = googleLoc;
+        this.responsibility = responsibility;
         this.imageUrl = imageUrl;
         this.startTime = startTime;
         this.endTime = endTime;
         this.category = category;
-        this.location = location;
+        this.salary = salary;
         this.description = description;
         this.price = price;
     }
