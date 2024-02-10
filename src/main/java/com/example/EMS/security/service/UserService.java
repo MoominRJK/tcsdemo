@@ -43,23 +43,13 @@ public class UserService {
                         "Choose another username.",ERROR);
             }
 
-            else if(isAnyUserHasSameSchoolIdWith(userDTO)){
-                return new MessageResponse("Has this ID number" +
-                        "Another user is registered in the system. This ID" +
-                        "You cannot register with the number",ERROR);
-            }
-            else if(isAnyUserHasSamePhoneWith(userDTO)) {
-                return new MessageResponse("He has this phone number" +
-                        "another user is registered in the system. This phone" +
-                        "You cannot register with the number ",ERROR);
-            }
             else if(isAnyUserHasSameEmailWith(userDTO)) {
                 return new MessageResponse("He has this e-mail address" +
                         "Another user is registered in the system. This is mail" +
                         "You cannot register with the address",ERROR);
             }
             addUserToRelatedTable(userDTO,userType);
-            authorityRepository.saveAll(authorities);
+           authorityRepository.saveAll(authorities);
 
             addUserToUsersTable(userDTO,authorities);
             return new MessageResponse( "Congratulations, you have registered in the system. " +
@@ -133,7 +123,7 @@ public class UserService {
                 userDTO.getPassword(),userDTO.getSchoolId(),userDTO.getEmail(),userDTO.getPhone(),userDTO.getName(),
                 userDTO.getSurname(),
                 true,true,
-                true,true,authorities);
+                true,true,authorities, userDTO.getEmployer());
         userRepository.save(users);
     }
 

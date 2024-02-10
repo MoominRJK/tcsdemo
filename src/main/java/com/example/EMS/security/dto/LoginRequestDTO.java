@@ -17,4 +17,6 @@ public class LoginRequestDTO {
 
     @NotBlank(message = "Username cannot be empty !")
     private String username;
+
+    private String employer;
 }

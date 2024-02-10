@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 @Repository
 public interface EventRepository extends JpaRepository<Event,Integer> {
@@ -24,6 +25,9 @@ public interface EventRepository extends JpaRepository<Event,Integer> {
             nativeQuery = true)
     Collection<Event> getNonRaffledEvents();
 
-
+    @Query(
+            value = "SELECT * FROM event WHERE employer = :employer",
+            nativeQuery = true)
+    List<Event> findAllByEmployer(@Param("employer")String employer);
 }
 

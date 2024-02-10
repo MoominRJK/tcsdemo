@@ -57,6 +57,23 @@ public class EventController {
         return reportDTO;
     }
 
+    @GetMapping("/report/{employer}")
+    public ReportDTO getReport(@PathVariable String employer) {
+        List<Event> events = eventService.getAllEventsByEmployer(employer);
+
+        final List<ParticipantsInEvents> participantInEvent = participantService.getAllEventParticipant(employer);
+
+        final List<Participant> participants = participantService.getAllParticipant();
+
+//        final List<Organizator> organizators = organizatorService.getAllOrganizators();
+
+        final List<Prize> prizes = prizeService.getAllPrizes();
+
+        ReportDTO reportDTO = new ReportDTO(events.size(),participants.size() , participantInEvent.size(), prizes.size());
+
+        return reportDTO;
+    }
+
     @GetMapping
     public List<EventDTO> getAllEvents() {
         List<Event> events = eventService.getAllEvents();

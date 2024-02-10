@@ -48,4 +48,6 @@ public class UserDTO {
 
     private int grade;
 
+    private String employer;
+
 }

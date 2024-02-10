@@ -93,6 +93,10 @@ public class EventService {
         return eventRepository.findAll();
     }
 
+    public List<Event> getAllEventsByEmployer(String employer) {
+        return eventRepository.findAllByEmployer(employer);
+    }
+
     @Transactional
     public MessageResponse deleteEvent(String eventName) {
 

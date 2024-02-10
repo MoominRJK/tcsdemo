@@ -17,7 +17,7 @@ import java.util.stream.Stream;
 @Service
 public class FilesStorageServiceImpl implements FilesStorageService {
 
-  private final Path root = Paths.get("src/main/webapp/my-app/public/assets/event");
+  private final Path root = Paths.get("src/main/webapp/job-app/public/assets/event");
 
   @Override
   public void init() {

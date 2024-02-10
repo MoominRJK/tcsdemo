@@ -76,6 +76,14 @@ public interface ParticipantsInEventsRepository
     @Transactional
     List<ParticipantsInEvents> getAllParticipantEvents();
 
+    @Query(
+            value = "SELECT * " +
+                    "from participants_in_events as pie inner join event as e on e.id = pie.event_id " +
+                    "WHERE e.employer = :employer "
+            ,
+            nativeQuery = true)
+    @Transactional
+    List<ParticipantsInEvents> getAllParticipantEvents(@Param("employer") String employer);
 
     @Transactional
     @Modifying(clearAutomatically = true)

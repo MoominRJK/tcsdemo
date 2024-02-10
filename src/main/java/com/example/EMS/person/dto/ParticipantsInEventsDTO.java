@@ -33,13 +33,35 @@ public class ParticipantsInEventsDTO {
     @JsonProperty("hours")
     private double hours;
 
+    @JsonProperty("imageUrl")
+    private String imageUrl;
+
+    @JsonProperty("firstName")
+    private String firstName;
+
+    @JsonProperty("lastName")
+    private String lastName;
+
+    @JsonProperty("employer")
+    private String employer;
+
+    @JsonProperty("jobName")
+    private String jobName;
+
+
+
     @JsonCreator
     public ParticipantsInEventsDTO(@JsonProperty("event") EventDTO event,
                                    @JsonProperty("participant") ParticipantDTO participant,
                                    @JsonProperty("partitionDate") LocalDate partitionDate,
                                    @JsonProperty("checkIn") LocalDateTime checkIn,
                                    @JsonProperty("checkOut") LocalDateTime checkOut,
-                                   @JsonProperty("hours") double hours
+                                   @JsonProperty("hours") double hours,
+                                   @JsonProperty("imageUrl") String imageUrl,
+                                   @JsonProperty("firstName") String firstName,
+                                   @JsonProperty("lastName") String lastName,
+                                   @JsonProperty("employer") String employer,
+                                   @JsonProperty("jobName") String jobName
     ) {
         this.event = event;
         this.participant = participant;
@@ -47,5 +69,10 @@ public class ParticipantsInEventsDTO {
         this.checkIn = checkIn;
         this.checkOut = checkOut;
         this.hours = hours;
+        this.imageUrl = imageUrl;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.employer = employer;
+        this.jobName = jobName;
     }
 }

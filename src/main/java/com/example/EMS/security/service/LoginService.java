@@ -33,13 +33,13 @@ public class LoginService {
             String jwtToken =  JwtUtil.generateToken(authentication,secretKey,7);
             messageResponse = new MessageResponse("Login successfully. You are being redirected",
                                                         MessageType.SUCCESS);
-            return new LoginResponse(jwtToken,messageResponse, user.getName() + " " +user.getSurname());
+            return new LoginResponse(jwtToken,messageResponse, user.getName() + " " +user.getSurname(), user.getEmployer());
         } catch (Exception ex) {
                ex.printStackTrace();
         }
         messageResponse = new MessageResponse("The information you entered is incorrect! Please re-enter.",
                 MessageType.ERROR);
-        return new LoginResponse(null,messageResponse , "NoBody");
+        return new LoginResponse(null,messageResponse , "NoBody", "");
     }
 
 }

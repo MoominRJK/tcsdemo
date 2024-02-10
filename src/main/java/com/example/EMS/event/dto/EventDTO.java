@@ -34,7 +34,7 @@ public class EventDTO {
     public final String address;
 
     @JsonProperty("quota")
-    @Min(value = 1, message = "The event must be created for at least 1 quota")
+//    @Min(value = 1, message = "The event must be created for at least 1 quota")
     public final int quota;
 
     @JsonProperty("employer")
@@ -66,11 +66,11 @@ public class EventDTO {
     public final String responsibility;
 
     @JsonProperty("point")
-    @Min(value = 1, message = "The award point must be created for at least 1 point")
+//    @Min(value = 1, message = "The award point must be created for at least 1 point")
     public final int point;
 
     @JsonProperty("eventType")
-    @Min(value = 1, message = "The event must have an event type")
+//    @Min(value = 1, message = "The event must have an event type")
     public final int eventType;
 
     @JsonProperty("imageUrl")
@@ -107,6 +107,9 @@ public class EventDTO {
     @JsonProperty("eventSurveyQuestions")
     public final Set<EventSurveyQuestionDTO> eventSurveyQuestions;
 
+    @JsonProperty("jobType")
+    public final String jobType;
+
 
     @JsonCreator
     public EventDTO(@JsonProperty("name") String name,
@@ -135,7 +138,8 @@ public class EventDTO {
                     @JsonProperty("price") double price,
                     @JsonProperty("eventQuestions") Set<EventQuestionsDTO> eventQuestions,
                     @JsonProperty("participantsInEvents") Set<ParticipantsInEventsDTO> participantsInEventsDTO,
-                    @JsonProperty("eventSurveyQuestions")Set<EventSurveyQuestionDTO> eventSurveyQuestions) {
+                    @JsonProperty("eventSurveyQuestions")Set<EventSurveyQuestionDTO> eventSurveyQuestions,
+                    @JsonProperty("jobType") String jobType) {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -163,6 +167,7 @@ public class EventDTO {
         this.salary = salary;
         this.description = description;
         this.price = price;
+        this.jobType = jobType;
     }
 
 }

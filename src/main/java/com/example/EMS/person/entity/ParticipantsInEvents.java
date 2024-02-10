@@ -47,6 +47,22 @@ public class ParticipantsInEvents implements Serializable {
     @Lob
     private byte [] eventInfoDocument;
 
+    @Column(name = "IMAGE_URL")
+    private String imageUrl;
+
+    @Column(name = "FIRST_NAME")
+    private String firstName;
+
+    @Column(name = "LAST_NAME")
+    private String lastName;
+
+    @Column(name = "EMPLOYER")
+    private String employer;
+
+    @Column(name = "JOB_NAME")
+    private String jobName;
+
+
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "EVENT_ID")

@@ -37,19 +37,16 @@ public class ParticipantsInEventsService {
 
     @Transactional
     public MessageResponse addParticipantToEvent(String username, Event event) {
+        //TODO: PDF add resume url
         Event eventFromDB = eventService.getEventByName(event.getName());
         Optional<Participant> optionalParticipant = participantService.findByUsername(username);
         if(optionalParticipant.isPresent()) {
             Participant participant = optionalParticipant.get();
-            if(isEventNotFull(eventFromDB)){
-                increaseCurrentPeopleCountOfEvent(eventFromDB);
-            }
-            else {
-                return new MessageResponse("This event is out of quota",
-                        ERROR);
-            }
+
+            increaseCurrentPeopleCountOfEvent(eventFromDB);
+
             if(isParticipatedBeforeToEvent(username,eventFromDB)){
-                return new MessageResponse("You have already applied for this event ! ",
+                return new MessageResponse("You have already applied for this job ! ",
                         ERROR);
             }
 
@@ -58,17 +55,24 @@ public class ParticipantsInEventsService {
             participantInEvents.setEvent(eventFromDB);
             participantInEvents.setPartitionDate(java.time.LocalDate.now());
             participantInEvents.setParticipantQuestions(null);
+            participantInEvents.setImageUrl(event.getImageUrl());
+            participantInEvents.setEmployer(event.getEmployer());
+            participantInEvents.setFirstName(event.getContact());
+            participantInEvents.setLastName(event.getSalary());
+            participantInEvents.setJobName(event.getName());
+            //TODO: PDF add resume url
+
             //TODO: PDF generation
             final byte[] pdfAboutEventInfo = fileService.createPdfAboutEventInfo(participantInEvents);
             participantInEvents.setEventInfoDocument(pdfAboutEventInfo);
 
             saveNewParticipationToEvent(eventFromDB);
             saveNewParticipationToParticipant(participant);
-           return new MessageResponse("You have successfully registered for the event." +
-                    "We send a QR Code to your e-mail with the details of the event..",
+           return new MessageResponse("You have successfully applied for the job." +
+                    "We send an e-mail with the details of the application.",
                     SUCCESS);
         }
-        return new MessageResponse("You could not register for this event.",
+        return new MessageResponse("You could not apply for this job at this moment. Please try again later",
                 ERROR);
     }
 
@@ -116,6 +120,16 @@ public class ParticipantsInEventsService {
         }
         return participants;
     }
+
+    public List<ParticipantsInEvents> getParticipantsInEvents(String eventName) {
+        List<ParticipantsInEvents> participantsInEvents = new ArrayList<ParticipantsInEvents>();
+        Event event = eventService.getEventByName(eventName);
+        for(ParticipantsInEvents pie : event.getParticipantsInEvents()){
+            participantsInEvents.add(pie);
+        }
+        return participantsInEvents;
+    }
+
     @Transactional
     public List<ParticipationCountInADay> getPartipationDatesAndParticipantCountsOfEvent(Event event) {
         List<ParticipationCountInADay> participationCountInADays =

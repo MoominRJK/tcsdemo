@@ -43,10 +43,11 @@ public class ParticipantController {
     private final ParticipantsInEventsMapper participantsInEventsMapper;
 
     @PostMapping("/join/{username}")
-    @PreAuthorize("hasAuthority('PARTICIPANT')")
+//    @PreAuthorize("hasAuthority('PARTICIPANT')")
     public MessageResponse joinEvent(@PathVariable String username,
                                      @RequestBody @Valid EventDTO eventDTO) {
         Event event = eventMapper.mapToEntity(eventDTO);
+        //TODO: PDF add resume url
         return participantsInEventsService.addParticipantToEvent(username,event);
     }
 
@@ -64,6 +65,14 @@ public class ParticipantController {
     public List<ParticipantDTO> getParticipantsOfEvent(@PathVariable String eventName) {
         List<Participant> participants = participantsInEventsService.getParticipantsOfEvent(eventName);
         return participantMapper.mapToDto(participants);
+    }
+
+    @GetMapping("/applicant/{eventName}")
+    @PreAuthorize("hasAuthority('ORGANIZATOR')")
+    @Transactional
+    public List<ParticipantsInEventsDTO> getParticipantsInEvents(@PathVariable String eventName) {
+        List<ParticipantsInEvents> participants = participantsInEventsService.getParticipantsInEvents(eventName);
+        return participantsInEventsMapper.mapToDto(participants);
     }
 
     @DeleteMapping("/unregisterEvent/{eventName}/{participantUsername}")

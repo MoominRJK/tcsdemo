@@ -45,6 +45,8 @@ public class Users implements UserDetails {
     @Column(name = "SURNAME")
     private String surname;
 
+
+
     private boolean isAccountNonExpired;
     private boolean isAccountNonLocked;
     private boolean isCredentialsNonExpired;
@@ -57,5 +59,8 @@ public class Users implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "authority_id")
     )
     private Set<Authority> authorities;
+
+    @Column(name = "EMPLOYER")
+    private String employer;
 
 }

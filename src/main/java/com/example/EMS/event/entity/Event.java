@@ -86,6 +86,9 @@ public class Event extends IdBaseEntity {
     @Column(name = "END_TIME")
     private LocalTime endTime;
 
+    @Column(name = "JOB_TYPE")
+    private String jobType;
+
     @JsonIgnore
     @ManyToOne()
     @JoinColumn(name = "organizator_id")
@@ -133,7 +136,8 @@ public class Event extends IdBaseEntity {
                  final double price,
                  final LocalTime startTime,
                  final LocalTime endTime,
-                 final String salary
+                 final String salary,
+                 final String jobType
                  ) {
         super(id);
         this.name = name;
@@ -161,5 +165,6 @@ public class Event extends IdBaseEntity {
         this.startTime = startTime;
         this.endTime = endTime;
         this.price = price;
+        this.jobType = jobType;
     }
 }
