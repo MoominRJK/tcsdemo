@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-@IdClass(com.example.EMS.event.pkclasses.ParticipantAnswersForEventQuestionsPK.ParticipantAnswersForEventQuestionsPK.class)
+@IdClass(com.example.EMS.event.pkclasses.ParticipantAnswersForEventQuestionsPK.class)
 @NoArgsConstructor
 @AllArgsConstructor
 public class ParticipantAnswersForEventQuestions {

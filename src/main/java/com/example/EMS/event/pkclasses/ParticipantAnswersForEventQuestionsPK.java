@@ -1,4 +1,4 @@
-package com.example.EMS.event.pkclasses.ParticipantAnswersForEventQuestionsPK;
+package com.example.EMS.event.pkclasses;
 
 import com.example.EMS.event.entity.EventQuestions;
 import com.example.EMS.person.entity.Participant;
